@@ -14,5 +14,11 @@ module.exports = {
     new HTMLWebpackPlugin({
       template: './public/index.html'
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      'myApp/': path.resolve(__dirname, 'src/components/')
+    },
+    extensions: ['', '.js', '.jsx']
+  }
 };
