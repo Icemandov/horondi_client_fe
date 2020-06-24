@@ -16,10 +16,14 @@
     "apollo-client": "^2.6.10",
     "axios": "^0.19.2",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "graphql": "^15.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-google-login": "^5.1.20",
+    "react-material-ui-form-validator": "^2.0.10",
     "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-scripts-config": "^1.0.17-13",
     "react-scroll-up-button": "^1.6.4",
@@ -37,7 +41,7 @@
     "eslint-check": "eslint --print-config src/components/App/App.js | eslint-config-prettier-check",
     "test": "jest --coverage",
     "create": "ccr create",
-    "set":"set NODE_ENV=development set BASE_URL=http://localhost:5000"
+    "set": "set NODE_ENV=development set BASE_URL=http://localhost:5000"
   },
   "eslintConfig": {
     "extends": "react-app",
@@ -104,7 +108,10 @@
   "lint-staged": {
     "*.js": [
       "prettier --write",
-      "eslint . --fix"
+      "eslint . --fix --color"
     ]
+  },
+  "jest": {
+    "maxConcurrency": 10
   }
 }

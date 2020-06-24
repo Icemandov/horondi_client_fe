@@ -88,7 +88,6 @@ export const routes = {
 
 export const formRegExp = {
   email: '^[^-_][a-z]{0,20}-?[a-z]{1,20}@[a-z]{0,20}-?[a-z]{1,20}.[a-z]{2,6}$',
-  // '^(?=.{1,60}$)(?:[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\\])',
   name: "^(?=.{2,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   password: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{8,30}$',
   phone: /^\+?[0-9]{3}-?[0-9]{6,12}$/g,
@@ -103,12 +102,59 @@ export const formRegExp = {
 };
 
 export const placeholders = {
-  firstname: 'Enter firstname',
-  lastname: 'Enter lastname',
-  email: 'Enter email',
-  password: 'Enter password',
-  confirmPassword: 'Confirm password'
+  firstname: [
+    {
+      lang: 'eng',
+      value: 'Enter firstname'
+    },
+    {
+      lang: 'uk',
+      value: "Введіть Ім'я"
+    }
+  ],
+
+  lastname: [
+    {
+      lang: 'eng',
+      value: 'Enter lastname'
+    },
+    {
+      lang: 'uk',
+      value: 'Введіть прізвище'
+    }
+  ],
+  email: [
+    {
+      lang: 'eng',
+      value: 'Enter email*'
+    },
+    {
+      lang: 'uk',
+      value: 'Введіть емейл*'
+    }
+  ],
+  password: [
+    {
+      lang: 'eng',
+      value: 'Enter password*'
+    },
+    {
+      lang: 'uk',
+      value: 'Введіть пароль*'
+    }
+  ],
+  confirmPassword: [
+    {
+      lang: 'eng',
+      value: 'Confirm password'
+    },
+    {
+      lang: 'uk',
+      value: 'Підтвердіть пароль'
+    }
+  ]
 };
+
 export const errorMessages = {
   firstname: 'Please enter firstname',
   lastname: 'Please enter lastname',

@@ -12,13 +12,11 @@ module.exports = {
   },
   plugins: [
     new HTMLWebpackPlugin({
-      template: './public/index.html'
+      template: './public/index.html',
+      collapseWhitespace: true,
+      minifyJS: true,
+      minifyCSS: true,
+      minifyURLs: true
     })
-  ],
-  resolve: {
-    alias: {
-      'myApp/': path.resolve(__dirname, 'src/components/')
-    },
-    extensions: ['', '.js', '.jsx']
-  }
+  ]
 };
