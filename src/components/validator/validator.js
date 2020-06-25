@@ -13,10 +13,10 @@ const Validator = ({
   validate = false,
   variant = 'outlined',
   style,
-  helperText='',
+  helperText = '',
   inputProps = {}
 }) => {
-  const [validated, setValidated] = useState('true');
+  const [validated, setValidated] = useState(true);
   const errorText = validated ? '' : helperText;
   const changeHandler = (e) => {
     handler(e);

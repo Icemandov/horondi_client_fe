@@ -4,11 +4,13 @@ import {
   Container,
   FormHelperText,
   Button,
-  Link,
   InputAdornment,
-  IconButton
+  IconButton,
+  ThemeProvider,
+  createMuiTheme
 } from '@material-ui/core';
 import { VisibilityOff } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 import { useStyles } from './Login.styles';
 import { placeholders, formRegExp, errorMessages } from '../../configs';
 import Validator from '../../components/validator';
@@ -32,7 +34,16 @@ const Login = () => {
   const handleChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
-
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: '#000'
+      },
+      secondary: {
+        main: '#949494'
+      }
+    }
+  });
   const endAdornment = {
     endAdornment: (
       <InputAdornment position='end'>
@@ -44,55 +55,57 @@ const Login = () => {
   };
 
   return (
-    <Container className={styles.containerBackground}>
-      <form className={styles.registerForm} noValidate autoComplete='off'>
-        <FormHelperText className={styles.formLabel}>
-          {FORM_LABEL}
-        </FormHelperText>
-        <Validator
-          helperText={errorMessages.email}
-          type='text'
-          name='email'
-          label={email}
-          regex={formRegExp.email}
-          validate
-          style={styles.textInput}
-          handler={handleChange}
-          setIsValidated={setEmailIsValidated}
-        />
+    <ThemeProvider theme={theme}>
+      <Container className={styles.containerBackground}>
+        <form className={styles.registerForm} noValidate autoComplete='off'>
+          <FormHelperText className={styles.formLabel}>
+            {FORM_LABEL}
+          </FormHelperText>
+          <Validator
+            helperText={errorMessages.email}
+            type='text'
+            name='email'
+            label={email}
+            regex={formRegExp.email}
+            validate
+            style={styles.textInput}
+            handler={handleChange}
+            setIsValidated={setEmailIsValidated}
+          />
 
-        <Validator
-          helperText={errorMessages.password}
-          type='password'
-          name='password'
-          label={password}
-          variant='outlined'
-          regex={formRegExp.password}
-          validate
-          handler={handleChange}
-          style={styles.textInput}
-          value={user.password}
-          inputProps={endAdornment}
-          setIsValidated={setPasswordIsValidated}
-        />
-        <div className={styles.forgotPasswordDiv}>
-          <Link to='/restore'>Забув пароль?</Link>
-        </div>
-        <Button
-          className={styles.loginButton}
-          disabled={!emailIsValidated || !passwordIsValidated}
-        >
-          {FORM_LABEL}
-        </Button>
-        <div className={styles.orText}>АБО</div>
-        <GoogleLogin id='google-button' className={styles.socialButtonDiv}>
-          GOOGLE
-        </GoogleLogin>
-        <div className={styles.registrationButtonDiv}>
-          <Link to='/register'>Реєстрація</Link>
-        </div>
-      </form>
-    </Container>
+          <Validator
+            helperText={errorMessages.password}
+            type='password'
+            name='password'
+            label={password}
+            variant='outlined'
+            regex={formRegExp.password}
+            validate
+            handler={handleChange}
+            style={styles.textInput}
+            value={user.password}
+            inputProps={endAdornment}
+            setIsValidated={setPasswordIsValidated}
+          />
+          <div className={styles.forgotPasswordDiv}>
+            <Link to='/restore'>Забув пароль?</Link>
+          </div>
+          <Button
+            className={styles.loginButton}
+            disabled={!emailIsValidated || !passwordIsValidated}
+          >
+            {FORM_LABEL}
+          </Button>
+          <div className={styles.orText}>АБО</div>
+          <GoogleLogin id='google-button' className={styles.socialButtonDiv}>
+            GOOGLE
+          </GoogleLogin>
+          <div className={styles.registrationButtonDiv}>
+            <Link to='/register'>Реєстрація</Link>
+          </div>
+        </form>
+      </Container>
+    </ThemeProvider>
   );
 };
 

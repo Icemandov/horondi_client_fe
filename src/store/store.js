@@ -1,11 +1,20 @@
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import cartReducer from '../redux/cart/cart-reducer';
+import { createStore, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootReducer from '../redux/rootReduser';
+import rootSaga from '../redux/rootSaga';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const configureStore = () => {
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(
+    rootReducer,
+    compose(
+      applyMiddleware(sagaMiddleware),
+      window.__REDUX_DEVTOOLS_EXTENSION__ &&
+        window.__REDUX_DEVTOOLS_EXTENSION__()
+    )
+  );
+  sagaMiddleware.run(rootSaga);
+  return store;
+};
 
-const store = createStore(
-  combineReducers({ cartReducer }),
-  composeEnhancers(applyMiddleware())
-);
-
-export default store;
+export default configureStore;

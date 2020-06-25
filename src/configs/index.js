@@ -160,6 +160,7 @@ export const errorMessages = {
   firstname: 'Please enter firstname',
   lastname: 'Please enter lastname',
   email: 'Please enter email',
-  password: 'Please enter password',
+  password: 'Password not correct',
   confirmPassword: 'Please confirm password'
 };
+export const LANGUAGE = 0;
