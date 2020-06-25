@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import GoogleLogin from 'react-google-login';
+import { GoogleLogin } from 'react-google-login';
 import {
   Container,
   FormHelperText,
@@ -9,13 +9,20 @@ import {
   ThemeProvider,
   createMuiTheme
 } from '@material-ui/core';
-import { VisibilityOff } from '@material-ui/icons';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { useStyles } from './Login.styles';
 import { placeholders, formRegExp, errorMessages } from '../../configs';
 import Validator from '../../components/validator';
 
-const FORM_LABEL = 'Увійти'.toUpperCase();
+const language = 0;
+const FORM_LABEL = [
+  {
+    lang: 'uk',
+    value: 'увійти'.toUpperCase()
+  },
+  { lang: 'eng', value: 'log in'.toUpperCase() }
+];
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -24,10 +31,14 @@ const Login = () => {
   });
   const [emailIsValidated, setEmailIsValidated] = useState(false);
   const [passwordIsValidated, setPasswordIsValidated] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const styles = useStyles();
 
-  const language = 0;
-
+  const disableButtonStyle =
+    emailIsValidated && passwordIsValidated
+      ? styles.loginButton
+      : styles.disabledLoginButton;
+  const label = FORM_LABEL[language].value;
   const email = placeholders.email[language].value;
   const password = placeholders.password[language].value;
 
@@ -44,23 +55,37 @@ const Login = () => {
       }
     }
   });
-  const endAdornment = {
-    endAdornment: (
-      <InputAdornment position='end'>
-        <IconButton aria-label='toggle password visibility'>
-          <VisibilityOff />
-        </IconButton>
-      </InputAdornment>
-    )
-  };
+  function toggleInputType(e, showPass) {
+    const input = e.currentTarget.parentElement.previousSibling;
+    if (input.type === 'password') {
+      input.type = 'text';
+      showPass(false);
+    } else {
+      input.type = 'password';
+      showPass(true);
+    }
+  }
+
+  function endAdornment(isVisible, setShowPass) {
+    return {
+      endAdornment: (
+        <InputAdornment position='end'>
+          <IconButton
+            aria-label='toggle password visibility'
+            onClick={(e) => toggleInputType(e, setShowPass)}
+          >
+            {isVisible ? <Visibility /> : <VisibilityOff />}
+          </IconButton>
+        </InputAdornment>
+      )
+    };
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <Container className={styles.containerBackground}>
         <form className={styles.registerForm} noValidate autoComplete='off'>
-          <FormHelperText className={styles.formLabel}>
-            {FORM_LABEL}
-          </FormHelperText>
+          <FormHelperText className={styles.formLabel}>{label}</FormHelperText>
           <Validator
             helperText={errorMessages.email}
             type='text'
@@ -84,17 +109,17 @@ const Login = () => {
             handler={handleChange}
             style={styles.textInput}
             value={user.password}
-            inputProps={endAdornment}
+            inputProps={endAdornment(showPassword, setShowPassword)}
             setIsValidated={setPasswordIsValidated}
           />
           <div className={styles.forgotPasswordDiv}>
             <Link to='/restore'>Забув пароль?</Link>
           </div>
           <Button
-            className={styles.loginButton}
+            className={disableButtonStyle}
             disabled={!emailIsValidated || !passwordIsValidated}
           >
-            {FORM_LABEL}
+            {label}
           </Button>
           <div className={styles.orText}>АБО</div>
           <GoogleLogin id='google-button' className={styles.socialButtonDiv}>

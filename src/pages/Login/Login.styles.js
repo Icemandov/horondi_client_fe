@@ -72,6 +72,15 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: '22px',
     color: '#FFFFFF'
   },
+  disabledLoginButton: {
+    width: '300px',
+    backgroundColor: '#999999',
+    marginBottom: '23px',
+    fontFamily: 'Montserrat',
+    fontSize: '16px',
+    lineHeight: '20px',
+    height: '42px'
+  },
   orText: {
     paddingTop: '12px',
     paddingBottom: '20px'
