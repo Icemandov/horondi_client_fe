@@ -4,11 +4,9 @@ import Login from '../pages/Login';
 
 const Routes = () => (
   <Router>
-    <div>
-      <Switch>
-        <Route path='/login' exact component={Login} />
-      </Switch>
-    </div>
+    <Switch>
+      <Route path='/login' exact component={Login} />
+    </Switch>
   </Router>
 );
 

@@ -103,6 +103,7 @@
     "no-multi-str": 2,
     "no-constant-condition": 1,
     "no-extra-parens": [1, "functions"],
+    "react/no-string-refs": 0,
     "no-param-reassign": [
       2,
       {
@@ -189,6 +190,6 @@
       }
     ],
     "cypress/no-unnecessary-waiting": 0,
-    "import/no-unresolved":0
+    "import/no-unresolved": 0
   }
 }

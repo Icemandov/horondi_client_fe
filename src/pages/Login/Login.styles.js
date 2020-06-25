@@ -40,7 +40,13 @@ export const useStyles = makeStyles((theme) => ({
   textInput: {
     width: '300px',
     background: '#FFFFFF',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    marginBottom: '10px',
+    color: 'black',
+    paddingBottom: '22.5px',
+    '& label': {
+      transform: 'translate(14px, 14px) scale(1)'
+    }
   },
   forgotPasswordDiv: {
     display: 'flex',
@@ -58,7 +64,6 @@ export const useStyles = makeStyles((theme) => ({
     width: '300px',
     height: '41.39px',
     background: '#000000',
-    opacity: '0.75',
     borderRadius: '5px',
     fontFamily: 'Montserrat',
     fontStyle: 'normal',

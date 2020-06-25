@@ -13,12 +13,14 @@ const Validator = ({
   validate = false,
   variant = 'outlined',
   style,
-  helperText
+  helperText='',
+  inputProps = {}
 }) => {
   const [validated, setValidated] = useState('true');
   const errorText = validated ? '' : helperText;
   const changeHandler = (e) => {
     handler(e);
+    getInputValue(e.target.value);
     if (validate) {
       setValidated(false);
       setIsValidated(false);
@@ -35,6 +37,7 @@ const Validator = ({
 
   return (
     <TextField
+      InputProps={inputProps}
       className={style}
       helperText={errorText}
       variant={variant}
@@ -43,10 +46,6 @@ const Validator = ({
       name={name}
       onChange={changeHandler}
       value={value}
-      autoComplete='on'
-      autoCapitalize='on'
-      autoCorrect='on'
-      aria-label={name}
       error={!validated}
     />
   );

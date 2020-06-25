@@ -108,6 +108,7 @@
   "lint-staged": {
     "*.js": [
       "prettier --write",
+      "test",
       "eslint . --fix --color"
     ]
   },

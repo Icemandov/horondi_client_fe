@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import GoogleLogin from 'react-google-login';
 import {
-  TextField,
   Container,
   FormHelperText,
   Button,
@@ -9,21 +8,24 @@ import {
   InputAdornment,
   IconButton
 } from '@material-ui/core';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
+import { VisibilityOff } from '@material-ui/icons';
 import { useStyles } from './Login.styles';
 import { placeholders, formRegExp, errorMessages } from '../../configs';
 import Validator from '../../components/validator';
 
 const FORM_LABEL = 'Увійти'.toUpperCase();
 
-const Registration = () => {
+const Login = () => {
   const [user, setUser] = useState({
     email: '',
     password: ''
   });
-
+  const [emailIsValidated, setEmailIsValidated] = useState(false);
+  const [passwordIsValidated, setPasswordIsValidated] = useState(false);
   const styles = useStyles();
+
   const language = 0;
+
   const email = placeholders.email[language].value;
   const password = placeholders.password[language].value;
 
@@ -35,7 +37,6 @@ const Registration = () => {
     endAdornment: (
       <InputAdornment position='end'>
         <IconButton aria-label='toggle password visibility'>
-          <Visibility />
           <VisibilityOff />
         </IconButton>
       </InputAdornment>
@@ -51,29 +52,38 @@ const Registration = () => {
         <Validator
           helperText={errorMessages.email}
           type='text'
+          name='email'
           label={email}
           regex={formRegExp.email}
           validate
           style={styles.textInput}
-          inputProps={endAdornment}
+          handler={handleChange}
+          setIsValidated={setEmailIsValidated}
         />
-        <FormHelperText className={styles.errorMessageDiv}>
-          <i className={styles.errorMessage} />
-        </FormHelperText>
-        <TextField
-          className={styles.textInput}
-          id='password'
+
+        <Validator
+          helperText={errorMessages.password}
+          type='password'
           name='password'
           label={password}
           variant='outlined'
+          regex={formRegExp.password}
+          validate
+          handler={handleChange}
+          style={styles.textInput}
           value={user.password}
-          onChange={handleChange}
+          inputProps={endAdornment}
+          setIsValidated={setPasswordIsValidated}
         />
-        <FormHelperText className={styles.errorMessageDiv} />
         <div className={styles.forgotPasswordDiv}>
           <Link to='/restore'>Забув пароль?</Link>
         </div>
-        <Button className={styles.loginButton}>{FORM_LABEL}</Button>
+        <Button
+          className={styles.loginButton}
+          disabled={!emailIsValidated || !passwordIsValidated}
+        >
+          {FORM_LABEL}
+        </Button>
         <div className={styles.orText}>АБО</div>
         <GoogleLogin id='google-button' className={styles.socialButtonDiv}>
           GOOGLE
@@ -86,4 +96,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Login;
