@@ -1,4 +1,4 @@
-export const LANGUAGE = 1;
+export const LANGUAGE = 0;
 
 // delete if dont need
 export const formRegExp = {

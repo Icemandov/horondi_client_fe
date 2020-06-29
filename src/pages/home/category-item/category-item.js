@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { useStyles } from './category-item.style';
 
 const CategoryItem = ({ categoryName, categoryImage, categoryCode }) => {
-  const props = {
-    image: categoryImage
-  };
+  // const props = {
+  //   image: categoryImage
+  // };
   const linkTo = categoryCode.split('-')[1];
   const styles = useStyles({ image: categoryImage });
 
