@@ -19,7 +19,6 @@ const AppHeader = () => {
         <Toolbar className={styles.header}>
           <NavbarLeft />
           <Toolbar>
-            {/* Here will be NavbarRight */}
             <AttachMoneyIcon className={styles.icons} />
             <LanguageIcon className={styles.icons} />
             <ShoppingBasketIcon className={styles.icons} />

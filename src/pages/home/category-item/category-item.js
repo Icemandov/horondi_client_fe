@@ -8,7 +8,7 @@ const CategoryItem = ({ categoryName, categoryImage, categoryCode }) => {
     image: categoryImage
   };
   const linkTo = categoryCode.split('-')[1];
-  const styles = useStyles(props);
+  const styles = useStyles({ image: categoryImage });
 
   return (
     <Link to={`/${linkTo}`} className={styles.link}>

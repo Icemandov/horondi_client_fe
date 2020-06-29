@@ -6,12 +6,8 @@ import NotLoggedCabinet from '../not-logged-cabinet';
 import LoggedCabinet from '../logged-cabinet';
 
 const Cabinet = () => {
-  const isLogged = false;
-  const props = {
-    logged: isLogged
-  };
-
-  const styles = useStyles(props);
+  const isLogged = true;
+  const styles = useStyles({ logged: isLogged });
 
   return (
     <div className={styles.cabinet}>
