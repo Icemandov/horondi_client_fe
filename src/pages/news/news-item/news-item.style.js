@@ -32,7 +32,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   ArticleTitle: {
-    minHeight: '8rem'
+    minHeight: '5rem'
   },
   newsText: {
     textAlign: 'justify',

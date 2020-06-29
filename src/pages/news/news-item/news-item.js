@@ -32,6 +32,7 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
   const dateLanguege = `${newsDateLanguegeOptions[LANGUAGE]}`;
   const dateToShow = new Date(parseInt(date));
   const newsDate = dateToShow.toLocaleString(`${dateLanguege}`, TIME_OPTIONS);
+
   return (
     <div className={styles.container}>
       <Card className={styles.root}>
