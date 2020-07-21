@@ -15,14 +15,16 @@ const Categories = () => {
   const styles = useStyles();
 
   const categoriesList = categories
-    ? categories.map(({ _id, name, images }) => (
-      <CategoryItem
-        key={_id}
-        url={getCategoryURL(name)}
-        categoryName={name[LANGUAGE].value}
-        categoryImage={images.large}
-      />
-    ))
+    ? categories.map(({ _id, name, images, isMain }) =>
+      isMain ? (
+        <CategoryItem
+          key={_id}
+          categoryUrl={getCategoryURL(name)}
+          categoryName={name[LANGUAGE].value}
+          categoryImage={images.large}
+        />
+      ) : null
+    )
     : null;
 
   return (

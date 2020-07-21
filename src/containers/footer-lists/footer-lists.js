@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import { getCategoryURL } from '../../pages/home/categories/categories';
 import { useStyles } from './footer-lists.styles';
 
 import {
@@ -11,7 +12,6 @@ import {
   FOOTER_CATALOGS,
   LANGUAGE
 } from '../../configs';
-import { getCategoryURL } from '../../pages/home/categories/categories';
 
 const FooterLists = ({ language = LANGUAGE }) => {
   const styles = useStyles();
@@ -20,15 +20,17 @@ const FooterLists = ({ language = LANGUAGE }) => {
   }));
 
   const categoriesList = categories
-    ? categories.map(({ _id, name }) => (
-      <div key={_id}>
-        <Typography variant='subtitle2'>
-          <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
-            {name[language].value}
-          </Link>
-        </Typography>
-      </div>
-    ))
+    ? categories.map(({ _id, name, isMain }) =>
+      isMain ? (
+        <div key={_id}>
+          <Typography variant='subtitle2'>
+            <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
+              {name[language].value}
+            </Link>
+          </Typography>
+        </div>
+      ) : null
+    )
     : null;
 
   const informationList = FOOTER_INFORMATION[language].items.map((item) => (
