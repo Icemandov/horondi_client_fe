@@ -9,7 +9,7 @@ export function* handleCategoriesLoad() {
   yield put(setCategoriesLoading(true));
   const query = `query {
                    getAllCategories {
-                     categoryCode
+                  
                      _id
                      name {
                      value

@@ -3,6 +3,10 @@ export const LANGUAGE = 1;
 export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
+export const PDP_IMAGES = {
+  main: './images/pdp/pdp-main.jpg'
+};
+
 export const HOMEPAGE_LOOKS_IMAGES = [
   'https://horondi.blob.core.windows.net/horondi/our-looks/img1.jpg',
   'https://horondi.blob.core.windows.net/horondi/our-looks/img2.jpg',
@@ -142,3 +146,100 @@ export const LANGUAGES_LIST = [
   { lang: 'UA', value: 0 },
   { lang: 'EN', value: 1 }
 ];
+
+export const FEEDBACK = {
+  0: {
+    title: 'Відгуки',
+    name: `Ім'я`,
+    email: 'Електронна адреса',
+    textfield: 'Поділіться своїми враженнями з іншими',
+    submit: 'Залишити відгук'
+  },
+  1: {
+    title: 'Feedback',
+    name: 'Name',
+    email: 'Email',
+    textfield: 'Share your thoughts with others',
+    submit: 'Leave feedback'
+  }
+};
+
+export const SIMILAR_ITEMS = {
+  0: {
+    title: 'Схожі товари'
+  },
+  1: {
+    title: 'Similar items'
+  }
+};
+
+export const COLOR = {
+  0: {
+    color: 'Колір'
+  },
+  1: {
+    color: 'Color'
+  }
+};
+
+export const PATTERN = {
+  0: {
+    pattern: 'Візерунок'
+  },
+  1: {
+    pattern: 'Pattern'
+  }
+};
+
+export const PDP_BUTTONS = {
+  0: {
+    cartButton: 'В кошик',
+    buyButton: 'Купити зараз'
+  },
+  1: {
+    cartButton: 'Add to cart',
+    buyButton: 'Buy now'
+  }
+};
+
+export const IMGS_VIEWER = {
+  0: {
+    prev: 'Попередній',
+    next: 'Наступний',
+    close: 'Закрити'
+  },
+  1: {
+    prev: 'Previous',
+    next: 'Next',
+    close: 'Close'
+  }
+};
+
+export const COLORS = {
+  red: './images/pdp/colors/red.jpg',
+  yellow_1: './images/pdp/colors/yellow_1.jpg',
+  yellow_2: './images/pdp/colors/yellow_2.jpg',
+  black: './images/pdp/colors/black.jpg',
+  brown: './images/pdp/colors/brown.jpg',
+  coffee: './images/pdp/colors/coffee.jpg',
+  blue: './images/pdp/colors/blue.jpg',
+  gray: './images/pdp/colors/gray.jpg',
+  gray_2: './images/pdp/colors/gray_2.jpg',
+  green: './images/pdp/colors/green.jpg',
+  pink: './images/pdp/colors/pink.jpg'
+};
+
+export const PATTERNS = {
+  pattern_1: './images/pdp/patterns/pattern_1.jpg'
+};
+
+export const SIZE = {
+  0: {
+    size: 'Розмір',
+    sizeError: 'Виберіть розмір продукту'
+  },
+  1: {
+    size: 'Size',
+    sizeError: 'Select product size'
+  }
+};

@@ -6,28 +6,18 @@ import Typography from '@material-ui/core/Typography';
 import { useStyles } from './footer-lists.styles';
 
 import {
-  URL_LANGUAGE,
   FOOTER_INFORMATION,
   FOOTER_CONTACTS,
   FOOTER_CATALOGS,
   LANGUAGE
 } from '../../configs';
+import { getCategoryURL } from '../../pages/home/categories/categories';
 
 const FooterLists = ({ language = LANGUAGE }) => {
   const styles = useStyles();
   const { categories } = useSelector(({ Categories }) => ({
     categories: Categories.list
   }));
-
-  const getCategoryURL = (category) => {
-    const [filteredCategory] = category.filter(
-      (item) => item.lang === URL_LANGUAGE
-    );
-
-    if (filteredCategory.value) {
-      return filteredCategory.value.toLowerCase();
-    }
-  };
 
   const categoriesList = categories
     ? categories.map(({ _id, name }) => (

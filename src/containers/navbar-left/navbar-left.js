@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './navbar-left.styles';
 
-import { LOGO, URL_LANGUAGE } from '../../configs';
+import { LOGO } from '../../configs';
+import { getCategoryURL } from '../../pages/home/categories/categories';
 
 const NavbarLeft = () => {
   const { categories, language } = useSelector(({ Categories, Language }) => ({
@@ -14,16 +15,6 @@ const NavbarLeft = () => {
     language: Language.language
   }));
   const styles = useStyles();
-
-  const getCategoryURL = (category) => {
-    const [filteredCategory] = category.filter(
-      (item) => item.lang === URL_LANGUAGE
-    );
-
-    if (filteredCategory.value) {
-      return filteredCategory.value.toLowerCase();
-    }
-  };
 
   const categoriesList = categories
     ? categories.map(({ _id, name }) => (
