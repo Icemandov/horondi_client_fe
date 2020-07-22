@@ -6,10 +6,26 @@ import Button from '@material-ui/core/Button';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Rating from '@material-ui/lab/Rating';
 import { useSelector } from 'react-redux';
-import SimilarProducts from './similar-products';
-import Feedback from './feedback';
-import { PDP_IMAGES , PDP_BUTTONS, COLOR , IMGS_VIEWER, COLORS, PATTERNS, SIZE, PATTERN } from '../../configs';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import { useStyles } from './product-details-page.styles';
+import {
+  PDP_IMAGES,
+  PDP_BUTTONS,
+  COLOR,
+  IMGS_VIEWER,
+  COLORS,
+  PATTERNS,
+  SIZE,
+  PATTERN,
+  ADD_FEATURES
+} from '../../configs';
+import Feedback from './feedback';
+import SimilarProducts from './similar-products';
 
 const ProductDetails = () => {
   const { language } = useSelector(({ Language }) => ({
@@ -25,13 +41,14 @@ const ProductDetails = () => {
   const {sizeError} = SIZE[language];
   const sizeLabel = SIZE[language].size;
   const patternLabel = PATTERN[language].pattern;
+  const featuresLabel = ADD_FEATURES[language].features;
 
   const title = 'Rolltop "Pumpkin"';
   const productPattern = 'pattern_1';
   const productColor = 'yellow_1';
   const productSizes = ['S', 'M', 'L'];
-  const price = '1700 UAH';
-  const priceWithSale = '1450.00 UAH';
+  const price = null;
+  const priceWithSale = '1350.00 UAH';
   const imgs = [
     {
       src: PDP_IMAGES.main
@@ -64,7 +81,9 @@ const ProductDetails = () => {
 
   const handleSizeChange = (e) => {
     setSize(e.target.textContent);
-    setError(false);
+    if (error === true) {
+      setError(false);
+    }
   };
 
   const [selectedSize, setSize] = useState(false);
@@ -72,6 +91,12 @@ const ProductDetails = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currImg, setCurrImg] = useState(0);
   const [error, setError] = useState(false);
+  const [bagBottom, setBagBottom] = useState('');
+  const [sidePocket, setSidePocket] = useState(false);
+
+  const handleBottomChange = (e) => {
+    setBagBottom(e.target.value);
+  };
 
   const sizes = productSizes
     ? productSizes.map((size) => (
@@ -144,13 +169,52 @@ const ProductDetails = () => {
             <div className={styles.patternCircle} />
             <br />
           </div>
-          <div>
+          <div className={styles.buttons}>
             <span className={styles.label}>{sizeLabel}: </span>
             <ButtonGroup aria-label='outlined primary button group'>
               {sizes}
             </ButtonGroup>{' '}
             <br />
             {error ? <span className={styles.error}>{sizeError}</span> : null}
+          </div>
+          <div>
+            <span className={styles.label}>{featuresLabel}: </span>
+            <div className={styles.additionalForm}>
+              <div className={styles.feature}>
+                <FormControl className={styles.formControl}>
+                  <InputLabel id='demo-simple-select-autowidth-label'>
+                    Bag bottom
+                  </InputLabel>
+                  <Select
+                    labelId='demo-simple-select-autowidth-label'
+                    id='demo-simple-select-autowidth'
+                    value={bagBottom}
+                    onChange={handleBottomChange}
+                  >
+                    <MenuItem value=''>
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value='leatherette'>Leatherette</MenuItem>
+                    <MenuItem value='cordura'>Cordura</MenuItem>
+                    <MenuItem value='skin'>Skin</MenuItem>
+                  </Select>
+                </FormControl>
+                <span className={styles.promotionalPrice}>+350 UAH</span>
+              </div>
+              <div className={styles.checkbox}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={sidePocket}
+                      onChange={(e) => setSidePocket(e.target.checked)}
+                      name='sidePocketChecked'
+                    />
+                  }
+                  label='Side pocket'
+                />
+                <span className={styles.promotionalPrice}>+100 UAH</span>
+              </div>
+            </div>
           </div>
           <div className={styles.submit}>
             <FavoriteIcon

@@ -12,7 +12,10 @@ const circle = {
 const price = {
   fontSize: '1.15rem',
   fontWeight: 'bolder',
-  color: '#6c757d'
+  color: '#6c757d',
+  '@media (max-width: 600px)': {
+    fontSize: '0.9rem'
+  }
 };
 
 const heart = {
@@ -63,31 +66,31 @@ export const useStyles = makeStyles((theme) => ({
         transform: 'scale(1.05)'
       },
       '&:nth-child(1)': {
-        gridColumn: '1',
-        gridRow: '1'
+        gridColumn: '2',
+        gridRow: '1 / 4'
       },
       '&:nth-child(2)': {
         gridColumn: '1',
-        gridRow: '2'
+        gridRow: '1'
       },
       '&:nth-child(3)': {
         gridColumn: '1',
-        gridRow: '3'
+        gridRow: '2'
       },
       '&:nth-child(4)': {
-        gridColumn: '2',
-        gridRow: '1 / 4'
+        gridColumn: '1',
+        gridRow: '3'
       }
     },
     '@media (max-width: 1150px)': {
       '& img': {
-        '&:nth-child(1)': {
-          display: 'none'
-        },
         '&:nth-child(2)': {
           display: 'none'
         },
         '&:nth-child(3)': {
+          display: 'none'
+        },
+        '&:nth-child(4)': {
           display: 'none'
         },
         gridColumnGap: '0',
@@ -95,7 +98,7 @@ export const useStyles = makeStyles((theme) => ({
         gridTemplateRows: '20rem'
       }
     },
-    '@media (max-width: 1300px)': {
+    '@media max-width: 1300px)': {
       gridGap: '10px',
       gridTemplateColumns: '5rem 16.7rem',
       gridTemplateRows: '6rem 6rem 6rem'
@@ -111,12 +114,13 @@ export const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'center'
+      textAlign: 'center'
     }
   },
   promotionalPrice: {
     ...price,
-    marginRight: '1rem'
+    paddingTop: '1.5rem',
+    alignSelf: 'center'
   },
   defaultPrice: {
     ...price,
@@ -129,11 +133,14 @@ export const useStyles = makeStyles((theme) => ({
     wordSpacing: '0.2rem',
     maxHeight: '4.5rem',
     '@media (max-width: 600px)': {
-      marginTop: '0'
+      margin: '0 auto'
     }
   },
   label: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    '@media (max-width: 600px)': {
+      justifyContent: 'center'
+    }
   },
   colorCircle: ({ colorUrl }) => ({
     ...circle,
@@ -193,11 +200,11 @@ export const useStyles = makeStyles((theme) => ({
     },
     '@media (max-width: 600px)': {
       marginRight: '0',
-      paddingRight: '0'
+      paddingRight: '0',
+      fontSize: '0.8rem'
     }
   },
   submit: {
-    marginTop: '1.5rem',
     display: 'flex',
     '@media (max-width: 600px)': {
       '& *': {
@@ -218,5 +225,30 @@ export const useStyles = makeStyles((theme) => ({
     letterSpacing: '0.03333em',
     color: '#f44336',
     position: 'absolute'
+  },
+  buttons: {
+    marginBottom: '1.6rem'
+  },
+  formControl: {
+    marginRight: '0.7rem',
+    minWidth: '8rem',
+    '& label.Mui-focused': {
+      color: theme.palette.textColor
+    }
+  },
+  additionalForm: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: '0.6rem'
+  },
+  checkbox: {
+    marginTop: '0.7rem',
+    marginRight: '0.7rem',
+    '& .MuiCheckbox-colorSecondary.Mui-checked': {
+      color: theme.palette.button.normal.backgroundColor
+    }
+  },
+  feature: {
+    display: 'flex'
   }
 }));

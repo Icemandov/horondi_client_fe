@@ -243,3 +243,12 @@ export const SIZE = {
     sizeError: 'Select product size'
   }
 };
+
+export const ADD_FEATURES = {
+  0: {
+    features: 'Додаткові особливості'
+  },
+  1: {
+    features: 'Additional features'
+  }
+};
