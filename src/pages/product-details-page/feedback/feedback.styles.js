@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: '1.5rem'
     }
   },
-  textfield: {
+  textField: {
     marginTop: '2.5rem',
     width: '39rem',
     '@media (max-width: 950px)': {

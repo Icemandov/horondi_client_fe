@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
+
+import Button from '@material-ui/core/Button';
 import Rating from '@material-ui/lab/Rating';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import useStyles from './feedback.styles';
+
 import FeedbackItem from './feedback-item';
 import { FEEDBACK } from '../../../configs';
 
 const Feedback = ({ language }) => {
-  const styles = useStyles();
-  const [rate, setRate] = useState(0);
-
-  const textfieldLabel = FEEDBACK[language].textfield;
-  const {title} = FEEDBACK[language];
-  const nameLabel = FEEDBACK[language].name;
-  const emailLabel = FEEDBACK[language].email;
-  const submitLabel = FEEDBACK[language].submit;
-
+  const inputVariant = 'outlined';
+  const textFieldRows = 10;
+  const rateName = 'simple-controlled';
   const productComments = [
     {
       name: 'Dimas',
@@ -29,6 +25,10 @@ const Feedback = ({ language }) => {
     }
   ];
 
+  const styles = useStyles();
+
+  const [rate, setRate] = useState(0);
+
   const feedbacks = productComments
     ? productComments.map(({ name, value, date }) => (
       <FeedbackItem key={name} name={name} value={value} date={date} />
@@ -37,39 +37,39 @@ const Feedback = ({ language }) => {
 
   return (
     <div className={styles.feedback}>
-      <h2>{title}</h2>
+      <h2>{FEEDBACK[language].title}</h2>
       <Rating
-        name='simple-controlled'
+        name={rateName}
         value={rate}
-        onChange={(e, newRate) => {
-          setRate(newRate);
-        }}
+        onChange={(e, newRate) => setRate(newRate)}
       />
       <form>
         <div className={styles.form}>
           <TextField
             className={styles.input}
-            label={nameLabel}
-            variant='outlined'
+            label={FEEDBACK[language].name}
+            variant={inputVariant}
             required
           />
           <TextField
             className={styles.input}
-            label={emailLabel}
-            variant='outlined'
+            label={FEEDBACK[language].email}
+            variant={inputVariant}
             required
-          />{' '}
+          />
           <br />
           <TextField
-            className={styles.textfield}
-            label={textfieldLabel}
+            className={styles.textField}
+            label={FEEDBACK[language].textField}
             multiline
-            rows={10}
-            variant='outlined'
+            rows={textFieldRows}
+            variant={inputVariant}
             required
           />
         </div>
-        <Button className={styles.feedbackBtn}>{submitLabel}</Button>
+        <Button className={styles.feedbackBtn}>
+          {FEEDBACK[language].submit}
+        </Button>
       </form>
       <hr />
       {feedbacks}

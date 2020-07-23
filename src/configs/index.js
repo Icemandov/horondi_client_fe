@@ -152,14 +152,14 @@ export const FEEDBACK = {
     title: 'Відгуки',
     name: `Ім'я`,
     email: 'Електронна адреса',
-    textfield: 'Поділіться своїми враженнями з іншими',
+    textField: 'Поділіться своїми враженнями з іншими',
     submit: 'Залишити відгук'
   },
   1: {
     title: 'Feedback',
     name: 'Name',
     email: 'Email',
-    textfield: 'Share your thoughts with others',
+    textField: 'Share your thoughts with others',
     submit: 'Leave feedback'
   }
 };
@@ -236,11 +236,11 @@ export const PATTERNS = {
 export const SIZE = {
   0: {
     size: 'Розмір',
-    sizeError: 'Виберіть розмір продукту'
+    error: 'Виберіть розмір продукту'
   },
   1: {
     size: 'Size',
-    sizeError: 'Select product size'
+    error: 'Select product size'
   }
 };
 
@@ -250,5 +250,41 @@ export const ADD_FEATURES = {
   },
   1: {
     features: 'Additional features'
+  }
+};
+
+export const PRODUCT_PRICE = {
+  0: {
+    price: 'Ціна'
+  },
+  1: {
+    price: 'Price'
+  }
+};
+
+export const SIDE_POCKET = {
+  0: {
+    sidePocket: 'Боковий карман'
+  },
+  1: {
+    sidePocket: 'Side pocket'
+  }
+};
+
+export const BAG_BOTTOM = {
+  0: {
+    bagBottom: 'Низ рюкзака'
+  },
+  1: {
+    bagBottom: 'Bag bottom'
+  }
+};
+
+export const SELECT_NONE = {
+  0: {
+    none: 'Жоден'
+  },
+  1: {
+    none: 'None'
   }
 };
