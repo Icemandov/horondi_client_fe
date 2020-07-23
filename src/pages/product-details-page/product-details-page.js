@@ -14,10 +14,6 @@ import ProductImages from './product-images';
 import { PDP_IMAGES } from '../../configs';
 
 const ProductDetails = () => {
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
-
   const title = 'Rolltop "Pumpkin"';
   const productPattern = 'pattern_1';
   const productColor = 'yellow_1';
@@ -37,6 +33,10 @@ const ProductDetails = () => {
       src: PDP_IMAGES.main
     }
   ];
+
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
+  }));
 
   const styles = useStyles();
 
