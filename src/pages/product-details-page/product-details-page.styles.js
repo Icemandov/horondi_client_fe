@@ -9,7 +9,11 @@ export const useStyles = makeStyles((theme) => ({
     background: '#F5F5F5',
     border: '1px solid #D3D3D3',
     boxSizing: 'border-box',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    '@media (max-width: 600px)': {
+      width: '100vw',
+      margin: '0'
+    }
   },
   product: {
     display: 'grid',

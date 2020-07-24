@@ -27,7 +27,7 @@ const ProductInfo = ({
     <div>
       <div className={styles.head}>
         <span className={styles.title}>{title}</span>
-        <Rating value={5} readOnly />
+        <Rating value={4.5} readOnly precision={0.1} />
       </div>
       <p className={styles.description}>
         Textured hoodie featuring an adjustable drawstring hood, long sleeves

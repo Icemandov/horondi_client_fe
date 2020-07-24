@@ -14,6 +14,9 @@ import ProductImages from './product-images';
 import { PDP_IMAGES } from '../../configs';
 
 const ProductDetails = () => {
+  const product = {
+    id: '13'
+  };
   const title = 'Rolltop "Pumpkin"';
   const productPattern = 'pattern_1';
   const productColor = 'yellow_1';
@@ -46,9 +49,20 @@ const ProductDetails = () => {
   const [sidePocket, setSidePocket] = useState(false);
   const [currentPrice, setPrice] = useState(defaultPrice);
 
+  const productToSend = {
+    ...product,
+    selectedSize,
+    bagBottom,
+    sidePocket,
+    totalPrice: currentPrice
+  };
+
   const checkSize = () => {
-    if (selectedSize) return;
-    setError(true);
+    if (!selectedSize) {
+      setError(true);
+      return false;
+    }
+    return true;
   };
 
   const handleSizeChange = (e) => {
@@ -85,7 +99,12 @@ const ProductDetails = () => {
             language={language}
             setPrice={setPrice}
           />
-          <ProductSubmit checkSize={checkSize} language={language} />
+          <ProductSubmit
+            checkSize={checkSize}
+            language={language}
+            product={product}
+            productToSend={productToSend}
+          />
         </div>
       </div>
       <SimilarProducts language={language} />

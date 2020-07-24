@@ -53,11 +53,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '2.5rem',
     width: '39rem',
     '@media (max-width: 950px)': {
-      width: '26rem',
+      width: '67vw',
       marginTop: '1rem'
     },
-    '@media (max-width: 650px)': {
-      width: '19rem',
+    '@media (max-width: 600px)': {
+      width: '85vw',
       marginTop: '1rem'
     }
   },

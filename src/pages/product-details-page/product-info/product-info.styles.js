@@ -5,7 +5,7 @@ export const price = {
   fontWeight: '700',
   color: '#454440',
   '@media (max-width: 600px)': {
-    fontSize: '0.9rem'
+    fontSize: '1rem'
   },
   paddingTop: '1.5rem',
   alignSelf: 'center'
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => {
       wordSpacing: '0.2rem',
       maxHeight: '4.5rem',
       '@media (max-width: 600px)': {
-        margin: '0 auto'
+        justifyContent: 'center'
       }
     },
     label: {

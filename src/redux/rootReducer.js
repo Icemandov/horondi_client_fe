@@ -8,6 +8,7 @@ import Error from './error/error.reducer';
 import Language from './language/language.reducer';
 import Cart from './cart/cart.reducer';
 import Wishlist from './wishlist/wishlist.reducer';
+import Products from './products/products.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -18,7 +19,8 @@ const rootReducer = (history) =>
     Error,
     Language,
     Cart,
-    Wishlist
+    Wishlist,
+    Products
   });
 
 export default rootReducer;

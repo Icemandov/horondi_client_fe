@@ -5,9 +5,11 @@ const useStyles = makeStyles((theme) => ({
     '& div': {
       padding: '0 !important'
     },
-
     '& svg': {
       display: 'none'
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'white'
     }
   },
   rootSelect: {

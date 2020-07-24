@@ -11,7 +11,10 @@ const useStyles = makeStyles((theme) => ({
   additionalForm: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: '0.6rem'
+    marginTop: '0.6rem',
+    '@media (max-width: 600px)': {
+      alignItems: 'center'
+    }
   },
   feature: {
     display: 'flex'
@@ -21,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
     minWidth: '7.5rem',
     '& .MuiInputBase-root .MuiSelect-root': {
       fontSize: '0.9rem'
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: theme.palette.textColor
     },
     '& label': {
       fontSize: '0.9rem',
