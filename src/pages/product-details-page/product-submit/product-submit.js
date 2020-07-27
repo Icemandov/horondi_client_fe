@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
@@ -20,28 +20,25 @@ import { setItemToCart } from '../../../redux/cart/cart.actions';
 import { PDP_BUTTONS } from '../../../configs';
 
 const ProductSubmit = ({ checkSize, language, productToSend, product }) => {
-  const { wishlistItems, cartItems } = useSelector(({ Wishlist, Cart }) => ({
-    wishlistItems: Wishlist.list,
-    cartItems: Cart.list
-  }));
   const styles = useStyles();
   const dispatch = useDispatch();
+  const cartItems = getFromLocalStorage('cart');
+  const wishlistItems = getFromLocalStorage('wishlist');
 
   const isWishful = wishlistItems
-    ? wishlistItems.find((item) => product.id === item.id)
+    ? wishlistItems.find((item) => product._id === item._id)
     : false;
 
   const onWishfulHandler = () => {
-    const localStorageWishlist = getFromLocalStorage('wishlist');
     if (isWishful) {
-      dispatch(removeItemFromWishlist(product.id));
-      const filteredItems = localStorageWishlist.filter(
-        (item) => item.id !== product.id
+      dispatch(removeItemFromWishlist(product._id));
+      const filteredItems = wishlistItems.filter(
+        (item) => item._id !== product._id
       );
       setToLocalStorage('wishlist', filteredItems);
     } else {
       dispatch(setItemToWishlist(product));
-      setToLocalStorage('wishlist', [...localStorageWishlist, product]);
+      setToLocalStorage('wishlist', [...wishlistItems, product]);
     }
   };
 

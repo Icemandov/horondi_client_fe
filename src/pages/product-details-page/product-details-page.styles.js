@@ -6,8 +6,8 @@ export const useStyles = makeStyles((theme) => ({
     width: '80%',
     minHeight: '1200px',
     margin: '2rem auto',
-    background: '#F5F5F5',
-    border: '1px solid #D3D3D3',
+    backgroundColor: theme.palette.card.backgroundColor,
+    border: theme.palette.card.border,
     boxSizing: 'border-box',
     borderRadius: '5px',
     '@media (max-width: 600px)': {
@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'grid',
     gridTemplateColumns: '50% 50%',
     padding: '2rem',
-    '@media (max-width: 1150px)': {
+    '@media (max-width: 1265px)': {
       display: 'block'
     }
   },
@@ -35,5 +35,9 @@ export const useStyles = makeStyles((theme) => ({
       alignItems: 'center',
       textAlign: 'center'
     }
+  },
+  center: {
+    width: '3rem',
+    margin: '15rem auto'
   }
 }));

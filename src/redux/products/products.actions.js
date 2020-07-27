@@ -9,8 +9,9 @@ const setProduct = (item) => ({
   payload: item
 });
 
-const getProduct = () => ({
-  type: GET_PRODUCT
+const getProduct = (id) => ({
+  type: GET_PRODUCT,
+  payload: id
 });
 
 const setProductsLoading = (loading) => ({

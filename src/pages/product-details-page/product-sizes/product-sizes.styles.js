@@ -19,13 +19,19 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '1.66',
     letterSpacing: '0.03333em',
     color: '#f44336',
-    position: 'absolute'
+    position: 'absolute',
+    '@media (max-width: 600px)': {
+      left: '34vw'
+    }
+  },
+  sizeButton: {
+    backgroundColor: theme.palette.card.childrenBackgroundColor
   },
   selectedSize: {
-    backgroundColor: 'black',
-    color: 'white',
+    backgroundColor: theme.palette.card.selectedButton.backgroundColor,
+    color: theme.palette.card.selectedButton.color,
     '&:hover': {
-      backgroundColor: 'black'
+      backgroundColor: theme.palette.card.selectedButton.backgroundColor
     }
   }
 }));

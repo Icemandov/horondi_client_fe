@@ -19,7 +19,9 @@ const ProductSizes = ({
     ? productSizes.map((size) => (
       <Button
         key={size}
-        className={size === selectedSize ? styles.selectedSize : null}
+        className={
+          size === selectedSize ? styles.selectedSize : styles.sizeButton
+        }
         onClick={(e) => handleSizeChange(e)}
       >
         {size}

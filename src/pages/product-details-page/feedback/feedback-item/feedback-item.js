@@ -1,8 +1,20 @@
 import React from 'react';
 import useStyles from './feedback-item.styles';
 
-const FeedbackItem = ({ name, value, date }) => {
+import {
+  COMMENTS_TIME_OPTIONS,
+  DATE_LANGUAGE_OPTIONS
+} from '../../../../configs';
+
+const FeedbackItem = ({ name, text, date, language }) => {
   const styles = useStyles();
+
+  const dateLanguage = DATE_LANGUAGE_OPTIONS[language];
+  const dateToShow = new Date(parseInt(date));
+  const commentDate = dateToShow.toLocaleString(
+    dateLanguage,
+    COMMENTS_TIME_OPTIONS
+  );
 
   return (
     <div className={styles.container}>
@@ -10,28 +22,9 @@ const FeedbackItem = ({ name, value, date }) => {
         <div>
           <div className={styles.head}>
             <h3>{name}</h3>
-            <div className={styles.date}>{date}</div>
+            <div className={styles.date}>{commentDate}</div>
           </div>
-          <div>
-            <div>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse
-              nesciunt odit perferendis saepe velit? Beatae eaque eius error
-              molestias nostrum quasi sapiente similique tenetur voluptates.
-              Enim iure nostrum numquam similique?
-            </div>
-            <div>
-              Aut consequuntur ea esse libero nobis ratione saepe sequi! Aliquam
-              assumenda blanditiis exercitationem neque nihil perferendis quas
-              repellat sint voluptatem. Autem culpa dolores eaque enim fuga hic
-              possimus quos voluptatem.
-            </div>
-            <div>
-              Ad cum cumque cupiditate, esse ipsa labore nisi obcaecati
-              reprehenderit sequi vero! Asperiores dolorem impedit nihil nulla
-              vitae. Consequatur dolore doloribus explicabo id inventore porro
-              quas quia vel voluptas voluptates.
-            </div>
-          </div>
+          <div>{text}</div>
         </div>
       </div>
       <hr />

@@ -83,6 +83,7 @@ export function* handleArticleLoad({ payload }) {
       }`
     );
     yield put(setArticle(article.data.getNewsById));
+    console.log(article.data.getNewsById);
     yield put(setLoading(false));
   } catch (e) {
     yield call(handleNewsError, e);

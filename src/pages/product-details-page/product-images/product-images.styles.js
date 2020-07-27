@@ -4,9 +4,10 @@ const useStyles = makeStyles((theme) => ({
   images: {
     display: 'grid',
     gridAutoFlow: 'column',
-    gridGap: '2rem',
-    gridTemplateColumns: '6rem 21rem',
-    gridTemplateRows: '6.5rem 6.5rem 6.5rem',
+    gridColumnGap: '2rem',
+    gridRowGap: '0.3rem',
+    gridTemplateColumns: '6rem 20.5rem',
+    gridTemplateRows: '9rem 9rem 9rem',
     overflow: 'hidden',
     '& img': {
       transition: 'all 0.3s',
@@ -44,8 +45,7 @@ const useStyles = makeStyles((theme) => ({
         '&:nth-child(4)': {
           display: 'none'
         },
-        gridColumnGap: '0',
-        gridTemplateColumns: '1fr',
+        gridTemplateColumns: '20rem',
         gridTemplateRows: '20rem'
       }
     },

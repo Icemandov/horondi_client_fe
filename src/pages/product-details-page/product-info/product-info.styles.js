@@ -1,16 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const price = {
-  fontSize: '1.15rem',
-  fontWeight: '700',
-  color: '#454440',
-  '@media (max-width: 600px)': {
-    fontSize: '1rem'
-  },
-  paddingTop: '1.5rem',
-  alignSelf: 'center'
-};
-
 const useStyles = makeStyles((theme) => {
   const circle = {
     marginLeft: '0.5rem',
@@ -41,7 +30,14 @@ const useStyles = makeStyles((theme) => {
       }
     },
     price: {
-      ...price
+      fontSize: '1.15rem',
+      fontWeight: '700',
+      color: theme.palette.textColor,
+      '@media (max-width: 600px)': {
+        fontSize: '1rem'
+      },
+      paddingTop: '1.5rem',
+      alignSelf: 'center'
     },
     look: {
       display: 'flex',

@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { price } from '../product-info/product-info.styles';
 
 const useStyles = makeStyles((theme) => ({
   label: {
@@ -37,7 +36,14 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   price: {
-    ...price
+    fontSize: '1.15rem',
+    fontWeight: '700',
+    color: theme.palette.textColor,
+    '@media (max-width: 600px)': {
+      fontSize: '1rem'
+    },
+    paddingTop: '1.5rem',
+    alignSelf: 'center'
   },
   checkbox: {
     marginTop: '0.7rem',
@@ -46,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.button.normal.backgroundColor
     },
     '& .MuiFormControlLabel-root .MuiTypography-root': {
-      fontSize: '0.9rem'
+      fontSize: '0.9rem',
+      color: theme.palette.textColor
     }
   }
 }));

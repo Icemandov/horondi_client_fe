@@ -3,10 +3,11 @@ import React from 'react';
 import './similar-products.css';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
+import * as productImage from '../../../images/pdp_main.jpg';
 
-import { PDP_IMAGES, SIMILAR_ITEMS } from '../../../configs';
+import { SIMILAR_ITEMS } from '../../../configs';
 
-const SimilarProducts = ({ products, language }) => {
+const SimilarProducts = ({ language }) => {
   const { title } = SIMILAR_ITEMS[language];
   const carouselLabel = 'carousel';
   const similarItemsLabel = 'similarItems';
@@ -41,11 +42,11 @@ const SimilarProducts = ({ products, language }) => {
         responsive={responsive}
         swipeable={false}
       >
-        <img src={`${PDP_IMAGES.main}`} alt='bag' />
-        <img src={`${PDP_IMAGES.main}`} alt='bag' />
-        <img src={`${PDP_IMAGES.main}`} alt='bag' />
-        <img src={`${PDP_IMAGES.main}`} alt='bag' />
-        <img src={`${PDP_IMAGES.main}`} alt='bag' />
+        <img src={productImage} alt='bag' />
+        <img src={productImage} alt='bag' />
+        <img src={productImage} alt='bag' />
+        <img src={productImage} alt='bag' />
+        <img src={productImage} alt='bag' />
       </Carousel>
       <hr />
     </div>

@@ -3,10 +3,6 @@ export const LANGUAGE = 1;
 export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
-export const PDP_IMAGES = {
-  main: './images/pdp/pdp-main.jpg'
-};
-
 export const HOMEPAGE_LOOKS_IMAGES = [
   'https://horondi.blob.core.windows.net/horondi/our-looks/img1.jpg',
   'https://horondi.blob.core.windows.net/horondi/our-looks/img2.jpg',
@@ -163,27 +159,16 @@ export const TIME_OPTIONS = {
   day: 'numeric'
 };
 
+export const COMMENTS_TIME_OPTIONS = {
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric'
+};
+
 export const LANGUAGES_LIST = [
   { lang: 'UA', value: 0 },
   { lang: 'EN', value: 1 }
 ];
-
-export const FEEDBACK = {
-  0: {
-    title: 'Відгуки',
-    name: `Ім'я`,
-    email: 'Електронна адреса',
-    textField: 'Поділіться своїми враженнями з іншими',
-    submit: 'Залишити відгук'
-  },
-  1: {
-    title: 'Feedback',
-    name: 'Name',
-    email: 'Email',
-    textField: 'Share your thoughts with others',
-    submit: 'Leave feedback'
-  }
-};
 
 export const SIMILAR_ITEMS = {
   0: {
@@ -472,4 +457,37 @@ export const EMPTY_FIELD = [
   }
 ];
 
+export const PRODUCT_DESCRIPTION = {
+  0: {
+    value: 'Опис продукту'
+  },
+  1: {
+    value: 'Product description'
+  }
+};
+
 export const SHOW_AFTER = 3000;
+
+export const RATE_PRECISION = 0.1;
+
+export const FEEDBACK_OPTIONS = {
+  0: {
+    title: 'Відгуки',
+    name: `Ім'я`,
+    email: 'Електронна адреса',
+    textField: 'Поділіться своїми враженнями з іншими',
+    submit: 'Залишити відгук'
+  },
+  1: {
+    title: 'Feedback',
+    name: 'Name',
+    email: 'Email',
+    textField: 'Share your thoughts with others',
+    submit: 'Leave feedback'
+  },
+  inputVariant: 'outlined',
+  textFieldRows: 10,
+  rateName: 'simple-controlled'
+};
+
+export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];

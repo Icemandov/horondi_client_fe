@@ -47,11 +47,15 @@ const useStyles = makeStyles((theme) => ({
     height: '2rem',
     '@media (max-width: 950px)': {
       marginBottom: '1.5rem'
+    },
+    '& .MuiOutlinedInput-root': {
+      backgroundColor: theme.palette.card.childrenBackgroundColor
     }
   },
   textField: {
     marginTop: '2.5rem',
     width: '39rem',
+    backgroundColor: theme.palette.card.childrenBackgroundColor,
     '@media (max-width: 950px)': {
       width: '67vw',
       marginTop: '1rem'

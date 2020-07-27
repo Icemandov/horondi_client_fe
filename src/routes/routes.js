@@ -27,7 +27,7 @@ const Routes = () => {
           <Route path='/news' exact component={NewsPage} />
           <Route path='/news/:id' exact component={NewsDetailPage} />
           <Route path='/about-us' exact component={AboutUs} />
-          <Route path='/pdp' exact component={ProductDetails} />
+          <Route path='/:category/:id' exact component={ProductDetails} />
           <Route path='/cart' exact component={Cart} />
           <Route path='/wishlist' exact component={Wishlist} />
           <Route path='/checkout' exact component={Checkout} />
