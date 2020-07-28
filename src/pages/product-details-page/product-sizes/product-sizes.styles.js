@@ -5,6 +5,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '1.6rem'
   },
   label: {
+    fontWeight: '700',
     alignSelf: 'center',
     '@media (max-width: 600px)': {
       justifyContent: 'center'

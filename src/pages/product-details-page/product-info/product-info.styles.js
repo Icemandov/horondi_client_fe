@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme) => {
       fontWeight: '700'
     },
     description: {
-      marginTop: '1.7rem',
-      '@media (max-width: 600px)': {
-        textAlign: 'center'
+      textAlign: 'left',
+      '@media (max-width: 400px)': {
+        padding: '0'
       }
     },
     price: {
@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => {
       '@media (max-width: 600px)': {
         fontSize: '1rem'
       },
-      paddingTop: '1.5rem',
       alignSelf: 'center'
     },
     look: {
@@ -48,10 +47,16 @@ const useStyles = makeStyles((theme) => {
         justifyContent: 'center'
       }
     },
-    label: {
+    subtitle: {
+      fontWeight: '700',
       alignSelf: 'center',
       '@media (max-width: 600px)': {
         justifyContent: 'center'
+      }
+    },
+    details: {
+      '& div': {
+        marginBottom: '0.3rem'
       }
     },
     colorCircle: ({ colorUrl }) => ({

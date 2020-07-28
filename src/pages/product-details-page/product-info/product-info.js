@@ -9,13 +9,24 @@ import * as patternImage from '../../../images/pattern_2.jpg';
 import {
   COLOR,
   PATTERN,
-  PATTERNS,
   PRODUCT_PRICE,
   PRODUCT_DESCRIPTION,
-  RATE_PRECISION
+  RATE_PRECISION,
+  WEIGHT
 } from '../../../configs';
 
-const ProductInfo = ({ rate, title, description, currentPrice, language }) => {
+const ProductInfo = ({
+  rate,
+  title,
+  description,
+  currentPrice,
+  mainMaterial,
+  innerMaterial,
+  strapLengthInCm,
+  currentVolume,
+  currentWeight,
+  language
+}) => {
   const styles = useStyles({
     colorUrl: colorImage,
     patternUrl: patternImage
@@ -27,19 +38,60 @@ const ProductInfo = ({ rate, title, description, currentPrice, language }) => {
         <span className={styles.title}>{title}</span>
         <Rating value={rate} readOnly precision={RATE_PRECISION} />
       </div>
-      <div>
-        <p>{PRODUCT_DESCRIPTION[language].value}:</p>
-        {parse(description)}
+      <div className={styles.details}>
+        <div>
+          <p className={styles.subtitle}>
+            {PRODUCT_DESCRIPTION[language].productDescription}:
+          </p>
+          <div className={styles.description}>{parse(description)}</div>
+        </div>
+        <div>
+          <span className={styles.subtitle}>
+            {PRODUCT_DESCRIPTION[language].productMainMaterial}
+          </span>
+          <span className={styles.description}>
+            - {mainMaterial[language].value}
+          </span>
+        </div>
+        <div>
+          <span className={styles.subtitle}>
+            {PRODUCT_DESCRIPTION[language].productInnerMaterial}
+          </span>
+          <span className={styles.description}>
+            - {innerMaterial[language].value}
+          </span>
+        </div>
+        <div>
+          <span className={styles.subtitle}>
+            {PRODUCT_DESCRIPTION[language].strapLengthInCm}
+          </span>
+          <span className={styles.description}>- {strapLengthInCm}</span>
+        </div>
+        <div>
+          <span className={styles.subtitle}>
+            {WEIGHT[language].volumeLabel}
+          </span>
+          <span className={styles.description}>- {currentVolume}</span>
+        </div>
+        <div>
+          <span className={styles.subtitle}>
+            {WEIGHT[language].weightLabel}
+          </span>
+          <span className={styles.description}>- {currentWeight}</span>
+        </div>
       </div>
+      <br />
       <div>
-        <span className={styles.label}>{PRODUCT_PRICE[language].price}: </span>
+        <span className={styles.subtitle}>
+          {PRODUCT_PRICE[language].price}:{' '}
+        </span>
         <span className={styles.price}>{currentPrice} UAH</span>
       </div>
       <div className={styles.look}>
-        <span className={styles.label}>{COLOR[language].color}:</span>
+        <span className={styles.subtitle}>{COLOR[language].color}:</span>
         <br />
         <div className={styles.colorCircle} />
-        <span className={styles.label}>{PATTERN[language].pattern}:</span>
+        <span className={styles.subtitle}>{PATTERN[language].pattern}:</span>
         <div className={styles.patternCircle} />
         <br />
       </div>

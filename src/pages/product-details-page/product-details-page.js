@@ -14,10 +14,9 @@ import ProductImages from './product-images';
 import CircularUnderLoad from '../../components/loading-bar';
 import { getProduct } from '../../redux/products/products.actions';
 
-const ProductDetails = ({ match }) => {
-  const productPattern = 'pattern_1';
-  const productSizes = ['S', 'M', 'L'];
+import { productOptions, defaultSize } from '../../configs';
 
+const ProductDetails = ({ match }) => {
   const { language, product, isLoading } = useSelector(
     ({ Language, Products }) => ({
       language: Language.language,
@@ -28,6 +27,11 @@ const ProductDetails = ({ match }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
 
+  const { sizes } = productOptions;
+  const { bottomMaterials, additions } = productOptions;
+  const { volumeInLiters, weightInKg } = sizes.find(
+    ({ size }) => size === defaultSize
+  );
   const {
     _id,
     name,
@@ -35,15 +39,19 @@ const ProductDetails = ({ match }) => {
     rate,
     images,
     description,
-    colors,
-    comments
+    comments,
+    mainMaterial,
+    innerMaterial,
+    strapLengthInCm
   } = product;
 
   const [selectedSize, setSize] = useState(false);
   const [error, setError] = useState(false);
   const [bagBottom, setBagBottom] = useState('');
   const [sidePocket, setSidePocket] = useState(false);
-  const [currentPrice, setPrice] = useState('');
+  const [currentPrice, setPrice] = useState(0);
+  const [currentVolume, setVolume] = useState(volumeInLiters);
+  const [currentWeight, setWeight] = useState(weightInKg);
 
   useEffect(() => {
     const productId = match.params.id;
@@ -63,7 +71,8 @@ const ProductDetails = ({ match }) => {
     selectedSize,
     bagBottom,
     sidePocket,
-    totalPrice: currentPrice
+    totalPrice: currentPrice,
+    quantity: 1
   };
 
   const checkSize = () => {
@@ -75,7 +84,19 @@ const ProductDetails = ({ match }) => {
   };
 
   const handleSizeChange = (e) => {
-    setSize(e.target.textContent);
+    const { textContent } = e.target;
+    const oldPrice = selectedSize
+      ? sizes.find(({ size }) => size === selectedSize).additionalPrice
+      : 0;
+    const { additionalPrice, volumeInLiters, weightInKg } = sizes.find(
+      ({ size }) => size === textContent
+    );
+
+    setSize(textContent);
+    setPrice((price) => price - oldPrice + additionalPrice);
+    setVolume(volumeInLiters);
+    setWeight(weightInKg);
+
     if (error) {
       setError(false);
     }
@@ -99,22 +120,29 @@ const ProductDetails = ({ match }) => {
             title={name[language].value}
             description={description[language].value}
             currentPrice={currentPrice}
+            mainMaterial={mainMaterial}
+            innerMaterial={innerMaterial}
+            strapLengthInCm={strapLengthInCm}
+            currentVolume={currentVolume}
+            currentWeight={currentWeight}
             language={language}
           />
           <ProductSizes
-            productSizes={productSizes}
             selectedSize={selectedSize}
             handleSizeChange={handleSizeChange}
+            sizes={sizes}
             language={language}
             error={error}
           />
           <ProductFeatures
+            bottomMaterials={bottomMaterials}
+            additions={additions}
             bagBottom={bagBottom}
             setBagBottom={setBagBottom}
             sidePocket={sidePocket}
             setSidePocket={setSidePocket}
-            language={language}
             setPrice={setPrice}
+            language={language}
           />
           <ProductSubmit
             checkSize={checkSize}

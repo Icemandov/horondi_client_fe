@@ -7,32 +7,34 @@ import useStyles from './product-sizes.styles';
 import { SIZE } from '../../../configs';
 
 const ProductSizes = ({
-  productSizes,
   selectedSize,
   handleSizeChange,
+  sizes,
   error,
   language
 }) => {
   const styles = useStyles();
 
-  const sizes = productSizes
-    ? productSizes.map((size) => (
-      <Button
-        key={size}
-        className={
-          size === selectedSize ? styles.selectedSize : styles.sizeButton
-        }
-        onClick={(e) => handleSizeChange(e)}
-      >
-        {size}
-      </Button>
-    ))
+  const sizeButtons = sizes
+    ? sizes.map(({ size, available }) =>
+      available ? (
+        <Button
+          key={size}
+          className={
+            size === selectedSize ? styles.selectedSize : styles.sizeButton
+          }
+          onClick={(e) => handleSizeChange(e)}
+        >
+          {size}
+        </Button>
+      ) : null
+    )
     : null;
 
   return (
     <div className={styles.sizeButtons}>
       <span className={styles.label}>{SIZE[language].size}: </span>
-      <ButtonGroup>{sizes}</ButtonGroup>
+      <ButtonGroup>{sizeButtons}</ButtonGroup>
       <br />
       {error ? (
         <span className={styles.error}>{SIZE[language].error}</span>

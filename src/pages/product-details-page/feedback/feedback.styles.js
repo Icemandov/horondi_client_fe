@@ -9,6 +9,10 @@ const useStyles = makeStyles((theme) => ({
       color: '#C2C2C2',
       backgroundColor: '#C2C2C2',
       height: '0.05rem'
+    },
+    '@media (max-width: 400px)': {
+      padding: '0 1rem',
+      marginTop: '0'
     }
   },
   form: {
@@ -47,6 +51,9 @@ const useStyles = makeStyles((theme) => ({
     height: '2rem',
     '@media (max-width: 950px)': {
       marginBottom: '1.5rem'
+    },
+    '@media (max-width: 600px)': {
+      width: '85vw'
     },
     '& .MuiOutlinedInput-root': {
       backgroundColor: theme.palette.card.childrenBackgroundColor

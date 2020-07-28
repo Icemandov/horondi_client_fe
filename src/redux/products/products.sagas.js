@@ -26,6 +26,7 @@ export function* handleProductLoading({ payload }) {
       lang
       value
     }
+    strapLengthInCm
     images {
       primary {
         medium
@@ -47,7 +48,6 @@ export function* handleProductLoading({ payload }) {
         large
       }
       available
-      simpleName
     }
     pattern {
       lang
@@ -58,24 +58,6 @@ export function* handleProductLoading({ payload }) {
       value
     }
     basePrice 
-    options {
-      size {
-        name
-        heightInCm
-        widthInCm
-        depthInCm
-        volumeInLiters
-        available
-        additionalPrice
-      }
-      bottomMaterial {
-        name {
-          lang
-          value
-        }
-        additionalPrice
-      }
-    }
     rate
     comments {
       text
@@ -88,7 +70,6 @@ export function* handleProductLoading({ payload }) {
 }`;
   try {
     const product = yield call(getItems, query);
-    console.log(product.data.getProductsById);
     yield put(setProduct(product.data.getProductsById));
     yield put(setProductsLoading(false));
   } catch (e) {

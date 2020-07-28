@@ -19,25 +19,28 @@ export const useStyles = makeStyles((theme) => ({
     display: 'grid',
     gridTemplateColumns: '50% 50%',
     padding: '2rem',
-    '@media (max-width: 1265px)': {
+    '@media (max-width: 1000px)': {
       display: 'block'
+    },
+    '@media (max-width: 400px)': {
+      padding: '0.5rem'
     }
   },
   productDetails: {
     wordSpacing: '0.2rem',
-    fontWeight: '600',
-    '@media (max-width: 1150px)': {
-      marginTop: '2rem'
-    },
+    fontWeight: '500',
     '@media (max-width: 600px)': {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       textAlign: 'center'
+    },
+    '@media (max-width: 300px)': {
+      padding: '0'
     }
   },
   center: {
     width: '3rem',
-    margin: '15rem auto'
+    margin: '22rem auto'
   }
 }));

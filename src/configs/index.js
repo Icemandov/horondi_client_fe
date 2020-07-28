@@ -459,10 +459,16 @@ export const EMPTY_FIELD = [
 
 export const PRODUCT_DESCRIPTION = {
   0: {
-    value: 'Опис продукту'
+    productDescription: 'Опис продукту',
+    productMainMaterial: 'Основна тканина ',
+    productInnerMaterial: 'Внутрішній матеріал ',
+    strapLengthInCm: 'Довжина лямок(см) '
   },
   1: {
-    value: 'Product description'
+    productDescription: 'Product description',
+    productMainMaterial: 'Main material ',
+    productInnerMaterial: 'Inner material ',
+    strapLengthInCm: 'Strap length(cm) '
   }
 };
 
@@ -491,3 +497,87 @@ export const FEEDBACK_OPTIONS = {
 };
 
 export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
+
+export const productOptions = {
+  sizes: [
+    {
+      size: 'S',
+      additionalPrice: -50,
+      volumeInLiters: 15,
+      weightInKg: 0.7,
+      available: true
+    },
+    {
+      size: 'M',
+      additionalPrice: 0,
+      volumeInLiters: 18,
+      weightInKg: 0.8,
+      available: true
+    },
+    {
+      size: 'L',
+      additionalPrice: 50,
+      volumeInLiters: 21,
+      weightInKg: 0.9,
+      available: true
+    }
+  ],
+  bottomMaterials: [
+    {
+      name: [
+        {
+          lang: 'uk',
+          value: 'Шкірзамінник'
+        },
+        {
+          lang: 'en',
+          value: 'Faux leather'
+        }
+      ],
+      additionalPrice: 0
+    },
+    {
+      name: [
+        {
+          lang: 'uk',
+          value: 'Кордура'
+        },
+        {
+          lang: 'en',
+          value: 'Cordura'
+        }
+      ],
+      additionalPrice: 0
+    },
+    {
+      name: [
+        {
+          lang: 'uk',
+          value: 'Шкіра'
+        },
+        {
+          lang: 'en',
+          value: 'Skin'
+        }
+      ],
+      additionalPrice: 350
+    }
+  ],
+  additions: {
+    available: true,
+    additionalPrice: 100
+  }
+};
+
+export const WEIGHT = {
+  0: {
+    weightLabel: 'Вага(кг) ',
+    volumeLabel: `Об'єм(л)`
+  },
+  1: {
+    weightLabel: 'Weight(kg) ',
+    volumeLabel: `Volume(L)`
+  }
+};
+
+export const defaultSize = 'M';

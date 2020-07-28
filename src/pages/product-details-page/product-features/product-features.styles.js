@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   label: {
+    fontWeight: '700',
     alignSelf: 'center',
     '@media (max-width: 600px)': {
       justifyContent: 'center'
@@ -13,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '0.6rem',
     '@media (max-width: 600px)': {
       alignItems: 'center'
+    },
+    '@media (max-width: 300px)': {
+      marginTop: '0'
     }
   },
   feature: {
@@ -33,7 +37,15 @@ const useStyles = makeStyles((theme) => ({
     },
     '& label.Mui-focused': {
       color: theme.palette.textColor
+    },
+    '@media (max-width: 300px)': {
+      margin: '0'
     }
+  },
+  selectPrice: {
+    fontSize: '1rem',
+    fontWeight: '700',
+    color: theme.palette.textColor
   },
   price: {
     fontSize: '1.15rem',
@@ -54,6 +66,14 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiFormControlLabel-root .MuiTypography-root': {
       fontSize: '0.9rem',
       color: theme.palette.textColor
+    },
+    '& .MuiFormControlLabel-root': {
+      '@media (max-width: 300px)': {
+        marginRight: '0.2rem'
+      }
+    },
+    '@media (max-width: 300px)': {
+      marginRight: '0'
     }
   }
 }));

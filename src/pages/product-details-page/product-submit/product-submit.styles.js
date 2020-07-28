@@ -23,6 +23,13 @@ const useStyles = makeStyles((theme) => {
     },
     submit: {
       display: 'flex',
+      '@media (max-width: 350px)': {
+        flexDirection: 'column',
+        alignItems: 'center'
+      },
+      '@media (max-width: 400px)': {
+        marginBottom: '1rem'
+      },
       '@media (max-width: 600px)': {
         '& *': {
           justifyContent: 'space-around'

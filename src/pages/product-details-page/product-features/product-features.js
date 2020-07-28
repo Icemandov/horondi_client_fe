@@ -1,11 +1,11 @@
 import React from 'react';
 
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
 import useStyles from './product-features.styles';
 
 import {
@@ -16,25 +16,56 @@ import {
 } from '../../../configs';
 
 const ProductFeatures = ({
+  bottomMaterials,
+  additions,
   bagBottom,
   setBagBottom,
   sidePocket,
   setSidePocket,
-  language,
-  setPrice
+  setPrice,
+  language
 }) => {
-  const bagBottomPrice = 350;
-  const sidePocketPrice = 100;
+  const { additionalPrice } = additions;
   const styles = useStyles();
 
-  const handlePriceChange = (value, featureType, featurePrice, setFeature) => {
-    if (!featureType) {
-      setPrice((currentPrice) => currentPrice + featurePrice);
-    } else if (!value) {
-      setPrice((currentPrice) => currentPrice - featurePrice);
-    }
-    setFeature(value);
+  const setPriceCurrency = (price) => ` + ${price} UAH`;
+
+  const handleBottomChange = (e) => {
+    const { value } = e.target;
+    const oldPrice = bagBottom
+      ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
+        .additionalPrice
+      : 0;
+    const newPrice = value
+      ? bottomMaterials.find(({ name }) => name[1].value === value)
+        .additionalPrice
+      : 0;
+
+    setPrice((currentPrice) => currentPrice - oldPrice + newPrice);
+    setBagBottom(value);
   };
+
+  const handlePocketChange = (e) => {
+    if (!sidePocket) {
+      setPrice((currentPrice) => currentPrice + additionalPrice);
+    } else {
+      setPrice((currentPrice) => currentPrice - additionalPrice);
+    }
+    setSidePocket(e.target.checked);
+  };
+
+  const menuItems = bottomMaterials
+    ? bottomMaterials.map(({ name, additionalPrice }) => (
+      <MenuItem value={name[1].value} key={name[1].value}>
+        {name[language].value}
+        {additionalPrice ? (
+          <span className={styles.selectPrice}>
+            {setPriceCurrency(additionalPrice)}
+          </span>
+        ) : null}
+      </MenuItem>
+    ))
+    : null;
 
   return (
     <div>
@@ -43,44 +74,27 @@ const ProductFeatures = ({
         <div className={styles.feature}>
           <FormControl className={styles.formControl}>
             <InputLabel>{BAG_BOTTOM[language].bagBottom}</InputLabel>
-            <Select
-              value={bagBottom}
-              onChange={(e) =>
-                handlePriceChange(
-                  e.target.value,
-                  bagBottom,
-                  bagBottomPrice,
-                  setBagBottom
-                )
-              }
-            >
-              <MenuItem value=''>{SELECT_NONE[language].none}</MenuItem>
-              <MenuItem value='leatherette'>Leatherette</MenuItem>
-              <MenuItem value='cordura'>Cordura</MenuItem>
-              <MenuItem value='skin'>Skin</MenuItem>
+            <Select value={bagBottom} onChange={handleBottomChange}>
+              <MenuItem value='' key='none'>
+                {SELECT_NONE[language].none}
+              </MenuItem>
+              {menuItems}
             </Select>
           </FormControl>
-          <span className={styles.price}>+{bagBottomPrice} UAH</span>
         </div>
-        <div className={styles.checkbox}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={sidePocket}
-                onChange={(e) =>
-                  handlePriceChange(
-                    e.target.checked,
-                    sidePocket,
-                    sidePocketPrice,
-                    setSidePocket
-                  )
-                }
-              />
-            }
-            label={SIDE_POCKET[language].sidePocket}
-          />
-          <span className={styles.price}>+100 UAH</span>
-        </div>
+        {additions.available ? (
+          <div className={styles.checkbox}>
+            <FormControlLabel
+              control={
+                <Checkbox checked={sidePocket} onChange={handlePocketChange} />
+              }
+              label={SIDE_POCKET[language].sidePocket}
+            />
+            <span className={styles.price}>
+              {setPriceCurrency(additionalPrice)}
+            </span>
+          </div>
+        ) : null}
       </div>
     </div>
   );

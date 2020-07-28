@@ -52,9 +52,11 @@ const ProductImages = ({ images, language }) => {
         leftArrowTitle={IMGS_VIEWER[language].prev}
         rightArrowTitle={IMGS_VIEWER[language].next}
       />
-      <div className={styles.images}>
-        {primaryImage}
-        {sideImages}
+      <div className={styles.container}>
+        <div className={styles.images}>
+          {primaryImage}
+          {sideImages}
+        </div>
       </div>
     </div>
   );
