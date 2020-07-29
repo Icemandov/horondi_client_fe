@@ -6,6 +6,8 @@ import Categories from './categories/categories.reducer';
 import Theme from './theme/theme.reducer';
 import Error from './error/error.reducer';
 import Language from './language/language.reducer';
+import Filter from './filter/filter.reducer';
+import Products from './products/products.reducer';
 import User from './user/user.reducer';
 
 const rootReducer = (history) =>
@@ -16,7 +18,9 @@ const rootReducer = (history) =>
     Theme,
     User,
     Error,
-    Language
+    Language,
+    Filter,
+    Products
   });
 
 export default rootReducer;
