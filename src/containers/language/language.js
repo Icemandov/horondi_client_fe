@@ -9,7 +9,7 @@ import useStyles from './language.styles';
 import { changeLanguage } from '../../redux/language/language.actions';
 import { LANGUAGES_LIST } from '../../configs';
 
-const languageInLocalStorage = getFromLocalStorage('language') || 0;
+const languageInLocalStorage = getFromLocalStorage('language');
 
 const Language = () => {
   const styles = useStyles();
@@ -17,6 +17,7 @@ const Language = () => {
 
   useEffect(() => {
     dispatch(changeLanguage(languageInLocalStorage));
+    console.log('disfgdfgs');
   }, [dispatch]);
 
   const handleChange = (e) => {

@@ -8,7 +8,8 @@ import { useStyles } from './wishlist-item.styles';
 import { removeItemFromWishlist } from '../../../redux/wishlist/wishlist.actions';
 import { WISHLIST_BUTTONS } from '../../../translations/wishlist.translations';
 import { MODAL_DELETE_MESSAGES } from '../../../translations/modal.translations';
-// import { addItemToCart } from '../../../redux/cart/cart.actions';
+import { addItemToCart } from '../../../redux/cart/cart.actions';
+import * as productImage from '../../../images/pdp_main.jpg';
 
 const WishlistItem = ({ item }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
@@ -25,14 +26,17 @@ const WishlistItem = ({ item }) => {
     setModalVisibility(false);
   };
 
-  const onAddToCart = () => dispatch();
+  const onAddToCart = () => {
+    console.log(item);
+    dispatch(addItemToCart(item));
+  };
 
   return (
     <>
       <tr className={styles.root}>
         <td className={styles.product}>
           <div className={styles.image}>
-            <img src={item.image} alt='product pictures' />
+            <img src={item.image || productImage} alt='product pictures' />
           </div>
           <div className={styles.description}>
             <span className={styles.itemName}>{item.name[language].value}</span>

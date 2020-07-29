@@ -12,6 +12,7 @@ import {
   incrementCartItemQuantity,
   removeItemFromCart
 } from '../../../redux/cart/cart.actions';
+import * as productImage from '../../../images/pdp_main.jpg';
 
 const CartItem = ({ item }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
@@ -39,7 +40,7 @@ const CartItem = ({ item }) => {
       <tr className={styles.root}>
         <td className={styles.product}>
           <div className={styles.image}>
-            <img src={item.image} alt='product pictures' />
+            <img src={item.image || productImage} alt='product pictures' />
           </div>
           <div className={styles.description}>
             <span className={styles.itemName}>{item.name[language].value}</span>
