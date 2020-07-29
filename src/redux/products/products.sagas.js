@@ -58,6 +58,32 @@ export function* handleProductLoading({ payload }) {
       value
     }
     basePrice 
+    options {
+      size {
+        name
+        heightInCm
+        widthInCm
+        depthInCm
+        volumeInLiters
+        available
+        additionalPrice
+      }
+      bottomMaterial {
+        name {
+          lang
+          value
+        }
+        additionalPrice
+      }
+      additions {
+        name {
+          lang
+    			value
+        }
+        available
+        additionalPrice
+      }
+    }
     rate
     comments {
       text
@@ -66,10 +92,46 @@ export function* handleProductLoading({ payload }) {
         firstName
       }
     }
+    options {
+      size {
+        name
+        volumeInLiters
+        widthInCm
+        weightInKg
+      }
+      bottomMaterial {
+        name {
+          lang
+          value
+        }
+    	available
+        additionalPrice
+      }
+      additions {
+        name {
+          value
+          lang
+        }
+        available
+        additionalPrice
+      }
+      availableCount
+    }
+    images {
+      primary {
+        large
+        medium
+      }
+      additional {
+        large
+        medium
+      }
+    }
   }
 }`;
   try {
     const product = yield call(getItems, query);
+    console.log(product.data.getProductsById);
     yield put(setProduct(product.data.getProductsById));
     yield put(setProductsLoading(false));
   } catch (e) {

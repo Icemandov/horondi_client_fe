@@ -68,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.textColor
     },
     '& .MuiFormControlLabel-root': {
+      marginRight: '0',
       '@media (max-width: 300px)': {
         marginRight: '0.2rem'
       }

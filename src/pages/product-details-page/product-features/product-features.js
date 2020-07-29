@@ -26,10 +26,10 @@ const ProductFeatures = ({
   setPrice,
   language
 }) => {
-  const { additionalPrice } = additions;
+  const { additionalPrice, available } = additions[0];
   const styles = useStyles();
 
-  const setAdditionalPrice = (price) => ` + ${price} UAH`;
+  const setAdditionalPrice = (price) => ` +${price} UAH`;
 
   const handleBottomChange = (e) => {
     const { value } = e.target;
@@ -83,7 +83,7 @@ const ProductFeatures = ({
             </Select>
           </FormControl>
         </div>
-        {additions.available ? (
+        {available ? (
           <div className={styles.checkbox}>
             <FormControlLabel
               control={

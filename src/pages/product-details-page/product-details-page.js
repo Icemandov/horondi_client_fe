@@ -14,7 +14,7 @@ import ProductImages from './product-images';
 import CircularUnderLoad from '../../components/loading-bar';
 import { getProduct } from '../../redux/products/products.actions';
 
-import { PRODUCT_OPTIONS, DEFAULT_SIZE } from '../../configs';
+import { DEFAULT_SIZE } from '../../configs';
 
 const ProductDetails = ({ match }) => {
   const { language, product, isLoading } = useSelector(
@@ -27,17 +27,13 @@ const ProductDetails = ({ match }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
 
-  const { sizes } = PRODUCT_OPTIONS;
-  const { bottomMaterials, additions } = PRODUCT_OPTIONS;
-  const { volumeInLiters, weightInKg } = sizes.find(
-    ({ size }) => size === DEFAULT_SIZE
-  );
   const {
     _id,
     name,
     basePrice,
     rate,
     images,
+    options,
     description,
     comments,
     mainMaterial,
@@ -45,24 +41,66 @@ const ProductDetails = ({ match }) => {
     strapLengthInCm
   } = product;
 
+  const uniqueSizes = new Set(
+    options ? options.map(({ size }) => size.name) : null
+  );
+
+  const uniqueBottomMaterials = new Set(
+    options
+      ? options.map(({ bottomMaterial }) => bottomMaterial.name[1].value)
+      : null
+  );
+
+  const uniqueAdditions = new Set(
+    options
+      ? options
+        .filter(({ additions }) => additions.length > 0)
+        .map(({ additions }) => additions[0].name[1].value)
+      : null
+  );
+
+  const sizes = Array.from(uniqueSizes).map(
+    (item) => options.find(({ size }) => item === size.name).size
+  );
+
+  const bottomMaterials = Array.from(uniqueBottomMaterials).map(
+    (item) =>
+      options.find(
+        ({ bottomMaterial }) => item === bottomMaterial.name[1].value
+      ).bottomMaterial
+  );
+
+  const additions = Array.from(uniqueAdditions).map(
+    (item) =>
+      options
+        .filter(({ additions }) => additions.length > 0)
+        .find(({ additions }) => item === additions[0].name[1].value)
+        .additions[0]
+  );
+
   const [selectedSize, setSize] = useState('');
   const [error, setError] = useState(false);
   const [bagBottom, setBagBottom] = useState('');
   const [sidePocket, setSidePocket] = useState(false);
   const [currentPrice, setPrice] = useState(0);
-  const [currentVolume, setVolume] = useState(volumeInLiters);
-  const [currentWeight, setWeight] = useState(weightInKg);
+  const [currentVolume, setVolume] = useState('');
+  const [currentWeight, setWeight] = useState('');
 
   useEffect(() => {
     const productId = match.params.id;
     if (!basePrice) {
       dispatch(getProduct(productId));
     } else {
+      const { volumeInLiters, weightInKg } = options.find(
+        ({ size }) => size.name === DEFAULT_SIZE
+      ).size;
       setPrice(basePrice);
+      setVolume(volumeInLiters);
+      setWeight(weightInKg);
     }
 
     window.scrollTo(0, 0);
-  }, [match.params.id, dispatch, basePrice]);
+  }, [match.params.id, dispatch, basePrice, options]);
 
   const productToSend = {
     _id,
@@ -86,10 +124,10 @@ const ProductDetails = ({ match }) => {
   const handleSizeChange = (e) => {
     const { textContent } = e.target;
     const oldPrice = selectedSize
-      ? sizes.find(({ size }) => size === selectedSize).additionalPrice
+      ? sizes.find(({ name }) => name === selectedSize).additionalPrice
       : 0;
     const { additionalPrice, volumeInLiters, weightInKg } = sizes.find(
-      ({ size }) => size === textContent
+      ({ name }) => name === textContent
     );
 
     setSize(textContent);
