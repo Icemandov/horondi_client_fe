@@ -14,7 +14,10 @@ const ProductListItem = ({ product, category }) => {
   const name = product.name[language].value;
   const price = product.basePrice;
   return (
-    <Link to={`${category}/${product._id}`} className={styles.productItem}>
+    <Link
+      to={`${category.toLowerCase()}/${product._id}`}
+      className={styles.productItem}
+    >
       <Card className={styles.name}>
         {name}
         <StarRating size='small' readOnly rate={product.rate} />${price}
