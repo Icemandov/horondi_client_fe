@@ -4,7 +4,8 @@ export const clearLocalStorage = () => {
     _id: null,
     wishlist: [],
     language: 0,
-    cart: []
+    cart: [],
+    theme: true
   };
   localStorage.setItem('horondi', JSON.stringify(horondi));
 };

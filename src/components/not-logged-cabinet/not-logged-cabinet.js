@@ -8,6 +8,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { useStyles } from '../logged-cabinet/logged-cabinet.styles';
 import { setThemeMode } from '../../redux/theme/theme.actions';
+import { setToLocalStorage } from '../../services/local-storage.service';
 import { CABINET_OPTIONS_NOT_LOGGED } from '../../translations/cabinet.translations';
 
 const NotLoggedCabinet = () => {
@@ -22,6 +23,7 @@ const NotLoggedCabinet = () => {
 
   const changeTheme = () => {
     dispatch(setThemeMode(!lightMode));
+    setToLocalStorage('theme', !lightMode);
   };
 
   return (

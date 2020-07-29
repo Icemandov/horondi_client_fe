@@ -9,6 +9,8 @@ import { theme } from './app-theme/app.theme';
 import { DARK_THEME, LIGHT_THEME } from '../../configs';
 import CircularUnderLoad from '../loading-bar';
 import { useStyles } from './App.styles';
+import { getFromLocalStorage } from '../../services/local-storage.service';
+import { setThemeMode } from '../../redux/theme/theme.actions';
 
 import { getCategories } from '../../redux/categories/categories.actions';
 
@@ -19,12 +21,15 @@ const App = () => {
   }));
   const dispatch = useDispatch();
   const styles = useStyles();
-  const themeMode = lightMode ? LIGHT_THEME : DARK_THEME;
+
+  const localStorageThemeMode = getFromLocalStorage('theme');
+  const themeMode = localStorageThemeMode ? LIGHT_THEME : DARK_THEME;
   const themeValue = theme(themeMode);
 
   useEffect(() => {
     dispatch(getCategories());
-  }, [dispatch]);
+    dispatch(setThemeMode(localStorageThemeMode));
+  }, [dispatch, lightMode]);
 
   if (isLoading) {
     return (
