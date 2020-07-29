@@ -581,3 +581,20 @@ export const WEIGHT = {
 };
 
 export const defaultSize = 'M';
+
+export const IMGS_SET = [
+  {
+    src: '../../../images/pdp_main.jpg'
+  },
+  {
+    src: '../../../images/pdp_main.jpg'
+  },
+  {
+    src: '../../../images/pdp_main.jpg'
+  },
+  {
+    src: '../../../images/pdp_main.jpg'
+  }
+];
+
+export const imgAltInfo = 'product';

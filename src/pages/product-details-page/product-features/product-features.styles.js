@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: 'center'
     }
   },
-  additionalForm: {
+  featuresForm: {
     display: 'flex',
     flexDirection: 'column',
     marginTop: '0.6rem',

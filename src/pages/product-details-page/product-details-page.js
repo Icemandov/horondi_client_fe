@@ -117,8 +117,8 @@ const ProductDetails = ({ match }) => {
         <div className={styles.productDetails}>
           <ProductInfo
             rate={rate}
-            title={name[language].value}
-            description={description[language].value}
+            title={name}
+            description={description}
             currentPrice={currentPrice}
             mainMaterial={mainMaterial}
             innerMaterial={innerMaterial}

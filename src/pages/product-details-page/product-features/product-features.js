@@ -27,8 +27,12 @@ const ProductFeatures = ({
 }) => {
   const { additionalPrice } = additions;
   const styles = useStyles();
+  const emptyMenuItem = {
+    value: '',
+    key: 'none'
+  };
 
-  const setPriceCurrency = (price) => ` + ${price} UAH`;
+  const setAdditionalPrice = (price) => ` + ${price} UAH`;
 
   const handleBottomChange = (e) => {
     const { value } = e.target;
@@ -60,7 +64,7 @@ const ProductFeatures = ({
         {name[language].value}
         {additionalPrice ? (
           <span className={styles.selectPrice}>
-            {setPriceCurrency(additionalPrice)}
+            {setAdditionalPrice(additionalPrice)}
           </span>
         ) : null}
       </MenuItem>
@@ -70,12 +74,12 @@ const ProductFeatures = ({
   return (
     <div>
       <span className={styles.label}>{ADD_FEATURES[language].features}: </span>
-      <div className={styles.additionalForm}>
+      <div className={styles.featuresForm}>
         <div className={styles.feature}>
           <FormControl className={styles.formControl}>
             <InputLabel>{BAG_BOTTOM[language].bagBottom}</InputLabel>
             <Select value={bagBottom} onChange={handleBottomChange}>
-              <MenuItem value='' key='none'>
+              <MenuItem value={emptyMenuItem.value} key={emptyMenuItem.key}>
                 {SELECT_NONE[language].none}
               </MenuItem>
               {menuItems}
@@ -91,7 +95,7 @@ const ProductFeatures = ({
               label={SIDE_POCKET[language].sidePocket}
             />
             <span className={styles.price}>
-              {setPriceCurrency(additionalPrice)}
+              {setAdditionalPrice(additionalPrice)}
             </span>
           </div>
         ) : null}

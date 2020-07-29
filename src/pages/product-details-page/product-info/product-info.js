@@ -35,7 +35,7 @@ const ProductInfo = ({
   return (
     <div>
       <div className={styles.head}>
-        <span className={styles.title}>{title}</span>
+        <span className={styles.title}>{title[language].value}</span>
         <Rating value={rate} readOnly precision={RATE_PRECISION} />
       </div>
       <div className={styles.details}>
@@ -43,7 +43,9 @@ const ProductInfo = ({
           <p className={styles.subtitle}>
             {PRODUCT_DESCRIPTION[language].productDescription}:
           </p>
-          <div className={styles.description}>{parse(description)}</div>
+          <div className={styles.description}>
+            {parse(description[language].value)}
+          </div>
         </div>
         <div>
           <span className={styles.subtitle}>
