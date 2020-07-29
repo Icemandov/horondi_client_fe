@@ -5,12 +5,15 @@ import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 import * as productImage from '../../../images/pdp_main.jpg';
 
-import { SIMILAR_ITEMS, imgAltInfo } from '../../../configs';
+import {
+  IMG_ALT_INFO,
+  SIMILAR_ITEMS_LABEL,
+  CAROUSEL_LABEL
+} from '../../../configs';
+import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
 
 const SimilarProducts = ({ language }) => {
   const { title } = SIMILAR_ITEMS[language];
-  const carouselLabel = 'carousel';
-  const similarItemsLabel = 'similarItems';
 
   const responsive = {
     superLargeDesktop: {
@@ -33,17 +36,17 @@ const SimilarProducts = ({ language }) => {
 
   const imgs = Array(6)
     .fill(productImage)
-    .map((img, idx) => <img src={img} alt={imgAltInfo} key={idx} />);
+    .map((img, idx) => <img src={img} alt={IMG_ALT_INFO} key={idx} />);
 
   return (
-    <div className={similarItemsLabel}>
+    <div className={SIMILAR_ITEMS_LABEL}>
       <div>
         <hr />
         <h2>{title}</h2>
         <hr />
       </div>
       <Carousel
-        className={carouselLabel}
+        className={CAROUSEL_LABEL}
         responsive={responsive}
         swipeable={false}
       >

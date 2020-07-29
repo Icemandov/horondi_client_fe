@@ -14,7 +14,7 @@ import ProductImages from './product-images';
 import CircularUnderLoad from '../../components/loading-bar';
 import { getProduct } from '../../redux/products/products.actions';
 
-import { productOptions, defaultSize } from '../../configs';
+import { PRODUCT_OPTIONS, DEFAULT_SIZE } from '../../configs';
 
 const ProductDetails = ({ match }) => {
   const { language, product, isLoading } = useSelector(
@@ -27,10 +27,10 @@ const ProductDetails = ({ match }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
 
-  const { sizes } = productOptions;
-  const { bottomMaterials, additions } = productOptions;
+  const { sizes } = PRODUCT_OPTIONS;
+  const { bottomMaterials, additions } = PRODUCT_OPTIONS;
   const { volumeInLiters, weightInKg } = sizes.find(
-    ({ size }) => size === defaultSize
+    ({ size }) => size === DEFAULT_SIZE
   );
   const {
     _id,
@@ -45,7 +45,7 @@ const ProductDetails = ({ match }) => {
     strapLengthInCm
   } = product;
 
-  const [selectedSize, setSize] = useState(false);
+  const [selectedSize, setSize] = useState('');
   const [error, setError] = useState(false);
   const [bagBottom, setBagBottom] = useState('');
   const [sidePocket, setSidePocket] = useState(false);

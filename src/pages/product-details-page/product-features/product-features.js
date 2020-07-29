@@ -8,12 +8,13 @@ import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import useStyles from './product-features.styles';
 
+import { EMPTY_MENU_ITEM } from '../../../configs';
 import {
   ADD_FEATURES,
   SIDE_POCKET,
   BAG_BOTTOM,
   SELECT_NONE
-} from '../../../configs';
+} from '../../../translations/product-details.translations';
 
 const ProductFeatures = ({
   bottomMaterials,
@@ -27,10 +28,6 @@ const ProductFeatures = ({
 }) => {
   const { additionalPrice } = additions;
   const styles = useStyles();
-  const emptyMenuItem = {
-    value: '',
-    key: 'none'
-  };
 
   const setAdditionalPrice = (price) => ` + ${price} UAH`;
 
@@ -79,7 +76,7 @@ const ProductFeatures = ({
           <FormControl className={styles.formControl}>
             <InputLabel>{BAG_BOTTOM[language].bagBottom}</InputLabel>
             <Select value={bagBottom} onChange={handleBottomChange}>
-              <MenuItem value={emptyMenuItem.value} key={emptyMenuItem.key}>
+              <MenuItem value={EMPTY_MENU_ITEM.value} key={EMPTY_MENU_ITEM.key}>
                 {SELECT_NONE[language].none}
               </MenuItem>
               {menuItems}

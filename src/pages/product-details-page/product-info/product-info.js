@@ -6,14 +6,14 @@ import useStyles from './product-info.styles';
 import * as colorImage from '../../../images/red.jpg';
 import * as patternImage from '../../../images/pattern_2.jpg';
 
+import { RATE_PRECISION } from '../../../configs';
 import {
   COLOR,
   PATTERN,
   PRODUCT_PRICE,
   PRODUCT_DESCRIPTION,
-  RATE_PRECISION,
   WEIGHT
-} from '../../../configs';
+} from '../../../translations/product-details.translations';
 
 const ProductInfo = ({
   rate,

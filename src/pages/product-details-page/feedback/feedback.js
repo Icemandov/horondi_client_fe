@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 
-import Button from '@material-ui/core/Button';
 import Rating from '@material-ui/lab/Rating';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import useStyles from './feedback.styles';
 
 import FeedbackItem from './feedback-item';
-import { FEEDBACK_OPTIONS } from '../../../configs';
+
+import { INPUT_VARIANT, RATE_NAME, TEXT_FIELD_ROWS } from '../../../configs';
+import { FEEDBACK } from '../../../translations/product-details.translations';
 
 const Feedback = ({ language, comments }) => {
   const styles = useStyles();
@@ -27,9 +29,9 @@ const Feedback = ({ language, comments }) => {
 
   return (
     <div className={styles.feedback}>
-      <h2>{FEEDBACK_OPTIONS[language].title}</h2>
+      <h2>{FEEDBACK[language].title}</h2>
       <Rating
-        name={FEEDBACK_OPTIONS.rateName}
+        name={RATE_NAME}
         value={rate}
         onChange={(e, newRate) => setRate(newRate)}
       />
@@ -37,28 +39,28 @@ const Feedback = ({ language, comments }) => {
         <div className={styles.form}>
           <TextField
             className={styles.input}
-            label={FEEDBACK_OPTIONS[language].name}
-            variant={FEEDBACK_OPTIONS.inputVariant}
+            label={FEEDBACK[language].name}
+            variant={INPUT_VARIANT}
             required
           />
           <TextField
             className={styles.input}
-            label={FEEDBACK_OPTIONS[language].email}
-            variant={FEEDBACK_OPTIONS.inputVariant}
+            label={FEEDBACK[language].email}
+            variant={INPUT_VARIANT}
             required
           />
           <br />
           <TextField
             className={styles.textField}
-            label={FEEDBACK_OPTIONS[language].textField}
+            label={FEEDBACK[language].textField}
             multiline
-            rows={FEEDBACK_OPTIONS.textFieldRows}
-            variant={FEEDBACK_OPTIONS.inputVariant}
+            rows={TEXT_FIELD_ROWS}
+            variant={INPUT_VARIANT}
             required
           />
         </div>
         <Button className={styles.feedbackBtn}>
-          {FEEDBACK_OPTIONS[language].submit}
+          {FEEDBACK[language].submit}
         </Button>
       </form>
       <hr />

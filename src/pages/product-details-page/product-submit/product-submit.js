@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { push } from 'connected-react-router';
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
-import { push } from 'connected-react-router';
 import useStyles from './product-submit.styles';
 
 import {
@@ -17,7 +17,7 @@ import {
 } from '../../../redux/wishlist/wishlist.actions';
 
 import { setItemToCart } from '../../../redux/cart/cart.actions';
-import { PDP_BUTTONS } from '../../../configs';
+import { PDP_BUTTONS } from '../../../translations/product-details.translations';
 
 const ProductSubmit = ({ checkSize, language, productToSend, product }) => {
   const styles = useStyles();

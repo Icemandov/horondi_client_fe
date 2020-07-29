@@ -4,7 +4,8 @@ import ImgsViewer from 'react-images-viewer';
 import useStyles from './product-images.styles';
 import * as productImage from '../../../images/pdp_main.jpg';
 
-import { IMGS_VIEWER, imgAltInfo } from '../../../configs';
+import { IMG_ALT_INFO } from '../../../configs';
+import { IMGS_VIEWER } from '../../../translations/product-details.translations';
 
 const ProductImages = ({ images, language }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +20,7 @@ const ProductImages = ({ images, language }) => {
   };
 
   const primaryImage = images[0].primary ? (
-    <img src={productImage} alt={imgAltInfo} onClick={() => openImage(0)} />
+    <img src={productImage} alt={IMG_ALT_INFO} onClick={() => openImage(0)} />
   ) : null;
 
   const sideImages = images[0].additional
@@ -27,7 +28,7 @@ const ProductImages = ({ images, language }) => {
       <img
         src={productImage}
         key={idx}
-        alt={imgAltInfo}
+        alt={IMG_ALT_INFO}
         onClick={() => openImage(idx + 1)}
       />
     ))
