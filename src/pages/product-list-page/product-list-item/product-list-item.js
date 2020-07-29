@@ -17,7 +17,7 @@ const ProductListItem = ({ product, category }) => {
     <Link to={`${category}/${product._id}`} className={styles.productItem}>
       <Card className={styles.name}>
         {name}
-        <StarRating size='small' rate={product.rate} />${price}
+        <StarRating size='small' readOnly rate={product.rate} />${price}
       </Card>
     </Link>
   );

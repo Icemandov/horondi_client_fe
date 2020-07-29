@@ -6,7 +6,8 @@ const StarRating = ({
   rate,
   size = 'normal',
   disabled = false,
-  precision = 0.1
+  precision = 0.1,
+  readOnly = false
 }) => (
   <Rating
     name='simple-controlled'
@@ -14,6 +15,7 @@ const StarRating = ({
     size={size}
     disabled={disabled}
     precision={precision}
+    readOnly={readOnly}
   />
 );
 StarRating.propTypes = {
