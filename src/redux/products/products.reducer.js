@@ -1,6 +1,11 @@
-import { SET_ALL_PRODUCTS, SET_LOADING } from './products.types';
+import {
+  SET_PRODUCT,
+  SET_ALL_PRODUCTS,
+  SET_PRODUCTS_LOADING
+} from './products.types';
 
 const initialState = {
+  product: {},
   products: [],
   loading: true
 };
@@ -12,7 +17,12 @@ const productsReducer = (state = initialState, action = {}) => {
       ...state,
       products: action.payload
     };
-  case SET_LOADING:
+  case SET_PRODUCT:
+    return {
+      ...state,
+      product: action.payload
+    };
+  case SET_PRODUCTS_LOADING:
     return {
       ...state,
       loading: action.payload
@@ -21,4 +31,5 @@ const productsReducer = (state = initialState, action = {}) => {
     return state;
   }
 };
+
 export default productsReducer;

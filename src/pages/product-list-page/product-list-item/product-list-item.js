@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import useStyles from './product-list-item.style';
 import StarRating from '../../../containers/star-rating';
+import * as productImage from '../../../images/pdp_main.jpg';
 
 const ProductListItem = ({ product, category }) => {
-  // const styles = useStyles({ image: product.images[0].primary.medium });
-  const styles = useStyles({ image: './images/small_6x9a1lkkbjjc9v1.jpg' });
+  const styles = useStyles({ image: productImage });
   const { language } = useSelector(({ Language: { language } }) => ({
     language
   }));

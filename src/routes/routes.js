@@ -8,10 +8,13 @@ import { useStyles } from './routes.style.js';
 import NewsPage from '../pages/news/news-page';
 import Home from '../pages/home';
 import AboutUs from '../pages/about-us';
+import Wishlist from '../pages/wishlist';
+import Cart from '../pages/cart';
 import NewsDetailPage from '../pages/news/news-detail';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
 import ProductListPage from '../pages/product-list-page';
+import ProductDetails from '../pages/product-details-page';
 import Register from '../pages/register';
 import Login from '../pages/login';
 import Confirmation from '../pages/confirmation';
@@ -34,6 +37,9 @@ const Routes = () => {
           <Route path='/about-us' exact component={AboutUs} />
           <Route path='/error-page' exact render={() => 'error page'} />
 
+          <Route path='/wishlist' exact component={Wishlist} />
+          <Route path='/cart' exact component={Cart} />
+          <Route path='/:category/:id' exact component={ProductDetails} />
           <Route path='/register' exact component={Register} />
           <Route path='/login' exact component={Login} />
           <Route

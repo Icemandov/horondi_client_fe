@@ -8,6 +8,8 @@ import Theme from './theme/theme.reducer';
 import Error from './error/error.reducer';
 import Language from './language/language.reducer';
 import Filter from './filter/filter.reducer';
+import Wishlist from './wishlist/wishlist.reducer';
+import Cart from './cart/cart.reducer';
 import Products from './products/products.reducer';
 
 const rootReducer = (history) =>
@@ -20,7 +22,9 @@ const rootReducer = (history) =>
     Error,
     Language,
     Products,
-    Filter
+    Filter,
+    Wishlist,
+    Cart
   });
 
 export default rootReducer;

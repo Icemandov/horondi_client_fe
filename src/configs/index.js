@@ -23,7 +23,18 @@ export const ABOUT_US_IMAGES = {
   workPlace_2: './images/about-us/work-place-2.jpg'
 };
 
+export const WISHLIST_IMAGES = {
+  lightTheme: './images/wishlist/wishlist-light-theme-img.png',
+  darkTheme: './images/wishlist/wishlist-dark-theme-img.png'
+};
+
+export const CART_IMAGES = {
+  lightTheme: './images/cart/cart-light-theme-img.png',
+  darkTheme: './images/cart/cart-dark-theme-img.png'
+};
+
 export const LOGO = 'HORONDI';
+
 export const URL_LANGUAGE = 'en';
 
 export const TIME_OPTIONS = {
@@ -32,11 +43,6 @@ export const TIME_OPTIONS = {
   month: 'long',
   day: 'numeric'
 };
-
-export const LANGUAGES_LIST = [
-  { lang: 'UA', value: 0 },
-  { lang: 'EN', value: 1 }
-];
 
 export const CONFIRM_EMAIL = [
   {
@@ -96,29 +102,16 @@ export const LOGIN_USER_DATA = {
   password: ''
 };
 
-export const EMPTY_FIELD = [
-  {
-    lang: 'uk',
-    value: 'Заповніть поле'
-  },
-  {
-    lang: 'eng',
-    value: 'Empty field'
-  }
-];
+export const COMMENTS_TIME_OPTIONS = {
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric'
+};
 
-export const LOGIN_USER_ERROR = [
-  {
-    lang: 'uk',
-    value: 'Неправильна електронна адреса або пароль'
-  },
-  {
-    lang: 'eng',
-    value: 'Wrong e-mail address or password'
-  }
+export const LANGUAGES_LIST = [
+  { lang: 'UA', value: 0 },
+  { lang: 'EN', value: 1 }
 ];
-
-export const SHOW_AFTER = 3000;
 
 export const errorMessages = [
   {
@@ -309,3 +302,19 @@ export const CONFIRM_ERROR = [
     value: 'Oops! Something went wrong.'
   }
 ];
+
+export const SHOW_AFTER = 3000;
+
+export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
+export const DEFAULT_SIZE = 'M';
+export const IMG_ALT_INFO = 'product';
+export const RATE_PRECISION = 0.1;
+export const CAROUSEL_LABEL = 'carousel';
+export const SIMILAR_ITEMS_LABEL = 'similarItems';
+export const EMPTY_MENU_ITEM = {
+  value: '',
+  key: 'none'
+};
+export const INPUT_VARIANT = 'outlined';
+export const TEXT_FIELD_ROWS = 10;
+export const RATE_NAME = 'simple-controlled';

@@ -1,3 +1,5 @@
 export const SET_ALL_PRODUCTS = 'SET_ALL_PRODUCTS';
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
-export const SET_LOADING = 'SET_LOADING';
+export const SET_PRODUCTS_LOADING = 'SET_PRODUCTS_LOADING';
+export const SET_PRODUCT = 'SET_PRODUCT';
+export const GET_PRODUCT = 'GET_PRODUCT';
