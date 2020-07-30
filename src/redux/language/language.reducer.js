@@ -7,7 +7,6 @@ export const initialState = {
 const languageReducer = (state = initialState, action = {}) => {
   switch (action.type) {
   case CHANGE_LANGUAGE:
-    console.log('2222');
     return {
       ...state,
       language: action.payload

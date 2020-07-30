@@ -17,7 +17,6 @@ const Language = () => {
 
   useEffect(() => {
     dispatch(changeLanguage(languageInLocalStorage));
-    console.log('disfgdfgs');
   }, [dispatch]);
 
   const handleChange = (e) => {
