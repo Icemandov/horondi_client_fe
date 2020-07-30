@@ -140,7 +140,7 @@ const ProductDetails = ({ match }) => {
     }
   };
 
-  if (isLoading && !product.basePrice) {
+  if (isLoading || !product.basePrice) {
     return (
       <div className={styles.center}>
         <CircularUnderLoad />
