@@ -56,34 +56,43 @@ const ProductInfo = ({
           </span>
         </div>
         <div>
-          <span className={styles.subtitle}>
-            {PRODUCT_DESCRIPTION[language].productInnerMaterial}
-          </span>
-          <span className={styles.description}>
-            - {innerMaterial[language].value}
-          </span>
+          {innerMaterial.length >= 1 ? (
+            <div>
+              <span className={styles.subtitle}>
+                {PRODUCT_DESCRIPTION[language].productInnerMaterial}
+              </span>
+              <span className={styles.description}>
+                - {innerMaterial[language].value}
+              </span>
+            </div>
+          ) : null}
         </div>
-        <div>
-          <span className={styles.subtitle}>
-            {PRODUCT_DESCRIPTION[language].strapLengthInCm}
-          </span>
-          <span className={styles.description}>- {strapLengthInCm}</span>
-        </div>
-        <div>
-          <span className={styles.subtitle}>
-            {WEIGHT[language].volumeLabel}
-          </span>
-          <span className={styles.description}>- {currentVolume}</span>
-        </div>
-        <div>
-          <span className={styles.subtitle}>
-            {WEIGHT[language].weightLabel}
-          </span>
-          <span className={styles.description}>- {currentWeight}</span>
-        </div>
+        {strapLengthInCm > 0 ? (
+          <div>
+            <span className={styles.subtitle}>
+              {PRODUCT_DESCRIPTION[language].strapLengthInCm}
+            </span>
+            <span className={styles.description}>- {strapLengthInCm}</span>
+          </div>
+        ) : null}
+        {currentVolume && currentWeight ? (
+          <div>
+            <div>
+              <span className={styles.subtitle}>
+                {WEIGHT[language].volumeLabel}
+              </span>
+              <span className={styles.description}>- {currentVolume}</span>
+            </div>
+            <div>
+              <span className={styles.subtitle}>
+                {WEIGHT[language].weightLabel}
+              </span>
+              <span className={styles.description}>- {currentWeight}</span>
+            </div>
+          </div>
+        ) : null}
       </div>
-      <br />
-      <div>
+      <div className={styles.priceContainer}>
         <span className={styles.subtitle}>
           {PRODUCT_PRICE[language].price}:{' '}
         </span>
@@ -91,7 +100,6 @@ const ProductInfo = ({
       </div>
       <div className={styles.look}>
         <span className={styles.subtitle}>{COLOR[language].color}:</span>
-        <br />
         <div className={styles.colorCircle} />
         <span className={styles.subtitle}>{PATTERN[language].pattern}:</span>
         <div className={styles.patternCircle} />

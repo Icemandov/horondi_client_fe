@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
   featuresForm: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: '0.6rem',
     '@media (max-width: 600px)': {
       alignItems: 'center'
     },
@@ -24,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     marginRight: '0.7rem',
-    minWidth: '7.5rem',
+    minWidth: '9.5rem',
     '& .MuiInputBase-root .MuiSelect-root': {
       fontSize: '0.9rem'
     },

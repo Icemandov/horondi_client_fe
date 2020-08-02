@@ -27,7 +27,7 @@ const ProductSubmit = ({ checkSize, language, productToSend, product }) => {
   const onWishfulHandler = () => {
     const productToWishlist = {
       ...productToSend,
-      selectedSize: productToSend.selectedSize || 'S'
+      selectedSize: productToSend.selectedSize || 'M'
     };
     if (isWishful) {
       dispatch(removeItemFromWishlist(productToWishlist));

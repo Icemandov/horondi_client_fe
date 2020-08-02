@@ -72,6 +72,13 @@ export function* handleProductLoading({ payload }) {
   const query = `query {
     getProductsById(id:"${payload}") {
     _id
+    category {
+      _id
+      name {
+        lang
+        value
+      }
+    }
     name {
       lang
       value
@@ -196,9 +203,7 @@ export function* handleProductLoading({ payload }) {
     yield put(setProduct(product.data.getProductsById));
     yield put(setProductsLoading(false));
   } catch (e) {
-    yield put(setProductsLoading(false));
-    yield put(setError({ e }));
-    yield put(push('/error-page'));
+    yield call(handleProductsErrors, e);
   }
 }
 

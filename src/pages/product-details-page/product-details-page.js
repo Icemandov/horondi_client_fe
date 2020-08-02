@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Card } from '@material-ui/core';
@@ -17,15 +17,25 @@ import { getProduct } from '../../redux/products/products.actions';
 import { DEFAULT_SIZE } from '../../configs';
 
 const ProductDetails = ({ match }) => {
-  const { language, product, isLoading } = useSelector(
-    ({ Language, Products }) => ({
+  const { id } = match.params;
+  const { language, product, isLoading, productUrl } = useSelector(
+    ({ Language, Products, router }) => ({
       language: Language.language,
       product: Products.product,
-      isLoading: Products.loading
+      isLoading: Products.loading,
+      productUrl: router.location.pathname
     })
   );
   const dispatch = useDispatch();
   const styles = useStyles();
+
+  const [selectedSize, setSize] = useState('');
+  const [error, setError] = useState(false);
+  const [bagBottom, setBagBottom] = useState('');
+  const [sidePocket, setSidePocket] = useState(false);
+  const [currentPrice, setPrice] = useState(0);
+  const [currentVolume, setVolume] = useState('');
+  const [currentWeight, setWeight] = useState('');
 
   const {
     _id,
@@ -38,83 +48,137 @@ const ProductDetails = ({ match }) => {
     comments,
     mainMaterial,
     innerMaterial,
-    strapLengthInCm
-  } = product;
+    strapLengthInCm,
+    category
+  } = product || {};
 
-  const uniqueSizes = new Set(
-    options ? options.map(({ size }) => size.name) : null
+  const { volumeInLiters, weightInKg } = useMemo(
+    () =>
+      product && options[0].size.name
+        ? options.find(({ size }) => size.name === DEFAULT_SIZE).size
+        : {},
+    [product, options]
   );
-
-  const uniqueBottomMaterials = new Set(
-    options
-      ? options.map(({ bottomMaterial }) => bottomMaterial.name[1].value)
-      : null
-  );
-
-  const uniqueAdditions = new Set(
-    options
-      ? options
-        .filter(({ additions }) => additions.length > 0)
-        .map(({ additions }) => additions[0].name[1].value)
-      : null
-  );
-
-  const sizes = Array.from(uniqueSizes).map(
-    (item) => options.find(({ size }) => item === size.name).size
-  );
-
-  const bottomMaterials = Array.from(uniqueBottomMaterials).map(
-    (item) =>
-      options.find(
-        ({ bottomMaterial }) => item === bottomMaterial.name[1].value
-      ).bottomMaterial
-  );
-
-  const additions = Array.from(uniqueAdditions).map(
-    (item) =>
-      options
-        .filter(({ additions }) => additions.length > 0)
-        .find(({ additions }) => item === additions[0].name[1].value)
-        .additions[0]
-  );
-
-  const [selectedSize, setSize] = useState('');
-  const [error, setError] = useState(false);
-  const [bagBottom, setBagBottom] = useState('');
-  const [sidePocket, setSidePocket] = useState(false);
-  const [currentPrice, setPrice] = useState(0);
-  const [currentVolume, setVolume] = useState('');
-  const [currentWeight, setWeight] = useState('');
 
   useEffect(() => {
-    const productId = match.params.id;
-    if (!basePrice) {
-      dispatch(getProduct(productId));
-    } else {
-      const { volumeInLiters, weightInKg } = options.find(
-        ({ size }) => size.name === DEFAULT_SIZE
-      ).size;
+    dispatch(getProduct(id));
+    window.scrollTo(0, 0);
+  }, [id, dispatch]);
+
+  useEffect(() => {
+    if (product !== null) {
       setPrice(basePrice);
       setVolume(volumeInLiters);
       setWeight(weightInKg);
     }
 
-    window.scrollTo(0, 0);
-  }, [match.params.id, dispatch, basePrice, options]);
+    return () => {
+      setBagBottom('');
+      setPrice(0);
+      setSize('');
+      setSidePocket(false);
+    };
+  }, [basePrice, volumeInLiters, weightInKg, product]);
+
+  const uniqueSizes = useMemo(
+    () =>
+      Array.from(
+        new Set(options ? options.map(({ size }) => size.name) : null)
+      ),
+    [options]
+  );
+
+  const uniqueBottomMaterials = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          options
+            ? options.map(({ bottomMaterial }) =>
+              bottomMaterial ? bottomMaterial.name[1].value : null
+            )
+            : null
+        )
+      ),
+    [options]
+  );
+
+  const uniqueAdditions = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          options
+            ? options
+              .filter(({ additions }) => additions.length > 0)
+              .map(({ additions }) => additions[0].name[1].value)
+            : null
+        )
+      ),
+    [options]
+  );
+
+  const sizes = useMemo(
+    () =>
+      uniqueSizes.map(
+        (item) => options.find(({ size }) => item === size.name).size
+      ),
+    [uniqueSizes, options]
+  );
+
+  const bottomMaterials = useMemo(
+    () =>
+      uniqueBottomMaterials[0]
+        ? uniqueBottomMaterials.map(
+          (item) =>
+            options.find(
+              ({ bottomMaterial }) => item === bottomMaterial.name[1].value
+            ).bottomMaterial
+        )
+        : null,
+    [uniqueBottomMaterials, options]
+  );
+
+  const additions = useMemo(
+    () =>
+      uniqueAdditions.map(
+        (item) =>
+          options
+            .filter(({ additions }) => additions.length > 0)
+            .find(({ additions }) => item === additions[0].name[1].value)
+            .additions[0]
+      ),
+    [uniqueAdditions, options]
+  );
+
+  const bottomNameToSend = useMemo(
+    () =>
+      bottomMaterials
+        ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
+        : null,
+    [bagBottom, bottomMaterials]
+  );
+
+  const additionsNameToSend = useMemo(
+    () => (additions.length >= 1 ? additions[0].name : null),
+    [additions]
+  );
 
   const productToSend = {
     _id,
     name,
     images,
     selectedSize,
-    bagBottom,
-    sidePocket,
+    bagBottom: bottomNameToSend,
+    sidePocket: {
+      isSelected: sidePocket,
+      name: additionsNameToSend
+    },
     totalPrice: currentPrice,
-    quantity: 1
+    quantity: 1,
+    productUrl
   };
 
   const checkSize = () => {
-    if (!selectedSize) {
+    if (sizes[0].name && !selectedSize) {
       setError(true);
       return false;
     }
@@ -140,7 +204,7 @@ const ProductDetails = ({ match }) => {
     }
   };
 
-  if (isLoading && !product.basePrice) {
+  if (isLoading || !product) {
     return (
       <div className={styles.center}>
         <CircularUnderLoad />
@@ -190,7 +254,11 @@ const ProductDetails = ({ match }) => {
           />
         </div>
       </div>
-      <SimilarProducts language={language} />
+      <SimilarProducts
+        language={language}
+        product={product}
+        category={category}
+      />
       <Feedback language={language} comments={comments} />
     </Card>
   );

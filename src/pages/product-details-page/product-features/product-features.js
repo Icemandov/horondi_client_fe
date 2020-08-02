@@ -11,8 +11,7 @@ import useStyles from './product-features.styles';
 import { EMPTY_MENU_ITEM } from '../../../configs';
 import {
   ADD_FEATURES,
-  SIDE_POCKET,
-  BAG_BOTTOM,
+  PRODUCT_BOTTOM,
   SELECT_NONE
 } from '../../../translations/product-details.translations';
 
@@ -26,7 +25,8 @@ const ProductFeatures = ({
   setPrice,
   language
 }) => {
-  const { additionalPrice, available } = additions[0];
+  const { additionalPrice, available, name } =
+    additions.length >= 1 ? additions[0] : {};
   const styles = useStyles();
 
   const setAdditionalPrice = (price) => ` +${price} UAH`;
@@ -70,33 +70,46 @@ const ProductFeatures = ({
 
   return (
     <div>
-      <span className={styles.label}>{ADD_FEATURES[language].features}: </span>
-      <div className={styles.featuresForm}>
-        <div className={styles.feature}>
-          <FormControl className={styles.formControl}>
-            <InputLabel>{BAG_BOTTOM[language].bagBottom}</InputLabel>
-            <Select value={bagBottom} onChange={handleBottomChange}>
-              <MenuItem value={EMPTY_MENU_ITEM.value} key={EMPTY_MENU_ITEM.key}>
-                {SELECT_NONE[language].none}
-              </MenuItem>
-              {menuItems}
-            </Select>
-          </FormControl>
-        </div>
-        {available ? (
-          <div className={styles.checkbox}>
-            <FormControlLabel
-              control={
-                <Checkbox checked={sidePocket} onChange={handlePocketChange} />
-              }
-              label={SIDE_POCKET[language].sidePocket}
-            />
-            <span className={styles.price}>
-              {setAdditionalPrice(additionalPrice)}
-            </span>
+      {menuItems ? (
+        <div>
+          <span className={styles.label}>
+            {ADD_FEATURES[language].features}:{' '}
+          </span>
+          <div className={styles.featuresForm}>
+            <div className={styles.feature}>
+              <FormControl className={styles.formControl}>
+                <InputLabel>{PRODUCT_BOTTOM[language].bagBottom}</InputLabel>
+                <Select
+                  value={bagBottom}
+                  onChange={handleBottomChange}
+                  autoWidth
+                >
+                  <MenuItem
+                    value={EMPTY_MENU_ITEM.value}
+                    key={EMPTY_MENU_ITEM.key}
+                  >
+                    {SELECT_NONE[language].none}
+                  </MenuItem>
+                  {menuItems}
+                </Select>
+              </FormControl>
+            </div>
           </div>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
+      {available ? (
+        <div className={styles.checkbox}>
+          <FormControlLabel
+            control={
+              <Checkbox checked={sidePocket} onChange={handlePocketChange} />
+            }
+            label={name[language].value}
+          />
+          <span className={styles.price}>
+            {setAdditionalPrice(additionalPrice)}
+          </span>
+        </div>
+      ) : null}
     </div>
   );
 };

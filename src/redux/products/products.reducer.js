@@ -5,7 +5,7 @@ import {
 } from './products.types';
 
 const initialState = {
-  product: {},
+  product: null,
   products: [],
   loading: true
 };

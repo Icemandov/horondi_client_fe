@@ -1,11 +1,11 @@
 export const WEIGHT = {
   0: {
     weightLabel: 'Вага(кг) ',
-    volumeLabel: `Об'єм(л)`
+    volumeLabel: `Об'єм(л) `
   },
   1: {
     weightLabel: 'Weight(kg) ',
-    volumeLabel: `Volume(L)`
+    volumeLabel: `Volume(L) `
   }
 };
 
@@ -50,12 +50,12 @@ export const SELECT_NONE = {
   }
 };
 
-export const BAG_BOTTOM = {
+export const PRODUCT_BOTTOM = {
   0: {
-    bagBottom: 'Низ рюкзака'
+    bagBottom: 'Нижній матеріал'
   },
   1: {
-    bagBottom: 'Bag bottom'
+    bagBottom: 'Bottom material'
   }
 };
 
