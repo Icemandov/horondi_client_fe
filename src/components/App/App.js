@@ -32,7 +32,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(setThemeMode(localStorageThemeMode));
-  }, [lightMode, dispatch]);
+  }, [lightMode, dispatch, localStorageThemeMode]);
 
   if (isLoading) {
     return (
