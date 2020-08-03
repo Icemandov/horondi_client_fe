@@ -11,7 +11,7 @@ import ProductSubmit from './product-submit';
 import ProductFeatures from './product-features/product-features';
 import ProductInfo from './product-info';
 import ProductImages from './product-images';
-import CircularUnderLoad from '../../components/loading-bar';
+import { Loader } from '../../components/loader/loader';
 import { getProduct } from '../../redux/products/products.actions';
 
 import { DEFAULT_SIZE } from '../../configs';
@@ -150,7 +150,7 @@ const ProductDetails = ({ match }) => {
         (item) =>
           options
             .filter(({ additions }) => additions.length > 0)
-            .find(({ additions }) => item === additions[0].name[1].value)
+            .find(({ additions: [{ name }] }) => item === name[1].value)
             .additions[0]
       ),
     [uniqueAdditions, options]
@@ -214,7 +214,7 @@ const ProductDetails = ({ match }) => {
   if (isLoading || !product) {
     return (
       <div className={styles.center}>
-        <CircularUnderLoad />
+        <Loader />
       </div>
     );
   }

@@ -200,7 +200,6 @@ export function* handleProductLoading({ payload }) {
 }`;
   try {
     const product = yield call(getItems, query);
-    console.log(product.data.getProductsById);
     yield put(setProduct(product.data.getProductsById));
     yield put(setProductsLoading(false));
   } catch (e) {
