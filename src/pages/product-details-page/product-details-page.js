@@ -83,7 +83,11 @@ const ProductDetails = ({ match }) => {
   const uniqueSizes = useMemo(
     () =>
       Array.from(
-        new Set(options ? options.map(({ size }) => size.name) : null)
+        new Set(
+          options
+            ? options.map(({ size }) => size.available && size.name)
+            : null
+        )
       ),
     [options]
   );
@@ -93,8 +97,8 @@ const ProductDetails = ({ match }) => {
       Array.from(
         new Set(
           options
-            ? options.map(({ bottomMaterial }) =>
-              bottomMaterial ? bottomMaterial.name[1].value : null
+            ? options.map(({ bottomMaterial: item }) =>
+              item && item.available ? item.name[1].value : null
             )
             : null
         )
@@ -109,7 +113,10 @@ const ProductDetails = ({ match }) => {
           options
             ? options
               .filter(({ additions }) => additions.length > 0)
-              .map(({ additions }) => additions[0].name[1].value)
+              .map(
+                ({ additions: [{ available, name }] }) =>
+                  available && name[1].value
+              )
             : null
         )
       ),

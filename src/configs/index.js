@@ -308,13 +308,8 @@ export const SHOW_AFTER = 3000;
 export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
 export const DEFAULT_SIZE = 'M';
 export const IMG_ALT_INFO = 'product';
-export const RATE_PRECISION = 0.1;
-export const CAROUSEL_LABEL = 'carousel';
-export const SIMILAR_ITEMS_LABEL = 'similarItems';
 export const EMPTY_MENU_ITEM = {
   value: '',
   key: 'none'
 };
 export const INPUT_VARIANT = 'outlined';
-export const TEXT_FIELD_ROWS = 10;
-export const RATE_NAME = 'simple-controlled';

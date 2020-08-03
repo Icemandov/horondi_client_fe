@@ -6,16 +6,13 @@ import './similar-products.css';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 
-import {
-  IMG_ALT_INFO,
-  SIMILAR_ITEMS_LABEL,
-  CAROUSEL_LABEL
-} from '../../../configs';
+import { IMG_ALT_INFO } from '../../../configs';
 import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
 import { getFiltredProducts } from '../../../redux/filter/filter.actions';
 import * as productImage from '../../../images/pdp_main.jpg';
 
 const SimilarProducts = ({ language, category, product }) => {
+  const categoryId = category._id;
   const { title } = SIMILAR_ITEMS[language];
   const responsive = {
     superLargeDesktop: {
@@ -43,31 +40,27 @@ const SimilarProducts = ({ language, category, product }) => {
   useEffect(() => {
     dispatch(
       getFiltredProducts({
-        category: category._id
+        category: categoryId
       })
     );
-  }, [dispatch, category._id]);
+  }, [dispatch, categoryId]);
 
   const imgs = products
     .filter(({ _id }) => _id !== product._id)
-    .map((product) => (
-      <Link to={`${product._id}`} key={product._id}>
+    .map(({ _id }) => (
+      <Link to={`${_id}`} key={_id}>
         <img className='similar-image' src={productImage} alt={IMG_ALT_INFO} />
       </Link>
     ));
 
   return (
-    <div className={SIMILAR_ITEMS_LABEL}>
+    <div className='similarItems'>
       <div>
         <hr />
         <h2>{title}</h2>
         <hr />
       </div>
-      <Carousel
-        className={CAROUSEL_LABEL}
-        responsive={responsive}
-        swipeable={false}
-      >
+      <Carousel className='carousel' responsive={responsive} swipeable={false}>
         {imgs}
       </Carousel>
       <hr />

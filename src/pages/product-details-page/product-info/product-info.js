@@ -6,7 +6,6 @@ import useStyles from './product-info.styles';
 import * as colorImage from '../../../images/red.jpg';
 import * as patternImage from '../../../images/pattern_2.jpg';
 
-import { RATE_PRECISION } from '../../../configs';
 import {
   COLOR,
   PATTERN,
@@ -36,7 +35,7 @@ const ProductInfo = ({
     <div>
       <div className={styles.head}>
         <span className={styles.title}>{title[language].value}</span>
-        <Rating value={rate} readOnly precision={RATE_PRECISION} />
+        <Rating value={rate} readOnly precision={0.1} />
       </div>
       <div className={styles.details}>
         <div>
