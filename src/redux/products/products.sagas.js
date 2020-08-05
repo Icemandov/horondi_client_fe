@@ -10,6 +10,13 @@ export function* handleProductLoading({ payload }) {
   const query = `query {
     getProductsById(id:"${payload}") {
     _id
+    category {
+      _id
+      name {
+        lang
+        value
+      }
+    }
     name {
       lang
       value

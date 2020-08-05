@@ -17,7 +17,7 @@ const ProductSizes = ({
 
   const sizeButtons = sizes
     ? sizes.map(({ name, available }) =>
-      available ? (
+      available && name ? (
         <Button
           key={name}
           className={
@@ -33,11 +33,15 @@ const ProductSizes = ({
 
   return (
     <div className={styles.sizeButtons}>
-      <span className={styles.label}>{SIZE[language].size}: </span>
-      <ButtonGroup>{sizeButtons}</ButtonGroup>
-      <br />
-      {error ? (
-        <span className={styles.error}>{SIZE[language].error}</span>
+      {sizeButtons[0] ? (
+        <div>
+          <span className={styles.label}>{SIZE[language].size}: </span>
+          <ButtonGroup id='sizes'>{sizeButtons}</ButtonGroup>
+          <br />
+          {error ? (
+            <span className={styles.error}>{SIZE[language].error}</span>
+          ) : null}
+        </div>
       ) : null}
     </div>
   );

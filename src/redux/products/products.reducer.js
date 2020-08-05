@@ -1,7 +1,7 @@
 import { SET_PRODUCT, SET_PRODUCTS_LOADING } from './products.types';
 
 const initialState = {
-  product: {},
+  product: null,
   products: [],
   loading: true
 };

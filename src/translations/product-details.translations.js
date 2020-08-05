@@ -50,21 +50,12 @@ export const SELECT_NONE = {
   }
 };
 
-export const BAG_BOTTOM = {
+export const PRODUCT_BOTTOM = {
   0: {
-    bagBottom: 'Низ рюкзака'
+    bagBottom: 'Низ продукту'
   },
   1: {
-    bagBottom: 'Bag bottom'
-  }
-};
-
-export const SIDE_POCKET = {
-  0: {
-    sidePocket: 'Боковий карман'
-  },
-  1: {
-    sidePocket: 'Side pocket'
+    bagBottom: 'Product bottom'
   }
 };
 

@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
   root: {
-    width: '100%'
+    maxWidth: '100vw'
   },
   header: {
     backgroundColor: '#000000',

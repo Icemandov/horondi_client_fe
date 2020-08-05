@@ -5,11 +5,7 @@ import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 import * as productImage from '../../../images/pdp_main.jpg';
 
-import {
-  IMG_ALT_INFO,
-  SIMILAR_ITEMS_LABEL,
-  CAROUSEL_LABEL
-} from '../../../configs';
+import { IMG_ALT_INFO } from '../../../configs';
 import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
 
 const SimilarProducts = ({ language }) => {
@@ -39,17 +35,13 @@ const SimilarProducts = ({ language }) => {
     .map((img, idx) => <img src={img} alt={IMG_ALT_INFO} key={idx} />);
 
   return (
-    <div className={SIMILAR_ITEMS_LABEL}>
+    <div className='similarItems'>
       <div>
         <hr />
         <h2>{title}</h2>
         <hr />
       </div>
-      <Carousel
-        className={CAROUSEL_LABEL}
-        responsive={responsive}
-        swipeable={false}
-      >
+      <Carousel className='carousel' responsive={responsive} swipeable={false}>
         {imgs}
       </Carousel>
       <hr />

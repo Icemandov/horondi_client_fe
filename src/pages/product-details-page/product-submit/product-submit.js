@@ -62,6 +62,7 @@ const ProductSubmit = ({ checkSize, language, productToSend, product }) => {
   return (
     <div className={styles.submit}>
       <FavoriteIcon
+        id='wishful'
         className={isWishful ? styles.redHeart : styles.heart}
         onClick={onWishfulHandler}
       />

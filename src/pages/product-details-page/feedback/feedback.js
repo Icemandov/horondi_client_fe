@@ -7,7 +7,7 @@ import useStyles from './feedback.styles';
 
 import FeedbackItem from './feedback-item';
 
-import { INPUT_VARIANT, RATE_NAME, TEXT_FIELD_ROWS } from '../../../configs';
+import { INPUT_VARIANT } from '../../../configs';
 import { FEEDBACK } from '../../../translations/product-details.translations';
 
 const Feedback = ({ language, comments }) => {
@@ -31,7 +31,7 @@ const Feedback = ({ language, comments }) => {
     <div className={styles.feedback}>
       <h2>{FEEDBACK[language].title}</h2>
       <Rating
-        name={RATE_NAME}
+        name='simple-controlled'
         value={rate}
         onChange={(e, newRate) => setRate(newRate)}
       />
@@ -54,7 +54,7 @@ const Feedback = ({ language, comments }) => {
             className={styles.textField}
             label={FEEDBACK[language].textField}
             multiline
-            rows={TEXT_FIELD_ROWS}
+            rows={10}
             variant={INPUT_VARIANT}
             required
           />

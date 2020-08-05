@@ -8,7 +8,7 @@ const userData = {
   password: 'qwertY123'
 };
 
-describe('Categories saga', () => {
+describe('User saga', () => {
   it('fetches user', () => {
     const fakeUser = {
       data: {

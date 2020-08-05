@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   sizeButtons: {
-    marginBottom: '1.6rem'
+    marginBottom: '0.8rem'
   },
   label: {
     fontWeight: '700',
@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   error: {
-    marginTop: '0.3rem',
     fontSize: '0.75rem',
     textAlign: 'left',
     fontFamily: 'Roboto,Helvetica,Arial,sans-serif',

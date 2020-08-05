@@ -1,5 +1,13 @@
-import { setCategories, getCategories } from '../categories.actions';
-import { GET_CATEGORIES, SET_CATEGORIES } from '../categories.types';
+import {
+  setCategories,
+  getCategories,
+  setCategoriesLoading
+} from '../categories.actions';
+import {
+  GET_CATEGORIES,
+  SET_CATEGORIES,
+  SET_CATEGORIES_LOADING
+} from '../categories.types';
 
 describe('Categories actions test', () => {
   it('should set new categories to payload property', () => {
@@ -25,5 +33,14 @@ describe('Categories actions test', () => {
     };
 
     expect(getCategories()).toEqual(result);
+  });
+
+  it('should set categories loading', () => {
+    const result = {
+      type: SET_CATEGORIES_LOADING,
+      payload: false
+    };
+
+    expect(setCategoriesLoading(false)).toEqual(result);
   });
 });

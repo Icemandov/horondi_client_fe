@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => {
         padding: '0'
       }
     },
+    priceContainer: {
+      marginTop: '0.5rem'
+    },
     price: {
       fontSize: '1.15rem',
       fontWeight: '700',
@@ -40,7 +43,6 @@ const useStyles = makeStyles((theme) => {
     },
     look: {
       display: 'flex',
-      marginTop: '0.6rem',
       wordSpacing: '0.2rem',
       maxHeight: '4.5rem',
       '@media (max-width: 600px)': {

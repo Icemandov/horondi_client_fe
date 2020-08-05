@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => {
     fontSize: '2.5rem',
     color: '#000000',
     '&:hover': {
-      transform: 'scale(1.1)',
+      transform: 'scale(1.15)',
       cursor: 'pointer',
       color: '#ed0505'
     }
