@@ -36,7 +36,7 @@ const ProductSizes = ({
       {sizeButtons[0] ? (
         <div>
           <span className={styles.label}>{SIZE[language].size}: </span>
-          <ButtonGroup id='sizes'>{sizeButtons}</ButtonGroup>
+          <ButtonGroup data-cy='sizes'>{sizeButtons}</ButtonGroup>
           <br />
           {error ? (
             <span className={styles.error}>{SIZE[language].error}</span>

@@ -30,14 +30,14 @@ describe('Product details test', () => {
   });
 
   it('should add and remove product wishful', () => {
-    cy.get('#wishful')
+    cy.get('[data-cy="wishful"]')
       .click()
       .should(() => {
         expect(
           JSON.parse(localStorage.getItem('horondi')).wishlist
         ).to.have.length(1);
       });
-    cy.get('#wishful')
+    cy.get('[data-cy="wishful"]')
       .click()
       .should(() => {
         expect(
@@ -47,7 +47,7 @@ describe('Product details test', () => {
   });
 
   it('should add product to cart', () => {
-    cy.get('#sizes').click();
+    cy.get('[data-cy="sizes"]').click();
     cy.contains('В кошик')
       .click()
       .should(() => {
@@ -58,24 +58,24 @@ describe('Product details test', () => {
   });
 
   it('should redirect to checkout page', () => {
-    cy.get('#sizes').click();
+    cy.get('[data-cy="sizes"]').click();
     cy.contains('Купити зараз').click().url().should('include', '/checkout');
   });
 
   it('should change price when pocket checked', () => {
     cy.visit('/backpacks/c3a84a5b9866c30390366168');
     cy.contains('Кишеня').click();
-    cy.get('#price').contains('1550');
+    cy.get('[data-cy="price"]').contains('1550');
     cy.contains('Кишеня').click();
-    cy.get('#price').contains('1450');
+    cy.get('[data-cy="price"]').contains('1450');
   });
 
   it('should change price when bag bottom selected', () => {
-    cy.get('#productSelect').click();
+    cy.get('[data-cy="productSelect"]').click();
     cy.contains('Натуральна шкіра').click();
-    cy.get('#price').contains('1800');
-    cy.get('#productSelect').click();
+    cy.get('[data-cy="price"]').contains('1800');
+    cy.get('[data-cy="productSelect"]').click();
     cy.contains('Жоден').click();
-    cy.get('#price').contains('1450');
+    cy.get('[data-cy="price"]').contains('1450');
   });
 });

@@ -76,7 +76,10 @@ const ProductFeatures = ({
           </span>
           <div className={styles.featuresForm}>
             <div className={styles.feature}>
-              <FormControl id='productSelect' className={styles.formControl}>
+              <FormControl
+                data-cy='productSelect'
+                className={styles.formControl}
+              >
                 <InputLabel>{PRODUCT_BOTTOM[language].bagBottom}</InputLabel>
                 <Select
                   value={bagBottom}

@@ -95,7 +95,7 @@ const ProductInfo = ({
         <span className={styles.subtitle}>
           {PRODUCT_PRICE[language].price}:{' '}
         </span>
-        <span id='price' className={styles.price}>
+        <span data-cy='price' className={styles.price}>
           {currentPrice} UAH
         </span>
       </div>
