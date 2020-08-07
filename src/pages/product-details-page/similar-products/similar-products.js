@@ -5,8 +5,10 @@ import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 import * as productImage from '../../../images/pdp_main.jpg';
 
-import { IMG_ALT_INFO } from '../../../configs';
-import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
+import {
+  SIMILAR_ITEMS,
+  IMG_ALT_INFO
+} from '../../../translations/product-details.translations';
 
 const SimilarProducts = ({ language }) => {
   const { title } = SIMILAR_ITEMS[language];
@@ -32,7 +34,9 @@ const SimilarProducts = ({ language }) => {
 
   const imgs = Array(6)
     .fill(productImage)
-    .map((img, idx) => <img src={img} alt={IMG_ALT_INFO} key={idx} />);
+    .map((img, idx) => (
+      <img src={img} alt={IMG_ALT_INFO[language].value} key={idx} />
+    ));
 
   return (
     <div className='similarItems'>

@@ -4,8 +4,10 @@ import ImgsViewer from 'react-images-viewer';
 import useStyles from './product-images.styles';
 import * as productImage from '../../../images/pdp_main.jpg';
 
-import { IMG_ALT_INFO } from '../../../configs';
-import { IMGS_VIEWER } from '../../../translations/product-details.translations';
+import {
+  IMGS_VIEWER,
+  IMG_ALT_INFO
+} from '../../../translations/product-details.translations';
 
 const ProductImages = ({ images, language }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,16 +21,20 @@ const ProductImages = ({ images, language }) => {
     setCurrImg(idx);
   };
 
-  const primaryImage = images[0].primary ? (
-    <img src={productImage} alt={IMG_ALT_INFO} onClick={() => openImage(0)} />
+  const primaryImage = images.primary ? (
+    <img
+      src={productImage}
+      alt={IMG_ALT_INFO[language].value}
+      onClick={() => openImage(0)}
+    />
   ) : null;
 
-  const sideImages = images[0].additional
-    ? images[0].additional.map((image, idx) => (
+  const sideImages = images.additional
+    ? images.additional.map((image, idx) => (
       <img
         src={productImage}
         key={idx}
-        alt={IMG_ALT_INFO}
+        alt={IMG_ALT_INFO[language].value}
         onClick={() => openImage(idx + 1)}
       />
     ))

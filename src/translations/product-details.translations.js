@@ -138,3 +138,12 @@ export const SIMILAR_ITEMS = {
     title: 'Similar items'
   }
 };
+
+export const IMG_ALT_INFO = {
+  0: {
+    value: 'Фото продукту'
+  },
+  1: {
+    value: 'Product image'
+  }
+};

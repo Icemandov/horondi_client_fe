@@ -241,5 +241,4 @@ export const SHOW_AFTER = 3000;
 
 export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
 export const DEFAULT_SIZE = 'M';
-export const IMG_ALT_INFO = 'product';
 export const INPUT_VARIANT = 'outlined';
