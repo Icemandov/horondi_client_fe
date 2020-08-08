@@ -11,34 +11,28 @@ export function* handleNewsLoad() {
     const news = yield call(
       getItems,
       `query{
-         getAllNews{
-           _id
-           title {
-             value
-           }
-           author{
-             name{
-             value
-             }
-             image{
-             small
-                  }
-                }
-                text{
-                  value
-                }
-                date
-                images{
-                  primary{
-                    medium
-                  }
-                  additional{
-                    medium
-                  }
-                }
-                video
-               }
-             }`
+        getAllNews{
+          _id
+          title
+          text
+          images{
+            primary{
+              medium
+            }
+            additional{
+              medium
+            }
+          }
+          author{
+            name
+            image{
+              small
+            }
+          }
+          date
+          show
+        }
+      }`
     );
     yield put(setNews(news.data.getAllNews));
     yield put(setLoading(false));
@@ -57,12 +51,8 @@ export function* handleArticleLoad({ payload }) {
           ... on News{
            __typename
             _id
-            title{
-              value
-            }
-            text{
-              value
-            }
+            title
+            text
             images{
               primary{
                 medium
@@ -71,16 +61,14 @@ export function* handleArticleLoad({ payload }) {
                 medium
               }
             }
-            video
             author{
-              name{
-                value
-              }
+              name
               image{
                 small
               }
             }
             date
+            show
           }
           ... on Error {
             message
