@@ -39,24 +39,16 @@ const NewsDetailPage = ({ match }) => {
       </Backdrop>
     );
   }
-  const newsTitle =
-    article.title.length !== 0
-      ? article.title[language].value
-      : 'No title provided';
+  const newsTitle = article.title ? article.title : 'No title provided';
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
   const dateLanguage = newsDateLanguageOptions[language];
   const dateToShow = new Date(parseInt(article.date));
   const newsDate = dateToShow.toLocaleString(dateLanguage, TIME_OPTIONS);
   const newsImage = article.images ? article.images.primary.medium : ' ';
-  const newsText =
-    article.text.length !== 0
-      ? parse(article.text[language].value)
-      : 'No text provided';
-  const newsVideo = article.video;
-  const newsAuthor =
-    article.author.name.length !== 0
-      ? article.author.name[language].value
-      : 'No author provided';
+  const newsText = article.text ? parse(article.text) : 'No text provided';
+  const newsAuthor = article.author.name
+    ? article.author.name
+    : 'No author provided';
   const newsAuthorAvatar = article.author.image
     ? article.author.image.small
     : 'No author provided';
@@ -92,7 +84,7 @@ const NewsDetailPage = ({ match }) => {
         >
           {newsText}
         </Typography>
-        <iframe
+        {/* <iframe
           className={newsVideo ? 'disp-block' : 'disp-none'}
           title={newsTitle}
           width='100%'
@@ -101,7 +93,7 @@ const NewsDetailPage = ({ match }) => {
           frameBorder='0'
           allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
           allowFullScreen
-        />
+        /> */}
         <hr />
         <div className={styles.newsAuthorFooter}>
           <CardHeader subheader={newsAuthor} id='newsAuthor' />
