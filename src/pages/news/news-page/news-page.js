@@ -20,6 +20,7 @@ const NewsPage = () => {
     window.scrollTo(0, 0);
   }, [dispatch]);
 
+  const currentLanguage = language === 1 ? 'en' : 'uk';
   const newsHeader = ['Новини', 'News'];
   const styles = useStyles();
   if (loading) {
@@ -29,7 +30,9 @@ const NewsPage = () => {
       </Backdrop>
     );
   }
-  const newsFilter = newslist.filter((news) => news.lang === 'en');
+  const newsFilter = newslist.filter(
+    (news) => news.lang === currentLanguage && news.show
+  );
   const newsItems = newsFilter.map(
     ({ _id, date, author, images, title, text }) => (
       <NewsItem
