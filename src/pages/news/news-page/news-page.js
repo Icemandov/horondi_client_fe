@@ -29,7 +29,8 @@ const NewsPage = () => {
       </Backdrop>
     );
   }
-  const newsItems = newslist.map(
+  const newsFilter = newslist.filter((news) => news.lang === 'en');
+  const newsItems = newsFilter.map(
     ({ _id, date, author, images, title, text }) => (
       <NewsItem
         date={date}

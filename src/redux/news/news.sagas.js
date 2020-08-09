@@ -13,6 +13,7 @@ export function* handleNewsLoad() {
       `query{
         getAllNews{
           _id
+          lang
           title
           text
           images{
@@ -51,6 +52,7 @@ export function* handleArticleLoad({ payload }) {
           ... on News{
            __typename
             _id
+            lang
             title
             text
             images{

@@ -96,10 +96,6 @@ const primaryShape = PropTypes.shape({
   medium: PropTypes.string
 });
 
-// const valueShape = PropTypes.shape({
-//   value: PropTypes.string
-// });
-
 const newsItemPropTypes = {
   date: PropTypes.string,
   id: PropTypes.string,
