@@ -31,13 +31,16 @@ const NewsDetailPage = ({ match }) => {
   }, [match.params.id, dispatch, article]);
 
   const styles = useStyles();
-
   if (loading || !article) {
     return (
       <Backdrop className={styles.backdrop} open={loading} invisible>
         <LoadingBar color='inherit' />
       </Backdrop>
     );
+  }
+  const currentLanguage = language === 1 ? 'en' : 'uk';
+  if (article.lang !== currentLanguage) {
+    return <h3>This article is not supported at current language</h3>;
   }
   const newsTitle = article.title ? article.title : 'No title provided';
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
