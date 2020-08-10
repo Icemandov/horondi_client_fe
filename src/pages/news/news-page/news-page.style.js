@@ -5,9 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'center'
   },
   NewsPageItem: {
-    marginTop: '5rem',
-    margin: '5rem auto',
-    marginRight: 'auto',
+    margin: '5rem',
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(25rem, auto))',
     gridColumnGap: '10px',
