@@ -34,9 +34,7 @@ export const useStyles = makeStyles((theme) => ({
   newsText: {
     textAlign: 'justify'
   },
-  video: {
-    margin: '2rem auto'
-  },
+
   newsAuthorFooter: {
     display: 'flex',
     justifyContent: 'flex-end'

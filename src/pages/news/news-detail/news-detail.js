@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
+import './news-detail.style.css';
 import {
   Card,
   Typography,
