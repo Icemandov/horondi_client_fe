@@ -30,8 +30,8 @@ const ProductFeatures = ({
 
   const setAdditionalPrice = (price) => ` +${price} UAH`;
 
-  const handleBottomChange = (e) => {
-    const { value } = e.target;
+  const handleBottomChange = (event) => {
+    const { value } = event.target;
     const oldPrice = bagBottom
       ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
         .additionalPrice
@@ -45,13 +45,13 @@ const ProductFeatures = ({
     setBagBottom(value);
   };
 
-  const handlePocketChange = (e) => {
+  const handlePocketChange = (event) => {
     if (!sidePocket) {
       setPrice((currentPrice) => currentPrice + additionalPrice);
     } else {
       setPrice((currentPrice) => currentPrice - additionalPrice);
     }
-    setSidePocket(e.target.checked);
+    setSidePocket(event.target.checked);
   };
 
   const menuItems = bottomMaterials

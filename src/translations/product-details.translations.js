@@ -12,16 +12,16 @@ export const WEIGHT = {
 export const FEEDBACK = {
   0: {
     title: 'Відгуки',
-    name: `Ім'я`,
+    firstName: `Ім'я`,
     email: 'Електронна адреса',
-    textField: 'Поділіться своїми враженнями з іншими',
+    text: 'Поділіться своїми враженнями з іншими',
     submit: 'Залишити відгук'
   },
   1: {
     title: 'Feedback',
-    name: 'Name',
+    firstName: 'First name',
     email: 'Email',
-    textField: 'Share your thoughts with others',
+    text: 'Share your thoughts with others',
     submit: 'Leave feedback'
   }
 };

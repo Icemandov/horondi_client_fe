@@ -13,7 +13,7 @@ export const loginUser = (payload) => {
     purchasedProducts
     orders
     token
-    id
+    _id
   }
 }
   `;
@@ -25,7 +25,7 @@ export function* handleUserLoad({ payload }) {
     yield put(setUserLoading());
     const user = yield call(loginUser, payload);
     yield put(setUser(user.data.loginUser));
-    yield put(push('/'));
+    yield put(push('b/c3a84a5b9866c30390366168'));
   } catch (error) {
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
   }

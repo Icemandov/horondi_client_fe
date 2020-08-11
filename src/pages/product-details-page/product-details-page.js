@@ -54,7 +54,7 @@ const ProductDetails = ({ match }) => {
   const { volumeInLiters, weightInKg } = useMemo(
     () =>
       product && options[0].size.name
-        ? options.find(({ size }) => size.name === DEFAULT_SIZE).size
+        ? options.find(({ size: { name } }) => name === DEFAULT_SIZE).size
         : {},
     [product, options]
   );
@@ -81,7 +81,9 @@ const ProductDetails = ({ match }) => {
   const uniqueSizes = useMemo(
     () => [
       ...new Set(
-        options ? options.map(({ size }) => size.available && size.name) : null
+        options
+          ? options.map(({ size: { available, name } }) => available && name)
+          : null
       )
     ],
     [options]
@@ -119,7 +121,7 @@ const ProductDetails = ({ match }) => {
   const sizes = useMemo(
     () =>
       uniqueSizes.map(
-        (item) => options.find(({ size }) => item === size.name).size
+        (item) => options.find(({ size: { name } }) => item === name).size
       ),
     [uniqueSizes, options]
   );
@@ -130,7 +132,7 @@ const ProductDetails = ({ match }) => {
         ? uniqueBottomMaterials.map(
           (item) =>
             options.find(
-              ({ bottomMaterial }) => item === bottomMaterial.name[1].value
+              ({ bottomMaterial: { name } }) => item === name[1].value
             ).bottomMaterial
         )
         : null,
@@ -185,8 +187,8 @@ const ProductDetails = ({ match }) => {
     return true;
   };
 
-  const handleSizeChange = (e) => {
-    const { textContent } = e.target;
+  const handleSizeChange = (event) => {
+    const { textContent } = event.target;
     const oldPrice = selectedSize
       ? sizes.find(({ name }) => name === selectedSize).additionalPrice
       : 0;
@@ -258,7 +260,7 @@ const ProductDetails = ({ match }) => {
         product={product}
         category={category}
       />
-      <Feedback language={language} comments={comments} />
+      <Feedback language={language} comments={comments} productId={_id} />
     </Card>
   );
 };

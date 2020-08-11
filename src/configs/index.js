@@ -109,9 +109,10 @@ export const errorMessages = [
     value: {
       firstname: 'Поле повинно містити від 2 до 30 символів',
       lastname: 'Поле повинно містити від 2 до 30 символів',
-      email: 'Некоректний формат, ',
+      email: 'Некоректний формат ',
       password: 'Від 6 до 30 символів з однією літерою та цифрою',
-      confirmPassword: 'Паролі не співпадають'
+      confirmPassword: 'Паролі не співпадають',
+      text: 'Від 3 до 500 символів'
     }
   },
   {
@@ -119,9 +120,10 @@ export const errorMessages = [
     value: {
       firstname: 'Field should contain from 2 to 30 characters',
       lastname: 'Field should contain from 2 to 30 characters',
-      email: `Wrong email address, `,
+      email: `Wrong email address `,
       password: 'From 6 to 30 characters with one letter and one digit',
-      confirmPassword: 'Passwords do not match'
+      confirmPassword: 'Passwords do not match',
+      text: 'From 3 to 500 characters'
     }
   }
 ];
@@ -137,7 +139,10 @@ export const formRegExp = {
   street: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   buildingNum: '^[a-zA-Z0-9_.-]*$',
   deliveryType: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-  deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+  deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+  text: /^.{3,500}$/g,
+  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim,
+  script: /(script)/g
 };
 
 export const placeholders = {
@@ -242,3 +247,13 @@ export const SHOW_AFTER = 3000;
 export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
 export const DEFAULT_SIZE = 'M';
 export const INPUT_VARIANT = 'outlined';
+
+export const FEEDBACK_DATA = {
+  firstName: '',
+  text: '',
+  product: '',
+  show: false,
+  email: ''
+};
+
+export const TEXT = 'text';

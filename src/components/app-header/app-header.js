@@ -1,6 +1,7 @@
 import React from 'react';
 
-import AppBar from '@material-ui/core/AppBar';
+import MenuIcon from '@material-ui/icons/Menu';
+import { AppBar, IconButton, Typography } from '@material-ui/core';
 import Toolbar from '@material-ui/core/Toolbar';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
@@ -14,15 +15,18 @@ const AppHeader = () => {
 
   return (
     <div className={styles.root}>
-      <AppBar position='static'>
-        <Toolbar className={styles.header}>
-          <NavbarLeft />
-          <Toolbar>
-            <AttachMoneyIcon className={styles.icons} />
-            <Language />
-            <ShoppingBasketIcon className={styles.icons} />
-            <Cabinet />
-          </Toolbar>
+      <AppBar position='static' className={styles.header}>
+        <Toolbar>
+          <IconButton className={styles.menuButton}>
+            <MenuIcon />
+          </IconButton>
+          <Typography className={styles.title}>
+            <NavbarLeft />
+          </Typography>
+          <AttachMoneyIcon />
+          <Language />
+          <ShoppingBasketIcon />
+          <Cabinet />
         </Toolbar>
       </AppBar>
     </div>

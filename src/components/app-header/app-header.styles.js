@@ -1,17 +1,22 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
-  root: {
-    maxWidth: '100vw'
-  },
+export const useStyles = makeStyles((theme) => ({
   header: {
-    backgroundColor: '#000000',
-    display: 'flex',
-    justifyContent: 'space-between'
+    backgroundColor: '#000000'
   },
-  icons: {
-    fontSize: '2rem',
-    padding: '0 0.4rem',
-    color: '#ffffff'
+  menuButton: {
+    color: '#ffffff',
+    '@media (min-width: 900px)': {
+      display: 'none'
+    }
+  },
+  title: {
+    flexGrow: 1
+  },
+  sectionMobile: {
+    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    }
   }
 }));
