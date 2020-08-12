@@ -1,7 +1,7 @@
 import React from 'react';
 
 import MenuIcon from '@material-ui/icons/Menu';
-import { AppBar, IconButton, Typography } from '@material-ui/core';
+import { AppBar, IconButton } from '@material-ui/core';
 import Toolbar from '@material-ui/core/Toolbar';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
@@ -20,9 +20,9 @@ const AppHeader = () => {
           <IconButton className={styles.menuButton}>
             <MenuIcon />
           </IconButton>
-          <Typography className={styles.title}>
+          <div className={styles.title}>
             <NavbarLeft />
-          </Typography>
+          </div>
           <AttachMoneyIcon />
           <Language />
           <ShoppingBasketIcon />

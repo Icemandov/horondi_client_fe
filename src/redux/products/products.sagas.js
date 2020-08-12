@@ -7,9 +7,11 @@ import { GET_PRODUCT } from './products.types';
 
 export function* handleProductLoading({ payload }) {
   yield put(setProductsLoading(true));
-  const query = `query {
-    getProductsById(id:"${payload}") {
-    _id
+  const query = `
+  query {
+    getProductById(id:"${payload}") {
+    ... on Product {
+      _id
     category {
       _id
       name {
@@ -64,7 +66,7 @@ export function* handleProductLoading({ payload }) {
       lang
       value
     }
-    basePrice 
+    basePrice
     options {
       size {
         name
@@ -96,7 +98,7 @@ export function* handleProductLoading({ payload }) {
       text
       date
       user {
-        firstName
+        name
       }
     }
     options {
@@ -134,11 +136,13 @@ export function* handleProductLoading({ payload }) {
         medium
       }
     }
+    }
   }
 }`;
   try {
     const product = yield call(getItems, query);
-    yield put(setProduct(product.data.getProductsById));
+    console.log(product.data.getProductById);
+    yield put(setProduct(product.data.getProductById));
     yield put(setProductsLoading(false));
   } catch (e) {
     yield put(setProductsLoading(false));

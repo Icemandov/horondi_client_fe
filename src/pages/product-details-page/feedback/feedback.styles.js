@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   form: {
+    display: 'grid',
+    gridTemplate: '6rem 10rem/ repeat(2, 20rem)',
     '& *': {
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
@@ -51,13 +53,10 @@ const useStyles = makeStyles((theme) => ({
     height: '2rem',
     '@media (max-width: 950px)': {
       marginBottom: '1.5rem'
-    },
-    '@media (max-width: 600px)': {
-      width: '85vw'
     }
   },
   text: {
-    marginTop: '2.5rem',
+    gridRowStart: '2 / -1',
     width: '39rem',
     '@media (max-width: 950px)': {
       width: '67vw',
@@ -69,7 +68,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   feedbackBtn: {
-    margin: '1.5rem 0',
+    marginTop: '6rem',
+    marginBottom: '1.5rem',
     textTransform: 'none',
     textAlign: 'center',
     fontSize: '1rem',
