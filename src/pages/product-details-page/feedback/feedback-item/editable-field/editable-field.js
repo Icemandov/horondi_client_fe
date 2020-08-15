@@ -17,15 +17,13 @@ const EditableField = ({ setEditable, text, language, handleClickOpen }) => {
 
   const handleChange = (event) => {
     const { value } = event.target;
-    const noscriptText = value.replace(script, '');
-    const filteredText = noscriptText.replace(link, '');
+    const noScriptText = value.replace(script, '');
+    const noLinkText = noScriptText.replace(link, '');
 
-    setEditableText(filteredText);
+    setEditableText(noLinkText);
 
-    if (filteredText.match(formRegExp.text)) {
-      filteredText.trim().length >= 2
-        ? setTextValidated(true)
-        : setTextValidated(false);
+    if (noLinkText.match(formRegExp.text) && noLinkText.trim().length >= 2) {
+      setTextValidated(true);
     } else {
       setTextValidated(false);
     }
@@ -34,7 +32,7 @@ const EditableField = ({ setEditable, text, language, handleClickOpen }) => {
   const handleSubmit = () => {
     setShouldValidate(true);
     if (textValidated) {
-      console.log(editableText);
+      console.log(editableText.trim());
       setEditable(false);
     }
   };

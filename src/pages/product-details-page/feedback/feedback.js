@@ -75,14 +75,14 @@ const Feedback = ({ language, comments, productId, userRates }) => {
 
   const handleChange = (event, setValid, regExp) => {
     const { value, name } = event.target;
-    const noscriptText = value.replace(script, '');
-    const filteredText =
-      name === TEXT ? noscriptText.replace(link, '') : noscriptText;
+    const noScriptText = value.replace(script, '');
+    const noLinkText =
+      name === TEXT ? noScriptText.replace(link, '') : noScriptText;
 
-    setFeedback({ ...feedback, [name]: filteredText });
+    setFeedback({ ...feedback, [name]: noLinkText });
 
-    if (filteredText.match(regExp)) {
-      filteredText.trim().length >= 2 ? setValid(true) : setValid(false);
+    if (noLinkText.match(regExp) && noLinkText.length >= 2) {
+      setValid(true);
     } else {
       setValid(false);
     }
