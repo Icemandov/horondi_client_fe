@@ -4,6 +4,7 @@ import { push } from 'connected-react-router';
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
 import useStyles from './product-submit.styles';
 
 import {
@@ -61,11 +62,13 @@ const ProductSubmit = ({ checkSize, language, productToSend, product }) => {
 
   return (
     <div className={styles.submit}>
-      <FavoriteIcon
-        data-cy='wishful'
-        className={isWishful ? styles.redHeart : styles.heart}
-        onClick={onWishfulHandler}
-      />
+      <Tooltip title='Add to wishlist' placement='left'>
+        <FavoriteIcon
+          data-cy='wishful'
+          className={isWishful ? styles.redHeart : styles.heart}
+          onClick={onWishfulHandler}
+        />
+      </Tooltip>
       <Button className={styles.submitButton} onClick={onAddToCart}>
         {PDP_BUTTONS[language].cartButton}
       </Button>

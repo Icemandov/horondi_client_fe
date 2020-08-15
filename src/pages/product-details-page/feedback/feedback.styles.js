@@ -16,8 +16,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   form: {
-    display: 'grid',
-    gridTemplate: '6rem 10rem/ repeat(2, 20rem)',
+    marginTop: '15px',
     '& *': {
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
@@ -39,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
       }
     },
     '@media (max-width: 950px)': {
+      marginTop: '0',
       display: 'flex',
       flexDirection: 'column',
       '&:nth-child(1)': {
@@ -47,28 +47,52 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   input: {
-    width: '20rem',
-    marginTop: '1rem',
+    marginBottom: '45px',
+    float: 'left',
+    width: '308px',
     paddingRight: '1rem',
     height: '2rem',
     '@media (max-width: 950px)': {
-      marginBottom: '1.5rem'
+      marginBottom: '1.5rem',
+      marginTop: '15px'
+    },
+    '& p': {
+      position: 'absolute',
+      top: '45px',
+      fontSize: '10px'
+    },
+    '@media (max-width: 350px)': {
+      width: '85vw'
+    },
+    '& input': {
+      fontFamily: 'Montserrat',
+      fontWeight: '500'
     }
   },
   text: {
-    gridRowStart: '2 / -1',
-    width: '39rem',
+    marginRight: '500px',
+    position: 'relative',
+    width: '70vw',
     '@media (max-width: 950px)': {
-      width: '67vw',
+      width: '63vw',
       marginTop: '1rem'
     },
     '@media (max-width: 600px)': {
-      width: '85vw',
-      marginTop: '1rem'
+      width: '78vw'
+    },
+    '& p': {
+      position: 'absolute',
+      top: '170px',
+      fontSize: '10px'
+    },
+    '& textarea': {
+      fontFamily: 'Montserrat',
+      fontSize: '0.875rem',
+      fontWeight: '500'
     }
   },
   feedbackBtn: {
-    marginTop: '6rem',
+    marginTop: '25px',
     marginBottom: '1.5rem',
     textTransform: 'none',
     textAlign: 'center',
@@ -78,10 +102,6 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: theme.palette.button.hover.backgroundColor,
       color: theme.palette.button.hover.color
-    },
-    '&:disabled': {
-      background: '#999999',
-      color: '#C2C2C2'
     },
     '@media (max-width: 950px)': {
       marginTop: '0',

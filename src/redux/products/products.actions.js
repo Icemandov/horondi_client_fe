@@ -1,7 +1,9 @@
 import {
   SET_PRODUCT,
   GET_PRODUCT,
-  SET_PRODUCTS_LOADING
+  SET_PRODUCTS_LOADING,
+  SET_RATE,
+  CHANGE_RATE
 } from './products.types';
 
 const setProduct = (item) => ({
@@ -19,4 +21,14 @@ const setProductsLoading = (loading) => ({
   payload: loading
 });
 
-export { setProduct, getProduct, setProductsLoading };
+const setRate = (rate) => ({
+  type: SET_RATE,
+  payload: rate
+});
+
+const changeRate = (payload) => ({
+  type: CHANGE_RATE,
+  payload
+});
+
+export { setProduct, getProduct, setProductsLoading, setRate, changeRate };

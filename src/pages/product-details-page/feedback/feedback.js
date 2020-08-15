@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Rating from '@material-ui/lab/Rating';
 import TextField from '@material-ui/core/TextField';
+import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import useStyles from './feedback.styles';
 
+import { changeRate } from '../../../redux/products/products.actions';
 import FeedbackItem from './feedback-item';
 
 import {
@@ -16,11 +18,32 @@ import {
 } from '../../../configs';
 import { FEEDBACK } from '../../../translations/product-details.translations';
 
-const Feedback = ({ language, comments, productId }) => {
+const Feedback = ({ language, comments, productId, userRates }) => {
   const styles = useStyles();
-  const { userData } = useSelector(({ User }) => ({
-    userData: User.userData
-  }));
+  const dispatch = useDispatch();
+  // const { userData } = useSelector(({ User }) => ({
+  //   userData: User.userData
+  // }));
+  const userData = null;
+  // {
+  //   _id:'02db86e74520d8d8f7947305',
+  //   purchasedProduct: [
+  //     "90d5c6dc0663662f949d3fbb"
+  //   ]
+  // }
+  const { link, script } = formRegExp;
+  const { purchasedProduct, _id } = userData || {};
+  const hasRate = userData
+    ? userRates.some(({ user }) => user._id === _id)
+    : null;
+  const hasBought = purchasedProduct
+    ? purchasedProduct.some((product) => product === productId)
+    : null;
+  const rateTip = !_id
+    ? FEEDBACK[language].unregisteredTip
+    : !hasBought
+      ? FEEDBACK[language].registeredTip
+      : FEEDBACK[language].successfulTip;
 
   const [firstNameValidated, setFirstNameValidated] = useState(false);
   const [emailValidated, setEmailValidated] = useState(false);
@@ -32,11 +55,11 @@ const Feedback = ({ language, comments, productId }) => {
 
   useEffect(() => {
     setFeedback(
-      userData
-        ? { user: userData._id, product: productId }
+      _id
+        ? { user: _id, product: productId }
         : { ...FEEDBACK_DATA, product: productId }
     );
-  }, [userData, productId]);
+  }, [_id, productId]);
 
   useEffect(() => {
     if (userData && textValidated) {
@@ -52,16 +75,14 @@ const Feedback = ({ language, comments, productId }) => {
 
   const handleChange = (event, setValid, regExp) => {
     const { value, name } = event.target;
-    const noscriptText = value.replace(formRegExp.script, '');
+    const noscriptText = value.replace(script, '');
     const filteredText =
-      name === TEXT
-        ? noscriptText.replace(formRegExp.link, '***')
-        : noscriptText;
+      name === TEXT ? noscriptText.replace(link, '') : noscriptText;
 
     setFeedback({ ...feedback, [name]: filteredText });
 
     if (filteredText.match(regExp)) {
-      setValid(true);
+      filteredText.trim().length >= 2 ? setValid(true) : setValid(false);
     } else {
       setValid(false);
     }
@@ -69,9 +90,17 @@ const Feedback = ({ language, comments, productId }) => {
 
   const handleFeedback = () => {
     setShouldValidate(true);
-
     if (allFieldsValidated) {
-      console.log('add feedback', feedback);
+      if (rate > 0) {
+        dispatch(
+          changeRate({
+            product: productId,
+            user: _id,
+            rate,
+            method: hasRate ? 'updateRate' : 'addRate'
+          })
+        );
+      }
 
       setFeedback({ ...FEEDBACK_DATA, product: productId });
       setShouldValidate(false);
@@ -122,18 +151,17 @@ const Feedback = ({ language, comments, productId }) => {
       type: TEXT,
       regExp: formRegExp.text,
       multiline: true,
-      rows: 10
+      rows: 7
     }
   };
 
   const feedbacks = comments
     ? comments
       .sort((a, b) => b.date - a.date)
-      .map(({ text, date, user: { firstName } }) => (
+      .map(({ text, date }) => (
         <FeedbackItem
           key={date}
           language={language}
-          name={firstName}
           text={text}
           date={date}
         />
@@ -143,16 +171,19 @@ const Feedback = ({ language, comments, productId }) => {
   return (
     <div className={styles.feedback}>
       <h2>{FEEDBACK[language].title}</h2>
-      <Rating
-        name='simple-controlled'
-        value={rate}
-        onChange={(e, newRate) => setRate(newRate)}
-      />
+      <Tooltip title={rateTip} placement='right'>
+        <span className={styles.rate}>
+          <Rating
+            disabled={!hasBought}
+            name='simple-controlled'
+            value={rate}
+            onChange={(e, newRate) => setRate(newRate)}
+          />
+        </span>
+      </Tooltip>
       <form>
         <div className={styles.form}>
-          {Object.values(
-            userFields
-          ).map(
+          {Object.values(userFields).map(
             ({
               inputName,
               errorMessage,
@@ -166,25 +197,28 @@ const Feedback = ({ language, comments, productId }) => {
               show = true
             }) =>
               show ? (
-                <TextField
-                  required
-                  className={`${
-                    inputName === TEXT ? styles.text : styles.input
-                  }`}
-                  key={FEEDBACK[language][inputName]}
-                  label={FEEDBACK[language][inputName]}
-                  variant='outlined'
-                  name={inputName}
-                  error={!validation.value && shouldValidate}
-                  helperText={
-                    !validation.value && shouldValidate ? `${errorMessage}` : ''
-                  }
-                  onChange={(e) => onChange(e, validation.setValid, regExp)}
-                  value={value}
-                  type={type}
-                  multiline={multiline}
-                  rows={rows}
-                />
+                <div key={FEEDBACK[language][inputName]}>
+                  <TextField
+                    required
+                    className={`${
+                      inputName === TEXT ? styles.text : styles.input
+                    }`}
+                    label={FEEDBACK[language][inputName]}
+                    variant='outlined'
+                    name={inputName}
+                    error={!validation.value && shouldValidate}
+                    helperText={
+                      !validation.value && shouldValidate
+                        ? `${errorMessage}`
+                        : ''
+                    }
+                    onChange={(e) => onChange(e, validation.setValid, regExp)}
+                    value={value}
+                    type={type}
+                    multiline={multiline}
+                    rows={rows}
+                  />
+                </div>
               ) : null
           )}
         </div>

@@ -41,6 +41,7 @@ const ProductDetails = ({ match }) => {
     name,
     basePrice,
     rate,
+    userRates,
     images,
     options,
     description,
@@ -66,7 +67,7 @@ const ProductDetails = ({ match }) => {
 
   useEffect(() => {
     if (product !== null) {
-      setPrice(basePrice);
+      setPrice(basePrice[0].value);
       setDimensions({ volumeInLiters, weightInKg });
     }
 
@@ -197,7 +198,7 @@ const ProductDetails = ({ match }) => {
     );
 
     setSize(textContent);
-    setPrice((price) => price - oldPrice + additionalPrice);
+    setPrice((price) => price - oldPrice + additionalPrice[0].value);
     setDimensions({ volumeInLiters, weightInKg });
 
     if (error) {
@@ -260,7 +261,12 @@ const ProductDetails = ({ match }) => {
         product={product}
         category={category}
       />
-      <Feedback language={language} comments={comments} productId={_id} />
+      <Feedback
+        language={language}
+        comments={comments}
+        userRates={userRates}
+        productId={_id}
+      />
     </Card>
   );
 };

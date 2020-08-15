@@ -15,14 +15,21 @@ export const FEEDBACK = {
     firstName: `Ім'я`,
     email: 'Електронна адреса',
     text: 'Поділіться своїми враженнями з іншими',
-    submit: 'Залишити відгук'
+    submit: 'Залишити відгук',
+    unregisteredTip:
+      'Вам потрібно увійти і купити продукт, щоб залишити рейтинг',
+    registeredTip: 'Вам потрібно купити продукт, щоб залишити рейтинг',
+    successfulTip: 'Встановити рейтинг'
   },
   1: {
     title: 'Feedback',
     firstName: 'First name',
     email: 'Email',
     text: 'Share your thoughts with others',
-    submit: 'Leave feedback'
+    submit: 'Leave feedback',
+    unregisteredTip: 'You should login and bought the product to leave rate',
+    registeredTip: 'You should bought the product to leave rate',
+    successfulTip: 'Set rate'
   }
 };
 

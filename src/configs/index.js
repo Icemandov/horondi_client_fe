@@ -112,7 +112,7 @@ export const errorMessages = [
       email: 'Некоректний формат ',
       password: 'Від 6 до 30 символів з однією літерою та цифрою',
       confirmPassword: 'Паролі не співпадають',
-      text: 'Від 3 до 500 символів'
+      text: 'Поле повинно містити від 2 до 500 символів'
     }
   },
   {
@@ -123,7 +123,7 @@ export const errorMessages = [
       email: `Wrong email address `,
       password: 'From 6 to 30 characters with one letter and one digit',
       confirmPassword: 'Passwords do not match',
-      text: 'From 3 to 500 characters'
+      text: 'Field should contain from 2 to 500 characters'
     }
   }
 ];
@@ -140,7 +140,7 @@ export const formRegExp = {
   buildingNum: '^[a-zA-Z0-9_.-]*$',
   deliveryType: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-  text: /^.{3,500}$/g,
+  text: /^.{2,700}$/gm,
   link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim,
   script: /(script)/g
 };

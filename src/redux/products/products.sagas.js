@@ -1,9 +1,9 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import { setProductsLoading, setProduct } from './products.actions';
+import { setProductsLoading, setProduct, setRate } from './products.actions';
 import { setError } from '../error/error.actions';
-import getItems from '../../utils/client';
-import { GET_PRODUCT } from './products.types';
+import getItems, { setItems } from '../../utils/client';
+import { GET_PRODUCT, CHANGE_RATE } from './products.types';
 
 export function* handleProductLoading({ payload }) {
   yield put(setProductsLoading(true));
@@ -66,7 +66,10 @@ export function* handleProductLoading({ payload }) {
       lang
       value
     }
-    basePrice
+    basePrice {
+      value
+      currency
+    }
     options {
       size {
         name
@@ -75,14 +78,20 @@ export function* handleProductLoading({ payload }) {
         depthInCm
         volumeInLiters
         available
-        additionalPrice
+        additionalPrice {
+          value
+          currency
+        }
       }
       bottomMaterial {
         name {
           lang
           value
         }
-        additionalPrice
+        additionalPrice {
+          value
+          currency
+        }
       }
       additions {
         name {
@@ -90,16 +99,21 @@ export function* handleProductLoading({ payload }) {
     			value
         }
         available
-        additionalPrice
+        additionalPrice {
+          value
+          currency
+        }
       }
     }
     rate
+    userRates {
+      user {
+        _id
+      }
+    }
     comments {
       text
       date
-      user {
-        name
-      }
     }
     options {
       size {
@@ -114,7 +128,10 @@ export function* handleProductLoading({ payload }) {
           value
         }
     	available
-        additionalPrice
+        additionalPrice {
+          value
+          currency
+        }
       }
       additions {
         name {
@@ -122,7 +139,10 @@ export function* handleProductLoading({ payload }) {
           lang
         }
         available
-        additionalPrice
+        additionalPrice {
+          value
+          currency
+        }
       }
       availableCount
     }
@@ -141,7 +161,6 @@ export function* handleProductLoading({ payload }) {
 }`;
   try {
     const product = yield call(getItems, query);
-    console.log(product.data.getProductById);
     yield put(setProduct(product.data.getProductById));
     yield put(setProductsLoading(false));
   } catch (e) {
@@ -151,6 +170,34 @@ export function* handleProductLoading({ payload }) {
   }
 }
 
+export function* handleRateChanging({ payload }) {
+  const mutation = `
+  mutation($product: ID!, $user: ID!, $rate: Int) {
+    ${payload.method}(product: $product, userRate: {user: $user,rate: $rate}) {
+      rate
+      userRates {
+        user {
+          _id
+        }
+      }
+    }
+  }
+  `;
+  const variables = {
+    product: payload.product,
+    user: payload.user,
+    rate: payload.rate
+  };
+  try {
+    const rate = yield call(setItems, mutation, variables);
+    yield put(setRate(rate.data[payload.method]));
+  } catch (e) {
+    yield put(setError({ e }));
+    yield put(push('/error-page'));
+  }
+}
+
 export default function* productsSaga() {
   yield takeEvery(GET_PRODUCT, handleProductLoading);
+  yield takeEvery(CHANGE_RATE, handleRateChanging);
 }
