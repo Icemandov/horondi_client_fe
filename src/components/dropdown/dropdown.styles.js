@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  rootLanguage: {
+  rootItem: {
     '& div': {
       padding: '0 !important'
     },
