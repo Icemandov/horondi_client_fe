@@ -52,23 +52,29 @@ const Contacts = () => {
   };
 
   return contacts.map((contact) => (
-    <div key={contact._id} className={styles.wrapper}>
-      <h2 className={styles.contactsTitle}>
+    <div key={contact._id} className={styles.wrapper} data-cy='wrapper'>
+      <h2 className={styles.contactsTitle} data-cy='title'>
         {CONTACTS_PAGE_TITLES[language].title}
       </h2>
       <div className={styles.content}>
         <div className={styles.mapContainer}>
-          <a target='_blank' rel='noopener noreferrer' href={contact.link}>
+          <a
+            target='_blank'
+            rel='noopener noreferrer'
+            href={contact.link}
+            data-cy='mapLink'
+          >
             <img
               className={styles.mapImage}
               src={mapImg}
               alt={CONTACTS_PAGE_TITLES[language].location}
+              data-cy='image'
             />
           </a>
         </div>
-        <div className={styles.contacts}>
+        <div className={styles.contacts} data-cy='contacts'>
           <div className={styles.contactsItem}>
-            <span className={styles.contactName}>
+            <span className={styles.contactName} data-cy='phone'>
               {CONTACTS_PAGE_TITLES[language].phone}
             </span>
             <span className={styles.contactsDetails}>
@@ -89,7 +95,7 @@ const Contacts = () => {
             <span className={styles.contactName}>
               {CONTACTS_PAGE_TITLES[language].address}
             </span>
-            <span className={styles.contactsDetails}>
+            <span className={styles.contactsDetails} data-cy='address'>
               {getAddress(language, contact)}
             </span>
           </div>
@@ -102,7 +108,9 @@ const Contacts = () => {
             </span>
           </div>
           <div className={styles.contactsItem}>
-            <span className={styles.contactName}>Email:</span>
+            <span className={styles.contactName} data-cy='email'>
+              Email:
+            </span>
             <span className={styles.contactsDetails}>{contact.email}</span>
           </div>
         </div>

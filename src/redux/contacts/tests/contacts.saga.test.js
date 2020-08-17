@@ -11,7 +11,7 @@ describe('Should get contacts saga', () => {
   it('Should fetches contacts', () => {
     const contactsMock = {
       data: {
-        getAllcontacts: {
+        getContacts: {
           contacts: [
             {
               phoneNumber: '380123123123',
@@ -67,7 +67,7 @@ describe('Should get contacts saga', () => {
     return expectSaga(handleContactsLoad)
       .provide([[matchers.call.fn(getItems), contactsMock]])
       .put(setLoading(true))
-      .put(setContacts(contactsMock.data.getAllcontacts))
+      .put(setContacts(contactsMock.data.getContacts))
       .put(setLoading(false))
       .run();
   });

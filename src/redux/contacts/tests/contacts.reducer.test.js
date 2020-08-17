@@ -76,8 +76,7 @@ describe('Contacts reducer test', () => {
   it('should return state with contacts', () => {
     const state = {
       loading: true,
-      list: contactsMock,
-      activeArticle: null
+      list: contactsMock
     };
 
     expect(contactsReducer(state, getContacts())).toEqual(state);
@@ -86,10 +85,10 @@ describe('Contacts reducer test', () => {
   it('Should enable loading', () => {
     const state = {
       ...initialState,
-      loading: false
+      loading: true
     };
 
-    expect(contactsReducer(initialState, setLoading(false))).toEqual(state);
+    expect(contactsReducer(initialState, setLoading(true))).toEqual(state);
   });
 
   it('Should disable loading', () => {
@@ -98,6 +97,6 @@ describe('Contacts reducer test', () => {
       loading: false
     };
 
-    expect(contactsReducer(initialState, setLoading(true))).toEqual(state);
+    expect(contactsReducer(initialState, setLoading(false))).toEqual(state);
   });
 });
