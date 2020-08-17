@@ -22,7 +22,7 @@ describe('contacts test', () => {
   // });
 
   it('Click to new tab with map', () => {
-    cy.get('.mapContainer > a').should('exist').and('be.visible').click();
+    cy.get('[data-cy="mapAnchor"]').should('exist').and('be.visible').click();
     cy.window().its('open').should('be.called');
   });
 });
