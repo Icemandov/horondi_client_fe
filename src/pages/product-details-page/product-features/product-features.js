@@ -47,9 +47,9 @@ const ProductFeatures = ({
 
   const handlePocketChange = (event) => {
     if (!sidePocket) {
-      setPrice((currentPrice) => currentPrice + additionalPrice[0].value);
+      setPrice((currentPrice) => currentPrice + additionalPrice);
     } else {
-      setPrice((currentPrice) => currentPrice - additionalPrice[0].value);
+      setPrice((currentPrice) => currentPrice - additionalPrice);
     }
     setSidePocket(event.target.checked);
   };
@@ -58,7 +58,7 @@ const ProductFeatures = ({
     ? bottomMaterials.map(({ name, additionalPrice }) => (
       <MenuItem value={name[1].value} key={name[1].value}>
         {name[language].value}
-        {additionalPrice[0].value ? (
+        {additionalPrice ? (
           <span className={styles.selectPrice}>
             {setAdditionalPrice(additionalPrice)}
           </span>
@@ -105,7 +105,7 @@ const ProductFeatures = ({
             label={name[language].value}
           />
           <span className={styles.price}>
-            {setAdditionalPrice(additionalPrice[0].value)}
+            {setAdditionalPrice(additionalPrice)}
           </span>
         </div>
       ) : null}

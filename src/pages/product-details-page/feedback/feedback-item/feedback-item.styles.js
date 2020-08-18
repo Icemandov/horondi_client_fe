@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => {
     text: {
       flexGrow: 1,
       marginRight: '10px',
-      marginTop: '12px'
+      marginTop: '20px'
     },
     button: {
       textTransform: 'none',
@@ -70,12 +70,18 @@ const useStyles = makeStyles((theme) => {
       height: '60px'
     },
     name: {
-      marginTop: '35px',
-      marginLeft: '15px',
-      justifySelf: 'flex-end'
+      marginTop: '10px',
+      fontSize: '1rem',
+      fontWeight: '700'
     },
     icons: {
       height: '30px'
+    },
+    userInfo: {
+      display: 'flex',
+      flexDirection: 'column',
+      marginTop: '10px',
+      marginLeft: '15px'
     }
   };
 });

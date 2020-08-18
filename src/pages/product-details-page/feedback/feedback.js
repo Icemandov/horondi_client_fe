@@ -7,7 +7,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import useStyles from './feedback.styles';
 
-import { changeRate } from '../../../redux/products/products.actions';
+import {
+  addComment,
+  changeRate
+} from '../../../redux/products/products.actions';
 import FeedbackItem from './feedback-item';
 
 import {
@@ -17,20 +20,26 @@ import {
   errorMessages
 } from '../../../configs';
 import { FEEDBACK } from '../../../translations/product-details.translations';
+import { Loader } from '../../../components/loader/loader';
 
-const Feedback = ({ language, comments, productId, userRates }) => {
+const Feedback = ({ language, comments, productId }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  // const { userData } = useSelector(({ User }) => ({
-  //   userData: User.userData
-  // }));
-  const userData = null;
-  // {
-  //   _id:'02db86e74520d8d8f7947305',
-  //   purchasedProduct: [
-  //     "90d5c6dc0663662f949d3fbb"
-  //   ]
-  // }
+  const { commentsLoading, updatingComment } = useSelector(({ Products }) => ({
+    commentsLoading: Products.commentsLoading
+  }));
+  const userData = {
+    _id: '02db86e74520d8d8f7947305',
+    purchasedProduct: ['90d5c6dc0663662f949d3fbb'],
+    email: 'vas.mytro@gmail.com'
+  };
+  const userRates = [
+    {
+      user: {
+        _id: '02db86e74520d8d8f7947305'
+      }
+    }
+  ];
   const { link, script } = formRegExp;
   const { purchasedProduct, _id } = userData || {};
   const hasRate = userData
@@ -56,7 +65,12 @@ const Feedback = ({ language, comments, productId, userRates }) => {
   useEffect(() => {
     setFeedback(
       _id
-        ? { user: _id, product: productId }
+        ? {
+          ...FEEDBACK_DATA,
+          user: _id,
+          product: productId,
+          email: userData.email
+        }
         : { ...FEEDBACK_DATA, product: productId }
     );
   }, [_id, productId]);
@@ -81,7 +95,7 @@ const Feedback = ({ language, comments, productId, userRates }) => {
 
     setFeedback({ ...feedback, [name]: noLinkText });
 
-    if (noLinkText.match(regExp) && noLinkText.length >= 2) {
+    if (noLinkText.match(regExp) && noLinkText.trim().length >= 2) {
       setValid(true);
     } else {
       setValid(false);
@@ -102,6 +116,7 @@ const Feedback = ({ language, comments, productId, userRates }) => {
         );
       }
 
+      dispatch(addComment({ ...feedback, text: text.trim() }));
       setFeedback({ ...FEEDBACK_DATA, product: productId });
       setShouldValidate(false);
       setAllFieldsValidated(false);
@@ -158,12 +173,16 @@ const Feedback = ({ language, comments, productId, userRates }) => {
   const feedbacks = comments
     ? comments
       .sort((a, b) => b.date - a.date)
-      .map(({ text, date }) => (
+      .map(({ text, date, _id }) => (
         <FeedbackItem
-          key={date}
+          userRates={userRates}
+          key={_id}
+          commentId={_id}
           language={language}
           text={text}
           date={date}
+          productId={productId}
+          userEmail={userData.email}
         />
       ))
     : null;
@@ -227,7 +246,7 @@ const Feedback = ({ language, comments, productId, userRates }) => {
         </Button>
       </form>
       <hr />
-      {feedbacks}
+      {commentsLoading ? <Loader /> : feedbacks}
     </div>
   );
 };

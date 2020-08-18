@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 
+import Tooltip from '@material-ui/core/Tooltip';
+import Rating from '@material-ui/lab/Rating';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import Avatar from '@material-ui/core/Avatar';
-import Tooltip from '@material-ui/core/Tooltip';
 import useStyles from './feedback-item.styles';
 
+import { Loader } from '../../../../components/loader/loader';
 import EditableField from './editable-field';
 import FeedbackDialog from './dialog';
 
@@ -16,9 +18,18 @@ import {
   DATE_LANGUAGE_OPTIONS
 } from '../../../../configs';
 
-const FeedbackItem = ({ name, text, date, language }) => {
+const FeedbackItem = ({
+  name,
+  text,
+  date,
+  language,
+  commentId,
+  productId,
+  userEmail
+}) => {
   const styles = useStyles();
 
+  const [rate, setRate] = useState(0);
   const [isEditable, setEditable] = useState(false);
   const [modal, setModal] = useState(false);
 
@@ -29,7 +40,7 @@ const FeedbackItem = ({ name, text, date, language }) => {
     COMMENTS_TIME_OPTIONS
   );
 
-  const handleClickOpen = () => {
+  const handleOpen = () => {
     setModal(true);
   };
 
@@ -44,7 +55,15 @@ const FeedbackItem = ({ name, text, date, language }) => {
           <div>
             <div className={styles.user}>
               <Avatar alt='Dimas' src={avatar} className={styles.avatar} />
-              <h3 className={styles.name}>Dimass</h3>
+              <div className={styles.userInfo}>
+                <Rating
+                  size='small'
+                  name='simple-controlled'
+                  value={rate}
+                  onChange={(e, newRate) => setRate(newRate)}
+                />
+                <span className={styles.name}>Dimass</span>
+              </div>
             </div>
           </div>
           <div className={styles.icons}>
@@ -60,7 +79,7 @@ const FeedbackItem = ({ name, text, date, language }) => {
                   <Tooltip title='Delete'>
                     <DeleteForeverIcon
                       className={styles.deleteIcon}
-                      onClick={handleClickOpen}
+                      onClick={handleOpen}
                     />
                   </Tooltip>
                 </div>
@@ -72,8 +91,11 @@ const FeedbackItem = ({ name, text, date, language }) => {
           <EditableField
             setEditable={setEditable}
             text={text}
-            handleClickOpen={handleClickOpen}
+            handleOpen={handleOpen}
             language={language}
+            commentId={commentId}
+            productId={productId}
+            userEmail={userEmail}
           />
         ) : (
           <div className={styles.text}>{text}</div>
@@ -81,7 +103,12 @@ const FeedbackItem = ({ name, text, date, language }) => {
         <div className={styles.date}>{commentDate}</div>
       </div>
       <hr />
-      <FeedbackDialog handleClose={handleClose} modal={modal} />
+      <FeedbackDialog
+        handleClose={handleClose}
+        modal={modal}
+        commentId={commentId}
+        productId={productId}
+      />
     </div>
   );
 };

@@ -11,19 +11,25 @@ const client = new ApolloClient({
   fetch
 });
 
-const getItems = (query) =>
-  client.query({
+const getItems = async (query) => {
+  const result = await client.query({
     query: gql`
       ${query}
     `
   });
+  await client.resetStore();
+  return result;
+};
 
-export const setItems = (query, variables) =>
-  client.mutate({
+export const setItems = async (query, variables) => {
+  const result = await client.mutate({
     mutation: gql`
       ${query}
     `,
     variables
   });
+  await client.resetStore();
+  return result;
+};
 
 export default getItems;

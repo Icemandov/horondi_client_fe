@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -7,10 +8,22 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import useStyles from './editable-field.styles';
 
 import { errorMessages, formRegExp } from '../../../../../configs';
+import { updateComment } from '../../../../../redux/products/products.actions';
+import { Loader } from '../../../../../components/loader/loader';
 
-const EditableField = ({ setEditable, text, language, handleClickOpen }) => {
+const EditableField = ({
+  setEditable,
+  text,
+  language,
+  handleOpen,
+  productId,
+  commentId,
+  userEmail
+}) => {
   const styles = useStyles();
+  const dispatch = useDispatch();
   const { script, link } = formRegExp;
+
   const [editableText, setEditableText] = useState(text);
   const [textValidated, setTextValidated] = useState(true);
   const [shouldValidate, setShouldValidate] = useState(false);
@@ -32,7 +45,15 @@ const EditableField = ({ setEditable, text, language, handleClickOpen }) => {
   const handleSubmit = () => {
     setShouldValidate(true);
     if (textValidated) {
-      console.log(editableText.trim());
+      dispatch(
+        updateComment({
+          show: true,
+          product: productId,
+          comment: commentId,
+          text: editableText.trim(),
+          email: userEmail
+        })
+      );
       setEditable(false);
     }
   };
@@ -68,7 +89,7 @@ const EditableField = ({ setEditable, text, language, handleClickOpen }) => {
         <Tooltip title='Delete' placement='right'>
           <DeleteForeverIcon
             className={styles.deleteIcon}
-            onClick={handleClickOpen}
+            onClick={handleOpen}
           />
         </Tooltip>
       </div>

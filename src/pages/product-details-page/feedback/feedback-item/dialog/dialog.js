@@ -6,10 +6,22 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
+import { useDispatch } from 'react-redux';
 import useStyles from './dialog.styles';
+import { deleteComment } from '../../../../../redux/products/products.actions';
 
-const FeedbackDialog = ({ modal, handleClose }) => {
+const FeedbackDialog = ({ modal, handleClose, commentId, productId }) => {
   const styles = useStyles();
+  const dispatch = useDispatch();
+  const handleDelete = () => {
+    dispatch(
+      deleteComment({
+        product: productId,
+        comment: commentId
+      })
+    );
+    handleClose();
+  };
 
   return (
     <div>
@@ -25,7 +37,7 @@ const FeedbackDialog = ({ modal, handleClose }) => {
           <Button onClick={handleClose} className={styles.button}>
             Cancel
           </Button>
-          <Button onClick={handleClose} className={styles.button}>
+          <Button onClick={handleDelete} className={styles.button}>
             Submit
           </Button>
         </DialogActions>

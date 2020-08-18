@@ -62,7 +62,7 @@ const ProductSubmit = ({ checkSize, language, productToSend, product }) => {
 
   return (
     <div className={styles.submit}>
-      <Tooltip title='Add to wishlist' placement='left'>
+      <Tooltip title='Add to wishlist' placement='bottom'>
         <FavoriteIcon
           data-cy='wishful'
           className={isWishful ? styles.redHeart : styles.heart}

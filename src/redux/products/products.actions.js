@@ -3,7 +3,13 @@ import {
   GET_PRODUCT,
   SET_PRODUCTS_LOADING,
   SET_RATE,
-  CHANGE_RATE
+  CHANGE_RATE,
+  ADD_COMMENT,
+  DELETE_COMMENT,
+  UPDATE_COMMENT,
+  SET_COMMENT,
+  SET_COMMENTS_LOADING,
+  SET_UPDATING_COMMENT
 } from './products.types';
 
 const setProduct = (item) => ({
@@ -31,4 +37,46 @@ const changeRate = (payload) => ({
   payload
 });
 
-export { setProduct, getProduct, setProductsLoading, setRate, changeRate };
+const addComment = (payload) => ({
+  type: ADD_COMMENT,
+  payload
+});
+
+const updateComment = (payload) => ({
+  type: UPDATE_COMMENT,
+  payload
+});
+
+const deleteComment = (payload) => ({
+  type: DELETE_COMMENT,
+  payload
+});
+
+const setComment = (payload) => ({
+  type: SET_COMMENT,
+  payload
+});
+
+const setCommentsLoading = (payload) => ({
+  type: SET_COMMENTS_LOADING,
+  payload
+});
+
+const setUpdatingComment = (payload) => ({
+  type: SET_UPDATING_COMMENT,
+  payload
+});
+
+export {
+  setProduct,
+  getProduct,
+  setProductsLoading,
+  setRate,
+  changeRate,
+  addComment,
+  deleteComment,
+  updateComment,
+  setComment,
+  setCommentsLoading,
+  setUpdatingComment
+};

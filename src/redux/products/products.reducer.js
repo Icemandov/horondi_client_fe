@@ -2,13 +2,17 @@ import {
   SET_PRODUCT,
   SET_PRODUCTS_LOADING,
   SET_RATE,
-  SET_COMMENT
+  SET_COMMENT,
+  SET_UPDATING_COMMENT,
+  SET_COMMENTS_LOADING
 } from './products.types';
 
 const initialState = {
   product: null,
   products: [],
-  loading: true
+  loading: true,
+  commentsLoading: false,
+  updatingComment: false
 };
 
 const productsReducer = (state = initialState, action) => {
@@ -37,8 +41,18 @@ const productsReducer = (state = initialState, action) => {
       ...state,
       product: {
         ...state.product,
-        comments: action.payload.comments
+        comments: action.payload
       }
+    };
+  case SET_COMMENTS_LOADING:
+    return {
+      ...state,
+      commentsLoading: action.payload
+    };
+  case SET_UPDATING_COMMENT:
+    return {
+      ...state,
+      updatingComment: action.payload
     };
   default:
     return state;

@@ -252,7 +252,7 @@ export const FEEDBACK_DATA = {
   firstName: '',
   text: '',
   product: '',
-  show: false,
+  show: true,
   email: ''
 };
 

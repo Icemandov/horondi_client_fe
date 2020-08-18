@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   editableText: {
-    marginTop: '10px',
+    marginTop: '20px',
     width: '70vw',
     '@media (max-width: 950px)': {
       width: '63vw'
