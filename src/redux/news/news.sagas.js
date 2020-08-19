@@ -12,31 +12,32 @@ export function* handleNewsLoad() {
       getItems,
       `query{
          getAllNews{
-           _id
-           title {
-             value
-           }
-           author{
-             name{
-             value
-             }
-             image{
-             small
-                  }
+          items{
+            _id
+            title {
+              value
+            }
+            author{
+              name{
+              value
+              }
+              image{
+              small
+                   }
+                 }
+                 text{
+                   value
+                 }
+                 date
+                 images{
+                   primary{
+                     medium
+                   }
+                   additional{
+                     medium
+                   }
+                 }
                 }
-                text{
-                  value
-                }
-                date
-                images{
-                  primary{
-                    medium
-                  }
-                  additional{
-                    medium
-                  }
-                }
-                video
                }
              }`
     );
@@ -71,7 +72,6 @@ export function* handleArticleLoad({ payload }) {
                 medium
               }
             }
-            video
             author{
               name{
                 value
