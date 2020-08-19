@@ -12,7 +12,7 @@ const initialState = {
   products: [],
   loading: true,
   commentsLoading: false,
-  updatingComment: false
+  updatingComment: null
 };
 
 const productsReducer = (state = initialState, action) => {

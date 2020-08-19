@@ -2,9 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 
+import Tooltip from '@material-ui/core/Tooltip';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
-import Tooltip from '@material-ui/core/Tooltip';
 import useStyles from './product-submit.styles';
 
 import {
@@ -18,7 +18,10 @@ import {
 } from '../../../redux/wishlist/wishlist.actions';
 
 import { setItemToCart } from '../../../redux/cart/cart.actions';
-import { PDP_BUTTONS } from '../../../translations/product-details.translations';
+import {
+  PDP_BUTTONS,
+  TOOLTIPS
+} from '../../../translations/product-details.translations';
 
 const ProductSubmit = ({ checkSize, language, productToSend, product }) => {
   const styles = useStyles();
@@ -29,6 +32,10 @@ const ProductSubmit = ({ checkSize, language, productToSend, product }) => {
   const isWishful = wishlistItems
     ? wishlistItems.find((item) => product._id === item._id)
     : false;
+
+  const wishlistTip = isWishful
+    ? TOOLTIPS[language].removeWishful
+    : TOOLTIPS[language].addWishful;
 
   const onWishfulHandler = () => {
     if (isWishful) {
@@ -62,7 +69,7 @@ const ProductSubmit = ({ checkSize, language, productToSend, product }) => {
 
   return (
     <div className={styles.submit}>
-      <Tooltip title='Add to wishlist' placement='bottom'>
+      <Tooltip title={wishlistTip} placement='bottom'>
         <FavoriteIcon
           data-cy='wishful'
           className={isWishful ? styles.redHeart : styles.heart}

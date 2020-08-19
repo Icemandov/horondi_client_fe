@@ -70,18 +70,22 @@ const useStyles = makeStyles((theme) => {
       height: '60px'
     },
     name: {
-      marginTop: '10px',
+      marginTop: '30px',
+      marginLeft: '15px',
       fontSize: '1rem',
       fontWeight: '700'
     },
     icons: {
       height: '30px'
     },
-    userInfo: {
-      display: 'flex',
-      flexDirection: 'column',
-      marginTop: '10px',
-      marginLeft: '15px'
+    loader: {
+      marginTop: '45px'
+    },
+    line: {
+      marginTop: '45px'
+    },
+    clear: {
+      marginTop: '15px'
     }
   };
 });

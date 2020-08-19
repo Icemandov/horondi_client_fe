@@ -5,13 +5,12 @@ import Rating from '@material-ui/lab/Rating';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
+import useValidation from '../../../utils/use-validation';
 import useStyles from './feedback.styles';
 
-import {
-  addComment,
-  changeRate
-} from '../../../redux/products/products.actions';
+import { addComment } from '../../../redux/products/products.actions';
 import FeedbackItem from './feedback-item';
+import { Loader } from '../../../components/loader/loader';
 
 import {
   FEEDBACK_DATA,
@@ -20,60 +19,69 @@ import {
   errorMessages
 } from '../../../configs';
 import { FEEDBACK } from '../../../translations/product-details.translations';
-import { Loader } from '../../../components/loader/loader';
 
-const Feedback = ({ language, comments, productId }) => {
+const Feedback = ({ language, comments, productId, userRates }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { commentsLoading, updatingComment } = useSelector(({ Products }) => ({
+
+  const { commentsLoading } = useSelector(({ Products }) => ({
     commentsLoading: Products.commentsLoading
   }));
+
+  const {
+    firstNameValidated,
+    emailValidated,
+    textValidated,
+    allFieldsValidated,
+    shouldValidate,
+    feedback,
+    setFirstNameValidated,
+    setEmailValidated,
+    setTextValidated,
+    setAllFieldsValidated,
+    setShouldValidate,
+    setFeedback
+  } = useValidation();
+
+  const [rate, setRate] = useState(0);
+
   const userData = {
-    _id: '02db86e74520d8d8f7947305',
-    purchasedProduct: ['90d5c6dc0663662f949d3fbb'],
-    email: 'vas.mytro@gmail.com'
+    _id: '9c031d62a3c4909b216e1d86',
+    purchasedProduct: ['018a5631de33999e751dbd52'],
+    email: 'poqj7ln40w@gmail.com',
+    firstName: 'Макарій'
   };
-  const userRates = [
-    {
-      user: {
-        _id: '02db86e74520d8d8f7947305'
-      }
-    }
-  ];
+
   const { link, script } = formRegExp;
   const { purchasedProduct, _id } = userData || {};
-  const hasRate = userData
+
+  const hasRate = userRates
     ? userRates.some(({ user }) => user._id === _id)
     : null;
+
   const hasBought = purchasedProduct
     ? purchasedProduct.some((product) => product === productId)
     : null;
+
   const rateTip = !_id
     ? FEEDBACK[language].unregisteredTip
     : !hasBought
       ? FEEDBACK[language].registeredTip
       : FEEDBACK[language].successfulTip;
 
-  const [firstNameValidated, setFirstNameValidated] = useState(false);
-  const [emailValidated, setEmailValidated] = useState(false);
-  const [textValidated, setTextValidated] = useState(false);
-  const [allFieldsValidated, setAllFieldsValidated] = useState(false);
-  const [shouldValidate, setShouldValidate] = useState(false);
-  const [feedback, setFeedback] = useState(FEEDBACK_DATA);
-  const [rate, setRate] = useState(0);
+  const commentToSend = _id
+    ? {
+      ...FEEDBACK_DATA,
+      user: _id,
+      email: userData.email,
+      firstName: userData.firstName,
+      product: productId
+    }
+    : { ...FEEDBACK_DATA, product: productId };
 
   useEffect(() => {
-    setFeedback(
-      _id
-        ? {
-          ...FEEDBACK_DATA,
-          user: _id,
-          product: productId,
-          email: userData.email
-        }
-        : { ...FEEDBACK_DATA, product: productId }
-    );
-  }, [_id, productId]);
+    setFeedback(commentToSend);
+  }, [setFeedback]);
 
   useEffect(() => {
     if (userData && textValidated) {
@@ -83,7 +91,13 @@ const Feedback = ({ language, comments, productId }) => {
     } else {
       setAllFieldsValidated(false);
     }
-  }, [firstNameValidated, emailValidated, textValidated, userData]);
+  }, [
+    firstNameValidated,
+    emailValidated,
+    textValidated,
+    setAllFieldsValidated,
+    userData
+  ]);
 
   const { firstName, email, text } = feedback;
 
@@ -105,19 +119,16 @@ const Feedback = ({ language, comments, productId }) => {
   const handleFeedback = () => {
     setShouldValidate(true);
     if (allFieldsValidated) {
-      if (rate > 0) {
-        dispatch(
-          changeRate({
-            product: productId,
-            user: _id,
-            rate,
-            method: hasRate ? 'updateRate' : 'addRate'
-          })
-        );
-      }
+      dispatch(
+        addComment({
+          ...feedback,
+          user: _id,
+          rate,
+          method: hasRate ? 'updateRate' : 'addRate'
+        })
+      );
 
-      dispatch(addComment({ ...feedback, text: text.trim() }));
-      setFeedback({ ...FEEDBACK_DATA, product: productId });
+      setFeedback(commentToSend);
       setShouldValidate(false);
       setAllFieldsValidated(false);
       setEmailValidated(false);
@@ -173,16 +184,16 @@ const Feedback = ({ language, comments, productId }) => {
   const feedbacks = comments
     ? comments
       .sort((a, b) => b.date - a.date)
-      .map(({ text, date, _id }) => (
+      .map(({ text, date, _id, user }) => (
         <FeedbackItem
-          userRates={userRates}
           key={_id}
           commentId={_id}
           language={language}
+          user={user}
           text={text}
           date={date}
           productId={productId}
-          userEmail={userData.email}
+          loggedUserEmail={email}
         />
       ))
     : null;
@@ -194,7 +205,7 @@ const Feedback = ({ language, comments, productId }) => {
         <span className={styles.rate}>
           <Rating
             disabled={!hasBought}
-            name='simple-controlled'
+            name='edit-rate'
             value={rate}
             onChange={(e, newRate) => setRate(newRate)}
           />
@@ -216,7 +227,7 @@ const Feedback = ({ language, comments, productId }) => {
               show = true
             }) =>
               show ? (
-                <div key={FEEDBACK[language][inputName]}>
+                <div key={inputName}>
                   <TextField
                     required
                     className={`${

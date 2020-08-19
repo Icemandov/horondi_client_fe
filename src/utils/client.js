@@ -6,30 +6,24 @@ export const REACT_APP_API_URL =
     ? window.env.REACT_APP_API_URL
     : process.env.REACT_APP_API_URL;
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   uri: REACT_APP_API_URL,
   fetch
 });
 
-const getItems = async (query) => {
-  const result = await client.query({
+const getItems = (query) =>
+  client.query({
     query: gql`
       ${query}
     `
   });
-  await client.resetStore();
-  return result;
-};
 
-export const setItems = async (query, variables) => {
-  const result = await client.mutate({
+export const setItems = (query, variables) =>
+  client.mutate({
     mutation: gql`
       ${query}
     `,
     variables
   });
-  await client.resetStore();
-  return result;
-};
 
 export default getItems;

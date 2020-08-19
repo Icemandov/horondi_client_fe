@@ -16,10 +16,10 @@ const ProductSizes = ({
   const styles = useStyles();
 
   const sizeButtons = sizes
-    ? sizes.map(({ name, available }) =>
+    ? sizes.map(({ name, available, _id }) =>
       available && name ? (
         <Button
-          key={name}
+          key={_id}
           className={
             name === selectedSize ? styles.selectedSize : styles.sizeButton
           }

@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import useValidation from '../../../../../utils/use-validation';
 import useStyles from './editable-field.styles';
 
 import { errorMessages, formRegExp } from '../../../../../configs';
 import { updateComment } from '../../../../../redux/products/products.actions';
-import { Loader } from '../../../../../components/loader/loader';
+
+import {
+  TOOLTIPS,
+  PDP_BUTTONS
+} from '../../../../../translations/product-details.translations';
 
 const EditableField = ({
   setEditable,
@@ -18,24 +23,35 @@ const EditableField = ({
   handleOpen,
   productId,
   commentId,
-  userEmail
+  userEmail,
+  username
 }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { script, link } = formRegExp;
+  const {
+    editableText,
+    textValidated,
+    shouldValidate,
+    setTextValidated,
+    setShouldValidate,
+    setEditableText
+  } = useValidation();
 
-  const [editableText, setEditableText] = useState(text);
-  const [textValidated, setTextValidated] = useState(true);
-  const [shouldValidate, setShouldValidate] = useState(false);
+  useEffect(() => {
+    setEditableText(text);
+    setTextValidated(true);
+  }, [setEditableText, setTextValidated, text]);
 
   const handleChange = (event) => {
     const { value } = event.target;
+    const { script, link, text } = formRegExp;
+
     const noScriptText = value.replace(script, '');
     const noLinkText = noScriptText.replace(link, '');
 
     setEditableText(noLinkText);
 
-    if (noLinkText.match(formRegExp.text) && noLinkText.trim().length >= 2) {
+    if (noLinkText.match(text) && noLinkText.trim().length >= 2) {
       setTextValidated(true);
     } else {
       setTextValidated(false);
@@ -50,10 +66,12 @@ const EditableField = ({
           show: true,
           product: productId,
           comment: commentId,
-          text: editableText.trim(),
-          email: userEmail
+          text: editableText,
+          email: userEmail,
+          firstName: username
         })
       );
+
       setEditable(false);
     }
   };
@@ -81,12 +99,12 @@ const EditableField = ({
           className={styles.editButton}
           onClick={() => setEditable(false)}
         >
-          Cancel
+          {PDP_BUTTONS[language].cancelButton}
         </Button>
         <Button className={styles.editButton} onClick={handleSubmit}>
-          Submit
+          {PDP_BUTTONS[language].submitButton}
         </Button>
-        <Tooltip title='Delete' placement='right'>
+        <Tooltip title={TOOLTIPS[language].delete} placement='right'>
           <DeleteForeverIcon
             className={styles.deleteIcon}
             onClick={handleOpen}

@@ -111,11 +111,15 @@ export const IMGS_VIEWER = {
 export const PDP_BUTTONS = {
   0: {
     cartButton: 'В кошик',
-    buyButton: 'Купити зараз'
+    buyButton: 'Купити зараз',
+    submitButton: 'Підтвердити',
+    cancelButton: 'Відхилити'
   },
   1: {
     cartButton: 'Add to cart',
-    buyButton: 'Buy now'
+    buyButton: 'Buy now',
+    submitButton: 'Submit',
+    cancelButton: 'Cancel'
   }
 };
 
@@ -152,5 +156,33 @@ export const IMG_ALT_INFO = {
   },
   1: {
     value: 'Product image'
+  }
+};
+
+export const TOOLTIPS = {
+  0: {
+    addWishful: 'Додати в бажане',
+    removeWishful: 'Видалити з бажаного',
+    edit: 'Редагувати',
+    delete: 'Видалити'
+  },
+  1: {
+    addWishful: 'Add to wishlist',
+    removeWishful: 'Remove from wishlist',
+    edit: 'Edit',
+    delete: 'Delete'
+  }
+};
+
+export const DIALOG = {
+  0: {
+    title: 'Видалити коментар?',
+    description:
+      'Ви дійсно хочете видалити коментар? Після видалення Ви не зможете його відновити.'
+  },
+  1: {
+    title: 'Delete comment?',
+    description:
+      'Are you sure you want to delete the comment? After deleting you will not be able to restore the comment.'
   }
 };

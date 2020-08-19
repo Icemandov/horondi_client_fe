@@ -9,28 +9,10 @@ import {
   SIMILAR_ITEMS,
   IMG_ALT_INFO
 } from '../../../translations/product-details.translations';
+import { responsiveCarousel } from '../../../configs';
 
 const SimilarProducts = ({ language }) => {
   const { title } = SIMILAR_ITEMS[language];
-
-  const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3
-    },
-    tablet: {
-      breakpoint: { max: 1146, min: 464 },
-      items: 2
-    },
-    mobile: {
-      breakpoint: { max: 810, min: 0 },
-      items: 1
-    }
-  };
 
   const imgs = Array(6)
     .fill(productImage)
@@ -45,7 +27,11 @@ const SimilarProducts = ({ language }) => {
         <h2>{title}</h2>
         <hr />
       </div>
-      <Carousel className='carousel' responsive={responsive} swipeable={false}>
+      <Carousel
+        className='carousel'
+        responsive={responsiveCarousel}
+        swipeable={false}
+      >
         {imgs}
       </Carousel>
       <hr />

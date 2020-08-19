@@ -2,7 +2,6 @@ export const SET_PRODUCTS_LOADING = 'SET_PRODUCTS_LOADING';
 export const SET_PRODUCT = 'SET_PRODUCT';
 export const GET_PRODUCT = 'GET_PRODUCT';
 export const SET_RATE = 'SET_RATE';
-export const CHANGE_RATE = 'CHANGE_RATE';
 export const SET_COMMENT = 'SET_COMMENT';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
