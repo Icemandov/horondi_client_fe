@@ -8,11 +8,13 @@ import {
   handleDeleteComment,
   handleUpdateComment
 } from '../products.sagas';
+
 import {
   addComment,
   deleteComment,
   getComments,
-  getProduct
+  getProduct,
+  updateComment
 } from '../products.operations';
 
 import { SET_ERROR } from '../../error/error.types';
@@ -20,7 +22,8 @@ import {
   SET_PRODUCTS_LOADING,
   SET_PRODUCT,
   SET_COMMENTS_LOADING,
-  SET_COMMENT
+  SET_COMMENT,
+  SET_UPDATING_COMMENT
 } from '../products.types';
 
 const productId = 'c3a84a5b9866c30390366168';
@@ -163,12 +166,12 @@ describe('Update comments saga', () => {
   it('should update comment', () => {
     const args = {
       payload: {
-        product: productId
+        comment: productId
       }
     };
     const updatedComment = {
       data: {
-        deleteComment: {
+        updateComment: {
           text: 'nice'
         }
       }
@@ -176,30 +179,30 @@ describe('Update comments saga', () => {
 
     return expectSaga(handleUpdateComment, args)
       .provide([
-        [matchers.call.fn(deleteComment), updatedComment],
+        [matchers.call.fn(updateComment), updatedComment],
         [matchers.call.fn(getComments), fakeComments]
       ])
-      .put({ type: SET_COMMENTS_LOADING, payload: true })
+      .put({ type: SET_UPDATING_COMMENT, payload: args.payload.comment })
       .put({
         type: SET_COMMENT,
         payload: fakeComments.data.getAllCommentsByProduct
       })
-      .put({ type: SET_COMMENTS_LOADING, payload: false })
+      .put({ type: SET_UPDATING_COMMENT, payload: null })
       .run();
   });
 
   it('should throw an error', () => {
     const args = {
       payload: {
-        product: productId
+        comment: productId
       }
     };
-    const e = new Error('Comment deleting fails');
+    const e = new Error('Comment updating fails');
 
-    return expectSaga(handleDeleteComment, args)
-      .provide([[matchers.call.fn(deleteComment), throwError(e)]])
-      .put({ type: SET_COMMENTS_LOADING, payload: true })
-      .put({ type: SET_COMMENTS_LOADING, payload: false })
+    return expectSaga(handleUpdateComment, args)
+      .provide([[matchers.call.fn(updateComment), throwError(e)]])
+      .put({ type: SET_UPDATING_COMMENT, payload: args.payload.comment })
+      .put({ type: SET_UPDATING_COMMENT, payload: null })
       .put({ type: SET_ERROR, payload: { e } })
       .run();
   });
