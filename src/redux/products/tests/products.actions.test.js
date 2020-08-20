@@ -1,10 +1,11 @@
 import {
-  setAllFilterProducts,
+  setAllFilterData,
+  setAllProducts,
   setCategoryFilter,
   setColorsFilter,
   setPatternsFilter,
   setPriceFilter,
-  setLoading,
+  setProductsLoading,
   setSearchFilter,
   setHotItemFilter,
   getFiltredProducts,
@@ -15,76 +16,47 @@ import {
   setCurrentPage
 } from '../products.actions';
 import {
-  SET_ALL_FILTER_PRODUCTS,
+  SET_ALL_FILTER_DATA,
+  SET_ALL_PRODUCTS,
   GET_FILTRED_PRODUCTS,
-  SET_LOADING,
+  SET_PRODUCTS_LOADING,
   SET_CATEGORY_FILTER,
   SET_PRICE_FILTER,
   SET_COLORS_FILTER,
   SET_PATTERNS_FILTER,
   SET_SEARCH,
-  SET_HOT_ITEMS_FILTER,
+  SET_HOT_ITEM_FILTER,
   SET_SORT_BY_PRICE,
   SET_SORT_BY_RATE,
   SET_SORT_BY_POPULARITY,
   SET_PAGES_COUNT,
   SET_CURRENT_PAGE
 } from '../products.types';
+import productsExample from './products.mocks';
 
 describe('Filter actions test', () => {
-  it('should set all filtred products to payload property', () => {
-    const products = [
-      {
-        name: [
-          {
-            value: 'Сумка синя'
-          },
-          {
-            value: 'Bag Blue'
-          }
-        ],
-        basePrice: 900,
-        rate: 3.8,
-        images: [
-          {
-            primary: {
-              medium: 'medium-primary_19.jpg'
-            }
-          }
-        ]
-      },
-      {
-        name: [
-          {
-            value: 'Бананка рожева'
-          },
-          {
-            value: 'Fanny Pack Pink'
-          }
-        ],
-        basePrice: 500,
-        rate: 3.7,
-        images: [
-          {
-            primary: {
-              medium: 'medium-primary_25.jpg'
-            }
-          }
-        ]
-      }
-    ];
+  it('should set all products to payload property', () => {
     const result = {
-      type: SET_ALL_FILTER_PRODUCTS,
-      payload: products
+      type: SET_ALL_PRODUCTS,
+      payload: productsExample
     };
 
-    expect(setAllFilterProducts(products)).toEqual(result);
+    expect(setAllProducts(productsExample)).toEqual(result);
+  });
+
+  it('should set all filter data to payload property', () => {
+    const result = {
+      type: SET_ALL_FILTER_DATA,
+      payload: productsExample
+    };
+
+    expect(setAllFilterData(productsExample)).toEqual(result);
   });
 
   it('should set hot items filter to payload property', () => {
     const isHot = true;
     const result = {
-      type: SET_HOT_ITEMS_FILTER,
+      type: SET_HOT_ITEM_FILTER,
       payload: isHot
     };
 
@@ -155,14 +127,14 @@ describe('Filter actions test', () => {
 
 describe('loading action', () => {
   test('should return loading = true', () => {
-    expect(setLoading(true)).toEqual({
-      type: SET_LOADING,
+    expect(setProductsLoading(true)).toEqual({
+      type: SET_PRODUCTS_LOADING,
       payload: true
     });
   });
   test('should return loading = false', () => {
-    expect(setLoading(false)).toEqual({
-      type: SET_LOADING,
+    expect(setProductsLoading(false)).toEqual({
+      type: SET_PRODUCTS_LOADING,
       payload: false
     });
   });

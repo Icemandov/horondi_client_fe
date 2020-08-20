@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -13,21 +13,26 @@ const CategoryFilter = ({ selectedCategory }) => {
 
   const styles = useStyles();
 
-  const { products, categoryFilter, language } = useSelector(
-    ({ Products: { products, categoryFilter }, Language: { language } }) => ({
-      products,
-      categoryFilter,
+  const { filterData, filters, language } = useSelector(
+    ({ Products: { filterData, filters }, Language: { language } }) => ({
+      filterData,
+      filters,
       language
     })
   );
 
-  const categories = [
-    ...new Set(products.map((product) => JSON.stringify(product.category)))
-  ].map(JSON.parse);
+  const { categoryFilter } = filters;
 
-  useEffect(() => {
-    dispatch(setCategoryFilter([selectedCategory._id]));
-  }, [selectedCategory]);
+  const categoriesName = filterData.map(
+    (product) => product.category.name[1].value
+  );
+
+  const categories = filterData
+    .map((product) => product.category)
+    .filter(
+      (category, index) =>
+        categoriesName.indexOf(category.name[1].value) === index
+    );
 
   const handleCategoryChange = (event) => {
     if (!event.target.checked) {
@@ -46,7 +51,7 @@ const CategoryFilter = ({ selectedCategory }) => {
   return (
     <FormGroup data-cy='category_filter'>
       <Typography id='categories' gutterBottom>
-        {CATERGORY_TEXT[language]}:
+        {CATERGORY_TEXT[language].value}:
       </Typography>
       {categories.map((category) => (
         <FormControlLabel

@@ -9,9 +9,11 @@ import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
 import {
-  getAllProducts,
+  getAllFilters,
   setCurrentPage,
-  getFiltredProducts
+  getFiltredProducts,
+  setCategoryFilter,
+  setPriceFilter
 } from '../../redux/products/products.actions';
 import {
   SHOW_FILTER_BUTTON_TEXT,
@@ -19,59 +21,48 @@ import {
 } from '../../translations/product-list.translations';
 
 const ProductListPage = ({ category }) => {
-  console.log(category);
   const styles = useStyles();
   const dispatch = useDispatch();
   const {
     language,
-    filtredProducts,
+    products,
     pagesCount,
     currentPage,
     productsPerPage,
     sortByRate,
     sortByPrice,
-    colorsFilter,
-    patternsFilter,
-    isHotItemFilter,
-    categoryFilter,
-    priceFilter,
-    searchFilter,
+    filters,
+    filterData,
     sortByPopularity
   } = useSelector(
     ({
       Language: { language },
       Products: {
-        filtredProducts,
+        products,
         pagesCount,
         sortByRate,
         sortByPrice,
-        colorsFilter,
-        patternsFilter,
-        categoryFilter,
-        priceFilter,
-        searchFilter,
-        isHotItemFilter,
+        filters,
+        filterData,
         sortByPopularity,
         productsPerPage,
         currentPage
       }
     }) => ({
       language,
-      filtredProducts,
+      products,
       pagesCount,
       sortByRate,
       sortByPrice,
-      colorsFilter,
-      patternsFilter,
-      categoryFilter,
-      priceFilter,
-      isHotItemFilter,
-      searchFilter,
+      filters,
+      filterData,
       sortByPopularity,
       productsPerPage,
       currentPage
     })
   );
+
+  const { categoryFilter } = filters;
 
   const [mobile, setMobile] = useState();
 
@@ -80,25 +71,11 @@ const ProductListPage = ({ category }) => {
   }, []);
 
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getAllFilters());
   }, [dispatch]);
+
   useEffect(() => {
-    dispatch(
-      getFiltredProducts({
-        isHotItemFilter,
-        patterns: patternsFilter || [],
-        colors: colorsFilter || [],
-        category: categoryFilter || [category._id],
-        price: priceFilter,
-        search: searchFilter,
-        skip: currentPage * productsPerPage,
-        limit: productsPerPage,
-        basePrice: sortByPrice || undefined,
-        rate: sortByRate || undefined,
-        purchasedCount: sortByPopularity || undefined,
-        productsPerPage
-      })
-    );
+    dispatch(getFiltredProducts({}));
   }, [
     dispatch,
     sortByRate,
@@ -110,12 +87,22 @@ const ProductListPage = ({ category }) => {
     currentPage
   ]);
 
+  useEffect(() => {
+    dispatch(setCategoryFilter([category._id]));
+    dispatch(
+      setPriceFilter([
+        Math.min(...filterData.map((product) => product.basePrice[0].value)),
+        Math.max(...filterData.map((product) => product.basePrice[0].value))
+      ])
+    );
+  }, [category, filterData, dispatch]);
+
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
 
   const handleFilterShow = () => setMobile(!mobile);
 
   const categoryText = category.name[language].value.toUpperCase();
-  const itemsToShow = filtredProducts.map((product, index) => (
+  const itemsToShow = products.map((product, index) => (
     <ProductListItem key={index} product={product} category={categoryText} />
   ));
   return (

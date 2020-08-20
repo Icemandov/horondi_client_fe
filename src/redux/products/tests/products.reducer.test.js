@@ -1,62 +1,23 @@
 import productReducer, { initialState } from '../products.reducer';
 import {
-  setAllFilterProducts,
+  setAllProducts,
   setCategoryFilter,
   setColorsFilter,
   setPatternsFilter,
   setPriceFilter,
-  setLoading,
+  setProductsLoading,
   setSearchFilter,
   setHotItemFilter,
   setPagesCount,
   setCurrentPage,
   setSortByPrice,
   setSortByRate,
-  setSortByPopularity
+  setSortByPopularity,
+  setProductsPerPage
 } from '../products.actions';
+import productsExample from './products.mocks';
 
 describe('Product reducer test', () => {
-  const productsExample = [
-    {
-      name: [
-        {
-          value: 'Сумка синя'
-        },
-        {
-          value: 'Bag Blue'
-        }
-      ],
-      basePrice: 900,
-      rate: 3.8,
-      images: [
-        {
-          primary: {
-            medium: 'medium-primary_19.jpg'
-          }
-        }
-      ]
-    },
-    {
-      name: [
-        {
-          value: 'Бананка рожева'
-        },
-        {
-          value: 'Fanny Pack Pink'
-        }
-      ],
-      basePrice: 500,
-      rate: 3.7,
-      images: [
-        {
-          primary: {
-            medium: 'medium-primary_25.jpg'
-          }
-        }
-      ]
-    }
-  ];
-
   it('should return default state', () => {
     expect(productReducer(initialState, {})).toEqual(initialState);
   });
@@ -65,18 +26,21 @@ describe('Product reducer test', () => {
     const state = {
       ...initialState,
       loading: true,
-      filtredProducts: productsExample
+      products: productsExample
     };
 
-    expect(
-      productReducer(state, setAllFilterProducts(productsExample))
-    ).toEqual(state);
+    expect(productReducer(state, setAllProducts(productsExample))).toEqual(
+      state
+    );
   });
 
   it('should return state with hot item true', () => {
     const state = {
       ...initialState,
-      isHotItemFilter: true
+      filters: {
+        ...initialState.filters,
+        isHotItemFilter: true
+      }
     };
 
     expect(productReducer(state, setHotItemFilter(true))).toEqual(state);
@@ -87,7 +51,10 @@ describe('Product reducer test', () => {
 
     const state = {
       ...initialState,
-      categoryFilter
+      filters: {
+        ...initialState.filters,
+        categoryFilter
+      }
     };
 
     expect(productReducer(state, setCategoryFilter(categoryFilter))).toEqual(
@@ -100,7 +67,10 @@ describe('Product reducer test', () => {
 
     const state = {
       ...initialState,
-      colorsFilter
+      filters: {
+        ...initialState.filters,
+        colorsFilter
+      }
     };
 
     expect(productReducer(state, setColorsFilter(colorsFilter))).toEqual(state);
@@ -111,7 +81,10 @@ describe('Product reducer test', () => {
 
     const state = {
       ...initialState,
-      patternsFilter
+      filters: {
+        ...initialState.filters,
+        patternsFilter
+      }
     };
 
     expect(productReducer(state, setPatternsFilter(patternsFilter))).toEqual(
@@ -124,7 +97,10 @@ describe('Product reducer test', () => {
 
     const state = {
       ...initialState,
-      searchFilter
+      filters: {
+        ...initialState.filters,
+        searchFilter
+      }
     };
 
     expect(productReducer(state, setSearchFilter(searchFilter))).toEqual(state);
@@ -135,9 +111,11 @@ describe('Product reducer test', () => {
 
     const state = {
       ...initialState,
-      priceFilter
+      filters: {
+        ...initialState.filters,
+        priceFilter
+      }
     };
-
     expect(productReducer(state, setPriceFilter(priceFilter))).toEqual(state);
   });
 
@@ -147,7 +125,9 @@ describe('Product reducer test', () => {
       loading: false
     };
 
-    expect(productReducer(initialState, setLoading(false))).toEqual(state);
+    expect(productReducer(initialState, setProductsLoading(false))).toEqual(
+      state
+    );
   });
   it('should set loading to false', () => {
     const state = {
@@ -155,7 +135,9 @@ describe('Product reducer test', () => {
       loading: true
     };
 
-    expect(productReducer(initialState, setLoading(true))).toEqual(state);
+    expect(productReducer(initialState, setProductsLoading(true))).toEqual(
+      state
+    );
   });
 
   it('should set pages count to 10', () => {
@@ -197,5 +179,12 @@ describe('Product reducer test', () => {
     expect(productReducer(initialState, setSortByPopularity(-1))).toEqual(
       state
     );
+  });
+  it('products per page in store should be set to 18', () => {
+    const state = {
+      ...initialState,
+      productsPerPage: 18
+    };
+    expect(productReducer(initialState, setProductsPerPage(18))).toEqual(state);
   });
 });

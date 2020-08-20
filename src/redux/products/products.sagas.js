@@ -1,33 +1,19 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, call, put, select } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import {
   setAllProducts,
-  setLoading,
-  setAllFilterProducts,
+  setProductsLoading,
+  setAllFilterData,
   setPagesCount
 } from './products.actions';
 import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
-import { GET_ALL_PRODUCTS, GET_FILTRED_PRODUCTS } from './products.types';
+import { GET_ALL_FILTERS, GET_FILTRED_PRODUCTS } from './products.types';
 
-export function* handleFilterLoad({
-  payload = {
-    search: '',
-    colors: [],
-    patterns: [],
-    price: [0, 99999],
-    isHotItemFilter: false,
-    skip: 1,
-    limit: 90,
-    rate: undefined,
-    basePrice: undefined,
-    purchasedCount: undefined,
-    category: [],
-    productsPerPage: 9
-  }
-}) {
+export function* handleFilterLoad() {
   try {
-    yield put(setLoading(true));
+    yield put(setProductsLoading(true));
+    const state = yield select((state) => state.Products);
     const products = yield call(
       getItems,
       `query(
@@ -67,7 +53,9 @@ export function* handleFilterLoad({
                   lang
                   value
                 }
-                basePrice
+                basePrice {
+                  value
+                }
                 rate
                 images {
                   primary {
@@ -101,66 +89,52 @@ export function* handleFilterLoad({
             }
           }`,
       {
-        search: payload.search,
-        colors: payload.colors,
-        patterns: payload.patterns,
-        price: payload.price,
-        skip: payload.skip,
-        limit: payload.limit,
-        rate: payload.rate,
-        basePrice: payload.basePrice,
-        category: payload.category,
-        purchasedCount: payload.purchasedCount,
-        isHotItem: payload.isHotItemFilter
+        search: state.filters.searchFilter,
+        colors: state.filters.colorsFilter,
+        patterns: state.filters.patternsFilter,
+        price: state.filters.priceFilter,
+        skip: state.currentPage * state.productsPerPage,
+        limit: state.productsPerPage,
+        rate: state.sortByRate || undefined,
+        basePrice: state.sortByPrice || undefined,
+        category: state.filters.categoryFilter,
+        purchasedCount: state.sortByPopularity || undefined,
+        isHotItem: state.filters.isHotItemFilter
       }
     );
     yield put(
       setPagesCount(
-        Math.ceil(products.data.getProducts.count / payload.productsPerPage)
+        Math.ceil(products.data.getProducts.count / state.productsPerPage)
       )
     );
-    yield put(setAllFilterProducts(products.data.getProducts.items));
-    yield put(setLoading(false));
+    yield put(setAllProducts(products.data.getProducts.items));
+    yield put(setProductsLoading(false));
   } catch (e) {
-    console.log(e);
     yield call(handleProductsErrors, e);
   }
 }
 
-export function* handleGetAllProducts() {
+export function* handleGetFilters() {
   try {
-    yield put(setLoading(true));
-    const products = yield call(
+    yield put(setProductsLoading(true));
+    const filter = yield call(
       getItems,
       `query{
         getProducts {
-      items{
-            name {
-              lang
-              value
-            }
-            rate
-            basePrice
+          items{
             colors {
               name {
-                lang
                 value
               }
               simpleName {
-                lang
                 value
               }
             }
-            basePrice
-            pattern {
-              lang
+            basePrice {
               value
             }
-            rate
-            images{
-                primary {
-                    medium
-                }
+            pattern {
+              value
             }
             category {
               _id
@@ -170,25 +144,24 @@ export function* handleGetAllProducts() {
               isMain
             }
           }
-          }
+        }
       }`
     );
 
-    yield put(setAllProducts(products.data.getProducts.items));
-    yield put(setLoading(false));
+    yield put(setAllFilterData(filter.data.getProducts.items));
+    yield put(setProductsLoading(false));
   } catch (e) {
-    console.error(e);
     yield call(handleProductsErrors, e);
   }
 }
 
 export function* handleProductsErrors(e) {
-  yield put(setLoading(false));
+  yield put(setProductsLoading(false));
   yield put(setError({ e }));
   yield put(push('/error-page'));
 }
 
 export default function* productsSaga() {
-  yield takeEvery(GET_ALL_PRODUCTS, handleGetAllProducts);
+  yield takeEvery(GET_ALL_FILTERS, handleGetFilters);
   yield takeEvery(GET_FILTRED_PRODUCTS, handleFilterLoad);
 }

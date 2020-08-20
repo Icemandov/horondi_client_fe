@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -12,22 +12,15 @@ const PriceFilter = () => {
 
   const styles = useStyles();
 
-  const { products, priceFilter, language } = useSelector(
-    ({ Products: { products, priceFilter }, Language: { language } }) => ({
-      products,
-      priceFilter,
+  const { filterData, filters, language } = useSelector(
+    ({ Products: { filterData, filters }, Language: { language } }) => ({
+      filterData,
+      filters,
       language
     })
   );
 
-  useEffect(() => {
-    dispatch(
-      setPriceFilter([
-        Math.min(...products.map((product) => product.basePrice)),
-        Math.max(...products.map((product) => product.basePrice))
-      ])
-    );
-  }, [products]);
+  const { priceFilter } = filters;
 
   const handlePriceChange = (event, newValue) => {
     dispatch(setPriceFilter(newValue));
@@ -36,19 +29,23 @@ const PriceFilter = () => {
   return (
     <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' gutterBottom>
-        {PRICE_TEXT[language]}:
+        {PRICE_TEXT[language].value}:
       </Typography>
       <Slider
         className={styles.slider}
         value={priceFilter}
         defaultValue={[
-          Math.min(...products.map((product) => product.basePrice)),
-          Math.max(...products.map((product) => product.basePrice))
+          Math.min(...filterData.map((product) => product.basePrice[0].value)),
+          Math.max(...filterData.map((product) => product.basePrice[0].value))
         ]}
         onChange={handlePriceChange}
         valueLabelDisplay='auto'
-        min={Math.min(...products.map((product) => product.basePrice))}
-        max={Math.max(...products.map((product) => product.basePrice))}
+        min={Math.min(
+          ...filterData.map((product) => product.basePrice[0].value)
+        )}
+        max={Math.max(
+          ...filterData.map((product) => product.basePrice[0].value)
+        )}
         aria-labelledby='range-slider'
       />
     </FormGroup>

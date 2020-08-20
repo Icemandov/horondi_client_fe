@@ -10,7 +10,7 @@ import ColorsFilter from './colors-filter';
 import PatternsFilter from './patterns-filter';
 import CategoryFilter from './category-filter';
 import PriceFilter from './price-filter';
-import HotItemFilter from './hotItem-filter';
+import HotItemFilter from './hot-item-filter';
 
 import useStyles from './product-list-filter.styles';
 import {
@@ -34,75 +34,38 @@ const ProductListFilter = ({ selectedCategory }) => {
 
   const styles = useStyles();
 
-  const {
-    products,
-    currentPage,
-    productsPerPage,
-    sortByPrice,
-    sortByRate,
-    sortByPopularity,
-    colorsFilter,
-    patternsFilter,
-    categoryFilter,
-    isHotItemFilter,
-    priceFilter,
-    searchFilter,
-    language
-  } = useSelector(
+  const { filterData, filters, language } = useSelector(
     ({
       Products: {
-        products,
+        filterData,
         currentPage,
         productsPerPage,
         sortByPrice,
         sortByRate,
         sortByPopularity,
-        colorsFilter,
-        patternsFilter,
-        categoryFilter,
-        isHotItemFilter,
-        priceFilter,
-        searchFilter
+        filters
       },
       Language: { language }
     }) => ({
-      products,
+      filterData,
       currentPage,
       productsPerPage,
       sortByPrice,
       sortByRate,
       sortByPopularity,
-      colorsFilter,
-      patternsFilter,
-      categoryFilter,
-      isHotItemFilter,
-      priceFilter,
-      searchFilter,
+      filters,
       language
     })
   );
+
+  const { searchFilter } = filters;
 
   const handleSearch = (event) => {
     dispatch(setSearchFilter(event.target.value));
   };
 
   const handleFilter = () => {
-    dispatch(
-      getFiltredProducts({
-        search: searchFilter,
-        price: priceFilter,
-        colors: colorsFilter,
-        patterns: patternsFilter,
-        category: categoryFilter,
-        isHotItemFilter,
-        skip: currentPage * productsPerPage,
-        limit: productsPerPage,
-        basePrice: sortByPrice,
-        rate: sortByRate,
-        purchasedProducts: sortByPopularity,
-        productsPerPage
-      })
-    );
+    dispatch(getFiltredProducts({}));
   };
 
   const handleClearFilter = () => {
@@ -113,8 +76,8 @@ const ProductListFilter = ({ selectedCategory }) => {
     dispatch(setHotItemFilter(false));
     dispatch(
       setPriceFilter([
-        Math.min(...products.map((product) => product.basePrice)),
-        Math.max(...products.map((product) => product.basePrice))
+        Math.min(...filterData.map((product) => product.basePrice[0].value)),
+        Math.max(...filterData.map((product) => product.basePrice[0].value))
       ])
     );
     dispatch(getFiltredProducts());
@@ -130,7 +93,7 @@ const ProductListFilter = ({ selectedCategory }) => {
               onChange={handleSearch}
               value={searchFilter}
               id='outlined-search'
-              label={SEARCH_TEXT[language]}
+              label={SEARCH_TEXT[language].value}
               type='search'
               variant='outlined'
             />
@@ -142,7 +105,7 @@ const ProductListFilter = ({ selectedCategory }) => {
               variant='contained'
               onClick={handleFilter}
             >
-              {FILTER_BUTTON_TEXT[language]}
+              {FILTER_BUTTON_TEXT[language].value}
             </Button>
             <Button
               className={styles.button}
@@ -150,12 +113,11 @@ const ProductListFilter = ({ selectedCategory }) => {
               variant='contained'
               onClick={handleClearFilter}
             >
-              {CLEAR_FILTER_BUTTON_TEXT[language]}
+              {CLEAR_FILTER_BUTTON_TEXT[language].value}
             </Button>
           </FormGroup>
           <HotItemFilter />
           <PriceFilter />
-
           <CategoryFilter selectedCategory={selectedCategory} />
           <ColorsFilter />
           <PatternsFilter />

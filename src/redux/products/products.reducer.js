@@ -1,20 +1,20 @@
 import {
   SET_CURRENT_PAGE,
   SET_ALL_PRODUCTS,
-  SET_ALL_FILTER_PRODUCTS,
+  SET_ALL_FILTER_DATA,
   SET_PRODUCTS_PER_PAGE,
   SET_SORT_BY_PRICE,
   SET_SORT_BY_DATE,
   SET_SORT_BY_RATE,
   SET_SORT_BY_POPULARITY,
-  SET_LOADING,
+  SET_PRODUCTS_LOADING,
   SET_CATEGORY_FILTER,
   SET_PRICE_FILTER,
   SET_COLORS_FILTER,
   SET_PATTERNS_FILTER,
   SET_SEARCH,
   SET_PAGES_COUNT,
-  SET_HOT_ITEMS_FILTER
+  SET_HOT_ITEM_FILTER
 } from './products.types';
 
 export const initialState = {
@@ -22,16 +22,17 @@ export const initialState = {
   currentPage: 0,
   productsPerPage: 9,
   sortByPrice: 0,
-  isHotItem: true,
   sortByRate: 0,
   sortByPopularity: -1,
-  colorsFilter: [],
-  patternsFilter: [],
-  categoryFilter: undefined,
-  priceFilter: [0, 99999],
-  searchFilter: '',
-  isHotItemFilter: false,
-  filtredProducts: [],
+  filters: {
+    colorsFilter: [],
+    patternsFilter: [],
+    categoryFilter: null,
+    priceFilter: [0, 99999],
+    searchFilter: '',
+    isHotItemFilter: false
+  },
+  filterData: [],
   products: [],
   pagesCount: 1
 };
@@ -52,10 +53,10 @@ const productsReducer = (state = initialState, action = {}) => {
       ...state,
       products: action.payload
     };
-  case SET_ALL_FILTER_PRODUCTS:
+  case SET_ALL_FILTER_DATA:
     return {
       ...state,
-      filtredProducts: action.payload
+      filterData: action.payload
     };
   case SET_CURRENT_PAGE:
     return {
@@ -70,32 +71,50 @@ const productsReducer = (state = initialState, action = {}) => {
   case SET_PATTERNS_FILTER:
     return {
       ...state,
-      patternsFilter: action.payload
+      filters: {
+        ...state.filters,
+        patternsFilter: action.payload
+      }
     };
   case SET_COLORS_FILTER:
     return {
       ...state,
-      colorsFilter: action.payload
+      filters: {
+        ...state.filters,
+        colorsFilter: action.payload
+      }
     };
   case SET_PRICE_FILTER:
     return {
       ...state,
-      priceFilter: action.payload
+      filters: {
+        ...state.filters,
+        priceFilter: action.payload
+      }
     };
   case SET_CATEGORY_FILTER:
     return {
       ...state,
-      categoryFilter: action.payload
+      filters: {
+        ...state.filters,
+        categoryFilter: action.payload
+      }
     };
-  case SET_HOT_ITEMS_FILTER:
+  case SET_HOT_ITEM_FILTER:
     return {
       ...state,
-      isHotItemFilter: action.payload
+      filters: {
+        ...state.filters,
+        isHotItemFilter: action.payload
+      }
     };
   case SET_SEARCH:
     return {
       ...state,
-      searchFilter: action.payload
+      filters: {
+        ...state.filters,
+        searchFilter: action.payload
+      }
     };
   case SET_SORT_BY_PRICE:
     return {
@@ -117,7 +136,7 @@ const productsReducer = (state = initialState, action = {}) => {
       ...state,
       ...setSort({ sortByPopularity: action.payload })
     };
-  case SET_LOADING:
+  case SET_PRODUCTS_LOADING:
     return {
       ...state,
       loading: action.payload

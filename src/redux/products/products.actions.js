@@ -1,26 +1,26 @@
 import {
   SET_ALL_PRODUCTS,
-  GET_ALL_PRODUCTS,
+  GET_ALL_FILTERS,
   SET_CURRENT_PAGE,
-  SET_ALL_FILTER_PRODUCTS,
+  SET_ALL_FILTER_DATA,
   SET_PRODUCTS_PER_PAGE,
   SET_SORT_BY_PRICE,
   SET_SORT_BY_DATE,
   SET_SORT_BY_RATE,
   SET_SORT_BY_POPULARITY,
   GET_FILTRED_PRODUCTS,
-  SET_LOADING,
+  SET_PRODUCTS_LOADING,
   SET_CATEGORY_FILTER,
   SET_PRICE_FILTER,
   SET_COLORS_FILTER,
   SET_PATTERNS_FILTER,
   SET_SEARCH,
   SET_PAGES_COUNT,
-  SET_HOT_ITEMS_FILTER
+  SET_HOT_ITEM_FILTER
 } from './products.types';
 
-export const setAllFilterProducts = (payload) => ({
-  type: SET_ALL_FILTER_PRODUCTS,
+export const setAllFilterData = (payload) => ({
+  type: SET_ALL_FILTER_DATA,
   payload
 });
 export const setCurrentPage = (payload) => ({
@@ -51,8 +51,8 @@ export const getFiltredProducts = (payload) => ({
   type: GET_FILTRED_PRODUCTS,
   payload
 });
-export const setLoading = (loading) => ({
-  type: SET_LOADING,
+export const setProductsLoading = (loading) => ({
+  type: SET_PRODUCTS_LOADING,
   payload: loading
 });
 export const setCategoryFilter = (payload) => ({
@@ -68,7 +68,7 @@ export const setColorsFilter = (payload) => ({
   payload
 });
 export const setHotItemFilter = (payload) => ({
-  type: SET_HOT_ITEMS_FILTER,
+  type: SET_HOT_ITEM_FILTER,
   payload
 });
 export const setPatternsFilter = (payload) => ({
@@ -87,6 +87,6 @@ export const setAllProducts = (payload) => ({
   type: SET_ALL_PRODUCTS,
   payload
 });
-export const getAllProducts = () => ({
-  type: GET_ALL_PRODUCTS
+export const getAllFilters = () => ({
+  type: GET_ALL_FILTERS
 });

@@ -13,19 +13,23 @@ const ColorsFilter = () => {
 
   const styles = useStyles();
 
-  const { products, colorsFilter, language } = useSelector(
-    ({ Products: { products, colorsFilter }, Language: { language } }) => ({
-      products,
-      colorsFilter,
+  const { filterData, filters, language } = useSelector(
+    ({ Products: { filterData, filters }, Language: { language } }) => ({
+      filterData,
+      filters,
       language
     })
   );
 
-  const colors = [
-    ...new Set(
-      products.map((product) => JSON.stringify(product.colors[0].simpleName))
-    )
-  ].map(JSON.parse);
+  const { colorsFilter } = filters;
+
+  const colorsName = filterData.map(
+    (product) => product.colors[0].simpleName[1].value
+  );
+
+  const colors = filterData
+    .map((product) => product.colors[0].simpleName)
+    .filter((color, index) => colorsName.indexOf(color[1].value) === index);
 
   const handleColorChange = (event) => {
     if (!event.target.checked) {
@@ -44,7 +48,7 @@ const ColorsFilter = () => {
   return (
     <FormGroup data-cy='colors_filter'>
       <Typography id='colors' gutterBottom>
-        {COLORS_TEXT[language]}:
+        {COLORS_TEXT[language].value}:
       </Typography>
       {colors.map((color) => (
         <FormControlLabel
