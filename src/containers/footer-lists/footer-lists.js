@@ -15,10 +15,13 @@ import {
 
 const FooterLists = () => {
   const styles = useStyles();
-  const { categories, language } = useSelector(({ Categories, Language }) => ({
-    categories: Categories.list,
-    language: Language.language
-  }));
+  const { categories, language, contacts } = useSelector(
+    ({ Categories, Language, Contacts }) => ({
+      categories: Categories.list,
+      language: Language.language,
+      contacts: Contacts.contacts[0]
+    })
+  );
 
   const categoriesList = categories
     ? categories.map(({ _id, name, isMain }) =>
@@ -44,11 +47,11 @@ const FooterLists = () => {
     </div>
   ));
 
-  const contactsList = FOOTER_CONTACTS[language].items.map((item) => (
-    <div key={item.id}>
-      <Typography variant='subtitle2'>{item.item}</Typography>
-    </div>
-  ));
+  // const contactsList = FOOTER_CONTACTS[language].items.map((item) => (
+  //   <div key={item.id}>
+  //     <Typography variant='subtitle2'>{item.item}</Typography>
+  //   </div>
+  // ));
   return (
     <div className={styles.cardDeck}>
       <div className={styles.cardBody}>
@@ -73,7 +76,9 @@ const FooterLists = () => {
             {FOOTER_CONTACTS[language].title}
           </Typography>
         </div>
-        {contactsList}
+        <Typography variant='subtitle2'>{contacts.phoneNumber}</Typography>
+        <Typography variant='subtitle2'>{contacts.email}</Typography>
+        <Typography variant='subtitle2'>{contacts.address}</Typography>
         <div key={FOOTER_CONTACTS[language].map.id}>
           <Typography variant='subtitle2'>
             <a
