@@ -2,8 +2,18 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { throwError } from 'redux-saga-test-plan/providers';
 import * as matchers from 'redux-saga-test-plan/matchers';
 
-import { handleProductLoading, handleAddComment } from '../products.sagas';
-import { addComment, getComments, getProduct } from '../products.operations';
+import {
+  handleProductLoading,
+  handleAddComment,
+  handleDeleteComment,
+  handleUpdateComment
+} from '../products.sagas';
+import {
+  addComment,
+  deleteComment,
+  getComments,
+  getProduct
+} from '../products.operations';
 
 import { SET_ERROR } from '../../error/error.types';
 import {
@@ -14,6 +24,13 @@ import {
 } from '../products.types';
 
 const productId = 'c3a84a5b9866c30390366168';
+const fakeComments = {
+  data: {
+    getAllCommentsByProduct: {
+      text: 'nice'
+    }
+  }
+};
 
 describe('Products saga', () => {
   it('fetches product', () => {
@@ -64,13 +81,6 @@ describe('Add comments saga', () => {
         }
       }
     };
-    const fakeComments = {
-      data: {
-        getAllCommentsByProduct: {
-          text: 'nice'
-        }
-      }
-    };
 
     return expectSaga(handleAddComment, args)
       .provide([
@@ -96,6 +106,98 @@ describe('Add comments saga', () => {
 
     return expectSaga(handleAddComment, args)
       .provide([[matchers.call.fn(addComment), throwError(e)]])
+      .put({ type: SET_COMMENTS_LOADING, payload: true })
+      .put({ type: SET_COMMENTS_LOADING, payload: false })
+      .put({ type: SET_ERROR, payload: { e } })
+      .run();
+  });
+});
+
+describe('Delete comments saga', () => {
+  it('should delete comment', () => {
+    const args = {
+      payload: {
+        product: productId
+      }
+    };
+    const deletedComment = {
+      data: {
+        deleteComment: {
+          text: 'nice'
+        }
+      }
+    };
+
+    return expectSaga(handleDeleteComment, args)
+      .provide([
+        [matchers.call.fn(deleteComment), deletedComment],
+        [matchers.call.fn(getComments), fakeComments]
+      ])
+      .put({ type: SET_COMMENTS_LOADING, payload: true })
+      .put({
+        type: SET_COMMENT,
+        payload: fakeComments.data.getAllCommentsByProduct
+      })
+      .put({ type: SET_COMMENTS_LOADING, payload: false })
+      .run();
+  });
+
+  it('should throw an error', () => {
+    const args = {
+      payload: {
+        product: productId
+      }
+    };
+    const e = new Error('Comment deleting fails');
+
+    return expectSaga(handleDeleteComment, args)
+      .provide([[matchers.call.fn(deleteComment), throwError(e)]])
+      .put({ type: SET_COMMENTS_LOADING, payload: true })
+      .put({ type: SET_COMMENTS_LOADING, payload: false })
+      .put({ type: SET_ERROR, payload: { e } })
+      .run();
+  });
+});
+
+describe('Update comments saga', () => {
+  it('should update comment', () => {
+    const args = {
+      payload: {
+        product: productId
+      }
+    };
+    const updatedComment = {
+      data: {
+        deleteComment: {
+          text: 'nice'
+        }
+      }
+    };
+
+    return expectSaga(handleUpdateComment, args)
+      .provide([
+        [matchers.call.fn(deleteComment), updatedComment],
+        [matchers.call.fn(getComments), fakeComments]
+      ])
+      .put({ type: SET_COMMENTS_LOADING, payload: true })
+      .put({
+        type: SET_COMMENT,
+        payload: fakeComments.data.getAllCommentsByProduct
+      })
+      .put({ type: SET_COMMENTS_LOADING, payload: false })
+      .run();
+  });
+
+  it('should throw an error', () => {
+    const args = {
+      payload: {
+        product: productId
+      }
+    };
+    const e = new Error('Comment deleting fails');
+
+    return expectSaga(handleDeleteComment, args)
+      .provide([[matchers.call.fn(deleteComment), throwError(e)]])
       .put({ type: SET_COMMENTS_LOADING, payload: true })
       .put({ type: SET_COMMENTS_LOADING, payload: false })
       .put({ type: SET_ERROR, payload: { e } })
