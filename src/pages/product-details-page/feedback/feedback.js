@@ -45,12 +45,13 @@ const Feedback = ({ language, comments, productId, userRates }) => {
 
   const [rate, setRate] = useState(0);
 
-  const userData = {
-    _id: '9c031d62a3c4909b216e1d86',
-    purchasedProduct: ['018a5631de33999e751dbd52'],
-    email: 'poqj7ln40w@gmail.com',
-    firstName: 'Макарій'
-  };
+  const userData = null;
+  //     {
+  //   _id: '9c031d62a3c4909b216e1d86',
+  //   purchasedProduct: ['624fa818faecdfb19243a9ab'],
+  //   email: 'poqj7ln40w@gmail.com',
+  //   firstName: 'Макарій'
+  // };
 
   const { link, script } = formRegExp;
   const { purchasedProduct, _id } = userData || {};
@@ -204,6 +205,7 @@ const Feedback = ({ language, comments, productId, userRates }) => {
       <Tooltip title={rateTip} placement='right'>
         <span className={styles.rate}>
           <Rating
+            data-cy='rate'
             disabled={!hasBought}
             name='edit-rate'
             value={rate}
@@ -247,6 +249,7 @@ const Feedback = ({ language, comments, productId, userRates }) => {
                     type={type}
                     multiline={multiline}
                     rows={rows}
+                    data-cy={inputName}
                   />
                 </div>
               ) : null
