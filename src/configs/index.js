@@ -276,3 +276,11 @@ export const responsiveCarousel = {
     items: 1
   }
 };
+
+export const SNACKBAR_DURATION = 4000;
+export const SNACKBAR_MESSAGE = {
+  added: ['Успішно додано', 'Successfully added'],
+  updated: ['Успішно оновлено', 'Successfully updated'],
+  deleted: ['Успішно видалено', 'Successfully deleted'],
+  error: ['Щось пішло не так', 'Something went wrong']
+};

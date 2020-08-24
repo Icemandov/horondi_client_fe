@@ -8,6 +8,7 @@ import Theme from './theme/theme.reducer';
 import Error from './error/error.reducer';
 import Language from './language/language.reducer';
 import Products from './products/products.reducer';
+import Snackbar from './snackbar/snackbar.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -18,7 +19,8 @@ const rootReducer = (history) =>
     Theme,
     Error,
     Language,
-    Products
+    Products,
+    Snackbar
   });
 
 export default rootReducer;

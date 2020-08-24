@@ -1,5 +1,6 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
+import { setError } from '../error/error.actions';
 
 import {
   setProductsLoading,
@@ -9,7 +10,6 @@ import {
   setCommentsLoading,
   setUpdatingComment
 } from './products.actions';
-import { setError } from '../error/error.actions';
 
 import {
   GET_PRODUCT,
@@ -27,6 +27,16 @@ import {
   updateComment
 } from './products.operations';
 
+import {
+  setSnackBarMessage,
+  setSnackBarSeverity,
+  setSnackBarStatus
+} from '../snackbar/snackbar.actions';
+
+import { SNACKBAR_MESSAGE } from '../../configs';
+
+const { added, updated, deleted, error } = SNACKBAR_MESSAGE;
+
 export function* handleProductLoading({ payload }) {
   try {
     yield put(setProductsLoading(true));
@@ -42,20 +52,18 @@ export function* handleProductLoading({ payload }) {
 
 export function* handleAddComment({ payload }) {
   try {
-    if (payload.rate > 0) {
-      const rate = yield call(changeRate, payload);
-      yield put(setRate(rate.data[payload.method]));
-    }
-
     yield put(setCommentsLoading(true));
     yield call(addComment, payload);
     const comments = yield call(getComments, payload.product);
     yield put(setComment(comments.data.getAllCommentsByProduct));
     yield put(setCommentsLoading(false));
+    yield call(handleSnackbar, added);
+    if (payload.rate > 0) {
+      const rate = yield call(changeRate, payload);
+      yield put(setRate(rate.data[payload.method]));
+    }
   } catch (e) {
-    yield put(setCommentsLoading(false));
-    yield put(setError({ e }));
-    yield put(push('/error-page'));
+    yield call(handleCommentsError);
   }
 }
 
@@ -66,10 +74,10 @@ export function* handleDeleteComment({ payload }) {
     const comments = yield call(getComments, payload.product);
     yield put(setComment(comments.data.getAllCommentsByProduct));
     yield put(setCommentsLoading(false));
-  } catch (e) {
     yield put(setCommentsLoading(false));
-    yield put(setError({ e }));
-    yield put(push('/error-page'));
+    yield call(handleSnackbar, deleted);
+  } catch (e) {
+    yield call(handleCommentsError);
   }
 }
 
@@ -80,11 +88,26 @@ export function* handleUpdateComment({ payload }) {
     const comments = yield call(getComments, payload.product);
     yield put(setComment(comments.data.getAllCommentsByProduct));
     yield put(setUpdatingComment(null));
+    yield call(handleSnackbar, updated);
   } catch (e) {
     yield put(setUpdatingComment(null));
-    yield put(setError({ e }));
-    yield put(push('/error-page'));
+    yield put(setSnackBarSeverity('error'));
+    yield put(setSnackBarMessage(error));
+    yield put(setSnackBarStatus(true));
   }
+}
+
+export function* handleCommentsError() {
+  yield put(setCommentsLoading(false));
+  yield put(setSnackBarSeverity('error'));
+  yield put(setSnackBarMessage(error));
+  yield put(setSnackBarStatus(true));
+}
+
+export function* handleSnackbar(message) {
+  yield put(setSnackBarSeverity('success'));
+  yield put(setSnackBarMessage(message));
+  yield put(setSnackBarStatus(true));
 }
 
 export default function* productsSaga() {

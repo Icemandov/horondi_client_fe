@@ -19,6 +19,7 @@ import {
   errorMessages
 } from '../../../configs';
 import { FEEDBACK } from '../../../translations/product-details.translations';
+import SnackbarItem from '../../../containers/snackbar';
 
 const Feedback = ({ language, comments, productId, userRates }) => {
   const styles = useStyles();
@@ -46,15 +47,15 @@ const Feedback = ({ language, comments, productId, userRates }) => {
   const [rate, setRate] = useState(0);
 
   const userData = {
-    _id: '9c031d62a3c4909b216e1d86',
-    purchasedProduct: ['624fa818faecdfb19243a9ab'],
+    _id: '02db86e74520d8d8f7947305',
+    purchasedProduct: ['624fa818faecdfb19243a9ab', '90d5c6dc0663662f949d3fbb'],
     email: 'vas.mytro@gmail.com',
     firstName: 'Макарій'
   };
 
   const { link, script } = formRegExp;
   const { purchasedProduct, _id } = userData || {};
-
+  console.log(userRates);
   const hasRate = userRates
     ? userRates.some(({ user }) => user._id === _id)
     : null;
@@ -260,6 +261,7 @@ const Feedback = ({ language, comments, productId, userRates }) => {
       </form>
       <hr />
       {commentsLoading ? <Loader /> : feedbacks}
+      <SnackbarItem />
     </div>
   );
 };
