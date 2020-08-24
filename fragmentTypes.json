@@ -84,6 +84,18 @@
             "name": "Error"
           }
         ]
+      },
+      {
+        "kind": "UNION",
+        "name": "LogicalResult",
+        "possibleTypes": [
+          {
+            "name": "SuccessfulResponse"
+          },
+          {
+            "name": "Error"
+          }
+        ]
       }
     ]
   }
