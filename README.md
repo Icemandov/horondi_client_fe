@@ -41,6 +41,10 @@ Order of testing components:
 3. components that have internal state but are not connected to redux
 4. components that connected to redux
 
+#### Cypress
+
+1. use `data-cy` as selector in tests
+
 ##### Don’t test:
 
 - third-party libraries
@@ -127,13 +131,13 @@ Your app is ready to be deployed!
 
 this command is used to run [graphql code generator](https://graphql-code-generator.com)
 
-before using codegen you must run backend server
+1. before using codegen you must run backend server [horondi backend](https://github.com/horondi/horondi_client_be)
 
-open terminal
+2. open terminal
 
-run `npm run generate`
+3. run `npm run generate`
 
-you should run `npm run generate` every time new unions or interfaces are created
+4. you should run `npm run generate` every time new unions or interfaces are created
 
 #### License
 
