@@ -74,7 +74,6 @@ export function* handleDeleteComment({ payload }) {
     const comments = yield call(getComments, payload.product);
     yield put(setComment(comments.data.getAllCommentsByProduct));
     yield put(setCommentsLoading(false));
-    yield put(setCommentsLoading(false));
     yield call(handleSnackbar, deleted);
   } catch (e) {
     yield call(handleCommentsError);

@@ -25,6 +25,12 @@ import {
   SET_COMMENT,
   SET_UPDATING_COMMENT
 } from '../products.types';
+import { SNACKBAR_MESSAGE } from '../../../configs';
+import {
+  SET_SNACKBAR_MESSAGE,
+  SET_SNACKBAR_SEVERITY,
+  SET_SNACKBAR_STATUS
+} from '../../snackbar/snackbar.types';
 
 const productId = 'c3a84a5b9866c30390366168';
 const fakeComments = {
@@ -96,6 +102,9 @@ describe('Add comments saga', () => {
         payload: fakeComments.data.getAllCommentsByProduct
       })
       .put({ type: SET_COMMENTS_LOADING, payload: false })
+      .put({ type: SET_SNACKBAR_SEVERITY, payload: 'success' })
+      .put({ type: SET_SNACKBAR_MESSAGE, payload: SNACKBAR_MESSAGE.added })
+      .put({ type: SET_SNACKBAR_STATUS, payload: true })
       .run();
   });
   it('should throw an error', () => {
@@ -111,7 +120,9 @@ describe('Add comments saga', () => {
       .provide([[matchers.call.fn(addComment), throwError(e)]])
       .put({ type: SET_COMMENTS_LOADING, payload: true })
       .put({ type: SET_COMMENTS_LOADING, payload: false })
-      .put({ type: SET_ERROR, payload: { e } })
+      .put({ type: SET_SNACKBAR_SEVERITY, payload: 'error' })
+      .put({ type: SET_SNACKBAR_MESSAGE, payload: SNACKBAR_MESSAGE.error })
+      .put({ type: SET_SNACKBAR_STATUS, payload: true })
       .run();
   });
 });
@@ -142,6 +153,9 @@ describe('Delete comments saga', () => {
         payload: fakeComments.data.getAllCommentsByProduct
       })
       .put({ type: SET_COMMENTS_LOADING, payload: false })
+      .put({ type: SET_SNACKBAR_SEVERITY, payload: 'success' })
+      .put({ type: SET_SNACKBAR_MESSAGE, payload: SNACKBAR_MESSAGE.deleted })
+      .put({ type: SET_SNACKBAR_STATUS, payload: true })
       .run();
   });
 
@@ -157,7 +171,9 @@ describe('Delete comments saga', () => {
       .provide([[matchers.call.fn(deleteComment), throwError(e)]])
       .put({ type: SET_COMMENTS_LOADING, payload: true })
       .put({ type: SET_COMMENTS_LOADING, payload: false })
-      .put({ type: SET_ERROR, payload: { e } })
+      .put({ type: SET_SNACKBAR_SEVERITY, payload: 'error' })
+      .put({ type: SET_SNACKBAR_MESSAGE, payload: SNACKBAR_MESSAGE.error })
+      .put({ type: SET_SNACKBAR_STATUS, payload: true })
       .run();
   });
 });
@@ -188,6 +204,9 @@ describe('Update comments saga', () => {
         payload: fakeComments.data.getAllCommentsByProduct
       })
       .put({ type: SET_UPDATING_COMMENT, payload: null })
+      .put({ type: SET_SNACKBAR_SEVERITY, payload: 'success' })
+      .put({ type: SET_SNACKBAR_MESSAGE, payload: SNACKBAR_MESSAGE.updated })
+      .put({ type: SET_SNACKBAR_STATUS, payload: true })
       .run();
   });
 
@@ -203,7 +222,9 @@ describe('Update comments saga', () => {
       .provide([[matchers.call.fn(updateComment), throwError(e)]])
       .put({ type: SET_UPDATING_COMMENT, payload: args.payload.comment })
       .put({ type: SET_UPDATING_COMMENT, payload: null })
-      .put({ type: SET_ERROR, payload: { e } })
+      .put({ type: SET_SNACKBAR_SEVERITY, payload: 'error' })
+      .put({ type: SET_SNACKBAR_MESSAGE, payload: SNACKBAR_MESSAGE.error })
+      .put({ type: SET_SNACKBAR_STATUS, payload: true })
       .run();
   });
 });
