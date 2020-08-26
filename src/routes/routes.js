@@ -19,6 +19,7 @@ import Login from '../pages/login';
 import Confirmation from '../pages/confirmation';
 import Recovery from '../pages/recovery';
 import NewPassword from '../pages/new-password';
+import ProductDetails from '../pages/product-details';
 import ErrorPage from '../pages/error-page';
 import ThanksPage from '../pages/thanks-page';
 
@@ -54,6 +55,7 @@ const Routes = () => {
             exact
             render={({ match }) => <NewPassword token={match.params.token} />}
           />
+          <Route path='/:category/:id' exact component={ProductDetails} />
           <Route
             path='/:category'
             exact

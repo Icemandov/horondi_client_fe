@@ -1,4 +1,6 @@
 import {
+  SET_PRODUCT,
+  GET_PRODUCT,
   SET_ALL_PRODUCTS,
   GET_ALL_FILTERS,
   SET_CURRENT_PAGE,
@@ -16,8 +18,26 @@ import {
   SET_PATTERNS_FILTER,
   SET_SEARCH,
   SET_PAGES_COUNT,
-  SET_HOT_ITEM_FILTER
+  SET_HOT_ITEM_FILTER,
+  SET_PRODUCT_LOADING,
+  SET_RATE,
+  ADD_COMMENT,
+  UPDATE_COMMENT,
+  DELETE_COMMENT,
+  SET_COMMENT,
+  SET_COMMENTS_LOADING,
+  SET_UPDATING_COMMENT
 } from './products.types';
+
+export const setProduct = (item) => ({
+  type: SET_PRODUCT,
+  payload: item
+});
+
+export const getProduct = (id) => ({
+  type: GET_PRODUCT,
+  payload: id
+});
 
 export const setAllFilterData = (payload) => ({
   type: SET_ALL_FILTER_DATA,
@@ -89,4 +109,43 @@ export const setAllProducts = (payload) => ({
 });
 export const getAllFilters = () => ({
   type: GET_ALL_FILTERS
+});
+export const setProductLoading = (payload) => ({
+  type: SET_PRODUCT_LOADING,
+  payload
+});
+
+export const setRate = (rate) => ({
+  type: SET_RATE,
+  payload: rate
+});
+
+export const addComment = (payload) => ({
+  type: ADD_COMMENT,
+  payload
+});
+
+export const updateComment = (payload) => ({
+  type: UPDATE_COMMENT,
+  payload
+});
+
+export const deleteComment = (payload) => ({
+  type: DELETE_COMMENT,
+  payload
+});
+
+export const setComment = (payload) => ({
+  type: SET_COMMENT,
+  payload
+});
+
+export const setCommentsLoading = (payload) => ({
+  type: SET_COMMENTS_LOADING,
+  payload
+});
+
+export const setUpdatingComment = (payload) => ({
+  type: SET_UPDATING_COMMENT,
+  payload
 });

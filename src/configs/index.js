@@ -67,6 +67,32 @@ export const LOGIN_USER_DATA = {
 };
 
 export const REDIRECT_TIMEOUT = 3000;
+export const SHOW_AFTER = 3000;
+
+export const errorMessages = [
+  {
+    lang: 'uk',
+    value: {
+      firstname: 'Поле повинно містити від 2 до 30 символів',
+      lastname: 'Поле повинно містити від 2 до 30 символів',
+      email: 'Некоректний формат ',
+      password: 'Від 6 до 30 символів з однією літерою та цифрою',
+      confirmPassword: 'Паролі не співпадають',
+      text: 'Поле повинно містити від 2 до 500 символів'
+    }
+  },
+  {
+    lang: 'eng',
+    value: {
+      firstname: 'Field should contain from 2 to 30 characters',
+      lastname: 'Field should contain from 2 to 30 characters',
+      email: `Wrong email address `,
+      password: 'From 6 to 30 characters with one letter and one digit',
+      confirmPassword: 'Passwords do not match',
+      text: 'Field should contain from 2 to 500 characters'
+    }
+  }
+];
 
 export const formRegExp = {
   email:
@@ -79,10 +105,152 @@ export const formRegExp = {
   street: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   buildingNum: '^[a-zA-Z0-9_.-]*$',
   deliveryType: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-  deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+  deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+  text: /^.{2,700}$/gm,
+  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim,
+  script: /(script)/g
 };
 
+export const placeholders = {
+  firstName: [
+    {
+      lang: 'uk',
+      value: "Введіть Ім'я"
+    },
+    {
+      lang: 'eng',
+      value: 'Enter firstname'
+    }
+  ],
+  lastName: [
+    {
+      lang: 'uk',
+      value: 'Введіть прізвище'
+    },
+    {
+      lang: 'eng',
+      value: 'Enter lastname'
+    }
+  ],
+  email: [
+    {
+      lang: 'uk',
+      value: 'Введіть емейл'
+    },
+    {
+      lang: 'eng',
+      value: 'Enter email'
+    }
+  ],
+  password: [
+    {
+      lang: 'uk',
+      value: 'Введіть пароль'
+    },
+    {
+      lang: 'eng',
+      value: 'Enter password'
+    }
+  ],
+  confirmPassword: [
+    {
+      lang: 'uk',
+      value: 'Підтвердіть пароль'
+    },
+    {
+      lang: 'eng',
+      value: 'Confirm password'
+    }
+  ]
+};
+
+export const FORGOT_PASSWORD = [
+  {
+    lang: 'uk',
+    value: 'Забули пароль?'
+  },
+  {
+    lang: 'eng',
+    value: 'Forgot password?'
+  }
+];
+
+export const REGISTER_PROPOSAL = [
+  {
+    lang: 'uk',
+    value: 'Реєстрація'
+  },
+  {
+    lang: 'eng',
+    value: 'Registration'
+  }
+];
+
+export const WELCOME_MESSAGE = [
+  {
+    h2: 'Вітаємо',
+    h3: 'Реєстрація пройшла успішно!',
+    button: 'В магазин'
+  },
+  {
+    h2: 'Welcome',
+    h3: 'Registration was successful!',
+    button: 'Go to shop'
+  }
+];
+
+export const CONFIRM_ERROR = [
+  {
+    value: 'Ой! Щось пішло не так.'
+  },
+  {
+    value: 'Oops! Something went wrong.'
+  }
+];
+
+export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
+export const DEFAULT_SIZE = 'M';
+export const INPUT_VARIANT = 'outlined';
+export const COMMENTS_TIME_OPTIONS = {
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric'
+};
 export const SORT_ASC = 'sortAsc';
 export const SORT_DESC = 'sortDesc';
 export const RATE = 'rate';
 export const POPULARITY = 'POPULARITY';
+export const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1146, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 810, min: 0 },
+    items: 1
+  }
+};
+
+export const SNACKBAR_DURATION = 4000;
+export const SNACKBAR_MESSAGE = {
+  added: ['Успішно додано', 'Successfully added'],
+  updated: ['Успішно оновлено', 'Successfully updated'],
+  deleted: ['Успішно видалено', 'Successfully deleted'],
+  error: ['Щось пішло не так', 'Something went wrong']
+};
+export const COMMENT_DATA = {
+  firstName: '',
+  text: '',
+  product: '',
+  show: true,
+  email: ''
+};
+export const TEXT = 'text';

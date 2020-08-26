@@ -1,4 +1,5 @@
 import {
+  SET_PRODUCT,
   SET_CURRENT_PAGE,
   SET_ALL_PRODUCTS,
   SET_ALL_FILTER_DATA,
@@ -14,10 +15,16 @@ import {
   SET_PATTERNS_FILTER,
   SET_SEARCH,
   SET_PAGES_COUNT,
-  SET_HOT_ITEM_FILTER
+  SET_HOT_ITEM_FILTER,
+  SET_PRODUCT_LOADING,
+  SET_COMMENT,
+  SET_RATE,
+  SET_COMMENTS_LOADING,
+  SET_UPDATING_COMMENT
 } from './products.types';
 
 export const initialState = {
+  productLoading: false,
   loading: true,
   currentPage: 0,
   productsPerPage: 9,
@@ -28,13 +35,16 @@ export const initialState = {
     colorsFilter: [],
     patternsFilter: [],
     categoryFilter: null,
-    priceFilter: [0, 99999],
+    priceFilter: [0, 99999999],
     searchFilter: '',
     isHotItemFilter: false
   },
   filterData: [],
+  product: null,
   products: [],
-  pagesCount: 1
+  pagesCount: 1,
+  commentsLoading: false,
+  updatingComment: null
 };
 const setSort = ({
   sortByPrice = 0,
@@ -145,6 +155,43 @@ const productsReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       pagesCount: action.payload
+    };
+  case SET_PRODUCT:
+    return {
+      ...state,
+      product: action.payload
+    };
+  case SET_PRODUCT_LOADING:
+    return {
+      ...state,
+      productLoading: action.payload
+    };
+  case SET_RATE:
+    return {
+      ...state,
+      product: {
+        ...state.product,
+        rate: action.payload.rate,
+        userRates: action.payload.userRates
+      }
+    };
+  case SET_COMMENT:
+    return {
+      ...state,
+      product: {
+        ...state.product,
+        comments: action.payload
+      }
+    };
+  case SET_COMMENTS_LOADING:
+    return {
+      ...state,
+      commentsLoading: action.payload
+    };
+  case SET_UPDATING_COMMENT:
+    return {
+      ...state,
+      updatingComment: action.payload
     };
   default:
     return state;
