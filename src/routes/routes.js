@@ -21,6 +21,7 @@ import Recovery from '../pages/recovery';
 import NewPassword from '../pages/new-password';
 import ErrorPage from '../pages/error-page';
 import ThanksPage from '../pages/thanks-page';
+import ProductsCarousel from '../pages/products-carousel';
 
 const Routes = () => {
   const styles = useStyles();
@@ -64,10 +65,23 @@ const Routes = () => {
                   categoryFound.name[1].value.toLowerCase() ===
                     category.toLowerCase() && categoryFound.isMain
               );
-              return <ProductListPage category={categoryParam} />;
+              return <ProductsCarousel category={categoryParam} />;
             }}
           />
-          <Route path='/:category/:id' exact render={() => 'detail page'} />
+          <Route
+            path='/:category/:model'
+            exact
+            render={({ match }) => {
+              const { category, model } = match.params;
+              const categoryParam = categories.find(
+                (categoryFound) =>
+                  categoryFound.name[1].value.toLowerCase() ===
+                    category.toLowerCase() && categoryFound.isMain
+              );
+              return <ProductListPage category={categoryParam} model={model} />;
+            }}
+          />
+          <Route path='/product/:id' exact render={() => 'detail page'} />
           <Route path='/error-page' exact component={ErrorPage} />
         </Switch>
       </div>

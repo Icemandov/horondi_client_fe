@@ -5,11 +5,11 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import { useDispatch, useSelector } from 'react-redux';
-import { CATERGORY_TEXT } from '../../../../translations/product-list.translations';
+import { MODEL_TEXT } from '../../../../translations/product-list.translations';
 import useStyles from '../product-list-filter.styles';
-import { setCategoryFilter } from '../../../../redux/products/products.actions';
+import { setModelsFilter } from '../../../../redux/products/products.actions';
 
-const CategoryFilter = () => {
+const ModelsFilter = () => {
   const dispatch = useDispatch();
 
   const styles = useStyles();
@@ -22,34 +22,29 @@ const CategoryFilter = () => {
     })
   );
 
-  const { categoryFilter } = filters;
+  const { modelsFilter } = filters;
 
-  const categoriesName = filterData.map(
-    (product) => product.category.name[1].value
-  );
+  const modelsName = filterData.map((product) => product.model[1].value);
 
-  const categories = filterData
-    .map((product) => product.category)
-    .filter(
-      (category, index) =>
-        categoriesName.indexOf(category.name[1].value) === index
-    );
+  const models = filterData
+    .map((product) => product.model)
+    .filter((model, index) => modelsName.indexOf(model[1].value) === index);
 
   const handleCategoryChange = (event) => {
     if (!event.target.checked) {
       dispatch(
-        setCategoryFilter(
-          categoryFilter.filter((category) => category !== event.target.name)
+        setModelsFilter(
+          modelsFilter.filter((model) => model !== event.target.name)
         )
       );
     } else {
       dispatch(
-        setCategoryFilter([...new Set([...categoryFilter, event.target.name])])
+        setModelsFilter([...new Set([...modelsFilter, event.target.name])])
       );
     }
   };
 
-  const [isFiltersHidden, hideFilters] = useState(true);
+  const [isFiltersHidden, hideFilters] = useState(false);
 
   return (
     <FormGroup data-cy='category_filter'>
@@ -59,24 +54,24 @@ const CategoryFilter = () => {
         gutterBottom
         onClick={() => hideFilters(!isFiltersHidden)}
       >
-        <span>{CATERGORY_TEXT[language].value}:</span>
-        <span style={{ textDecoration: 'underline' }}>{categories.length}</span>
+        <span>{MODEL_TEXT[language].value}:</span>
+        <span style={{ textDecoration: 'underline' }}>{models.length}</span>
       </Typography>
       {isFiltersHidden &&
-        categories.map((category) => (
+        models.map((model) => (
           <FormControlLabel
-            key={category.name[1].value}
+            key={model[1].value}
             className={styles.checkbox}
             control={
               <Checkbox
-                data-cy={category.name[1].value.toLowerCase()}
-                name={category._id}
+                data-cy={model[1].value.toLowerCase()}
+                name={model[1].value}
                 checked={
-                  !!categoryFilter.find((filter) => filter === category._id)
+                  !!modelsFilter.find((filter) => filter === model[1].value)
                 }
               />
             }
-            label={category.name[language].value}
+            label={model[language].value}
             onChange={handleCategoryChange}
           />
         ))}
@@ -85,4 +80,4 @@ const CategoryFilter = () => {
   );
 };
 
-export default CategoryFilter;
+export default ModelsFilter;
