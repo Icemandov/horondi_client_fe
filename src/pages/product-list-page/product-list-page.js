@@ -80,6 +80,7 @@ const ProductListPage = ({ category, model }) => {
 
   useEffect(() => {
     dispatch(getFiltredProducts({}));
+    dispatch(setCurrentPage(1));
   }, [
     dispatch,
     sortByRate,

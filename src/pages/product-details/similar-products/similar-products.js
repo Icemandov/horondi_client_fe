@@ -14,16 +14,14 @@ import {
 import { responsive } from '../../../configs';
 
 const SimilarProducts = () => {
-  const { language, similarProducts, category, productId } = useSelector(
+  const { language, similarProducts, productId } = useSelector(
     ({ Language, Products: { products, product } }) => ({
       language: Language.language,
       similarProducts: products,
-      category: product.category,
       productId: product._id
     })
   );
   const { title } = SIMILAR_ITEMS[language];
-  const categoryName = category.name[1].value.toLowerCase();
 
   const imgs = similarProducts
     .filter(({ _id }) => _id !== productId)

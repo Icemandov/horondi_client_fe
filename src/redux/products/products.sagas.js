@@ -98,7 +98,7 @@ export function* handleFilterLoad() {
                 rate
                 images {
                   primary {
-                    medium
+                  small
                   }
                 }
                 colors{

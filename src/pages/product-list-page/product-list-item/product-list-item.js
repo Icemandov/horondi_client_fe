@@ -7,10 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHryvnia, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import useStyles from './product-list-item.style';
 import StarRating from '../../../components/star-rating';
-import * as productImage from '../../../images/pdp_main.jpg';
 
 const ProductListItem = ({ product, category }) => {
-  const styles = useStyles({ image: productImage });
+  const styles = useStyles({
+    image: `https://horondi.blob.core.windows.net/horondi/images/${product.images.primary.small}`
+  });
 
   const { language, currency } = useSelector(
     ({ Language: { language }, Currency: { currency } }) => ({
