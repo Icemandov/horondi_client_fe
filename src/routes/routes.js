@@ -22,6 +22,7 @@ import NewPassword from '../pages/new-password';
 import ErrorPage from '../pages/error-page';
 import ThanksPage from '../pages/thanks-page';
 import ProductsCarousel from '../pages/products-carousel';
+import ContactsPage from '../pages/contacts';
 
 const Routes = () => {
   const styles = useStyles();
@@ -42,6 +43,7 @@ const Routes = () => {
           <Route path='/about-us' exact component={AboutUs} />
           <Route path='/cart' exact component={Cart} />
           <Route path='/wishlist' exact component={Wishlist} />
+          <Route path='/contacts' exact component={ContactsPage} />
           <Route path='/register' exact component={Register} />
           <Route path='/login' exact component={Login} />
           <Route path='/thanks' exact component={ThanksPage} />
@@ -83,6 +85,7 @@ const Routes = () => {
             }}
           />
           <Route path='/product/:id' exact render={() => 'detail page'} />
+          <Route path='/:category/:id' exact render={() => 'detail page'} />
         </Switch>
       </div>
       <AppFooter />
