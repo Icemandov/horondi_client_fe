@@ -48,11 +48,6 @@ export const TIME_OPTIONS = {
   day: 'numeric'
 };
 
-export const LANGUAGES_LIST = [
-  { lang: 'UA', value: 0 },
-  { lang: 'EN', value: 1 }
-];
-
 export const REGISTER_USER_DATA = {
   firstName: '',
   lastName: '',
@@ -254,3 +249,16 @@ export const COMMENT_DATA = {
   email: ''
 };
 export const TEXT = 'text';
+
+export const LANGUAGES_LIST = [
+  { lang: 'UA', value: 0 },
+  { lang: 'EN', value: 1 }
+];
+
+export const CURRENCIES_LIST = [
+  { currency: 'UAH', value: 0 },
+  { currency: 'USD', value: 1 }
+];
+
+export const DEFAULT_CURRENCY = 0;
+export const DEFAULT_LANGUAGE = 0;
