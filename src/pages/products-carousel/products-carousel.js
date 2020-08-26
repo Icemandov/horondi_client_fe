@@ -66,7 +66,7 @@ const ProductsCorousel = ({ category }) => {
         {models.map((model) => (
           <div
             key={model.name[1].value}
-            data-src={model.images.large}
+            data-src='https://horondi.blob.core.windows.net/horondi/images/large_6x9a6uskebt6s5t_74.jpg'
             className={styles.captionBlock}
           >
             <Link
