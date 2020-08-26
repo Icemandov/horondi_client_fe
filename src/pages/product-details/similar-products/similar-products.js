@@ -28,7 +28,7 @@ const SimilarProducts = () => {
   const imgs = similarProducts
     .filter(({ _id }) => _id !== productId)
     .map(({ _id }) => (
-      <Link key={_id} to={`/${categoryName}/${_id}`}>
+      <Link key={_id} to={`/product/${_id}`}>
         <img
           className='image'
           src={productImage}

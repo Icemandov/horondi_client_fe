@@ -10,6 +10,7 @@ import ColorsFilter from './colors-filter';
 import PatternsFilter from './patterns-filter';
 import CategoryFilter from './category-filter';
 import PriceFilter from './price-filter';
+import ModelsFilter from './models-filter';
 import HotItemFilter from './hot-item-filter';
 
 import useStyles from './product-list-filter.styles';
@@ -20,7 +21,8 @@ import {
   setCategoryFilter,
   setPriceFilter,
   setSearchFilter,
-  setHotItemFilter
+  setHotItemFilter,
+  setModelsFilter
 } from '../../../redux/products/products.actions';
 
 import {
@@ -29,7 +31,7 @@ import {
   CLEAR_FILTER_BUTTON_TEXT
 } from '../../../translations/product-list.translations';
 
-const ProductListFilter = ({ selectedCategory }) => {
+const ProductListFilter = () => {
   const dispatch = useDispatch();
 
   const styles = useStyles();
@@ -74,13 +76,14 @@ const ProductListFilter = ({ selectedCategory }) => {
     dispatch(setCategoryFilter([]));
     dispatch(setSearchFilter(''));
     dispatch(setHotItemFilter(false));
+    dispatch(setModelsFilter([]));
     dispatch(
       setPriceFilter([
         Math.min(...filterData.map((product) => product.basePrice[0].value)),
         Math.max(...filterData.map((product) => product.basePrice[0].value))
       ])
     );
-    dispatch(getFiltredProducts());
+    dispatch(getFiltredProducts({}));
   };
 
   return (
@@ -118,7 +121,8 @@ const ProductListFilter = ({ selectedCategory }) => {
           </FormGroup>
           <HotItemFilter />
           <PriceFilter />
-          <CategoryFilter selectedCategory={selectedCategory} />
+          <CategoryFilter />
+          <ModelsFilter />
           <ColorsFilter />
           <PatternsFilter />
         </FormControl>
