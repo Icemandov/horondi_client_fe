@@ -10,9 +10,9 @@ import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { setThemeMode } from '../../redux/theme/theme.actions';
-
 import { getCategories } from '../../redux/categories/categories.actions';
 import { Loader } from '../loader/loader';
+import Chat from '../chat';
 
 const App = () => {
   const { isLoading, lightMode } = useSelector(({ Categories, Theme }) => ({
@@ -46,6 +46,7 @@ const App = () => {
     <ThemeProvider theme={themeValue}>
       <CssBaseline />
       <Routes />
+      <Chat />
       <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
     </ThemeProvider>
   );
