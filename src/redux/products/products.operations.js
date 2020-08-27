@@ -37,6 +37,7 @@ const getProduct = (id) =>
             large
           }
           additional {
+            small
             thumbnail
             large
           }

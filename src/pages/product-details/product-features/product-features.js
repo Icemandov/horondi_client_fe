@@ -65,7 +65,7 @@ const ProductFeatures = ({
         {name[language].value}
         {value ? (
           <span className={styles.selectPrice}>
-            {setAdditionalPrice(value)}
+            {setAdditionalPrice(value / 100)}
           </span>
         ) : null}
       </MenuItem>
@@ -110,7 +110,7 @@ const ProductFeatures = ({
             label={name[language].value}
           />
           <span className={styles.price}>
-            {setAdditionalPrice(additionalPrice[0].value)}
+            {setAdditionalPrice(additionalPrice[0].value / 100)}
           </span>
         </div>
       ) : null}

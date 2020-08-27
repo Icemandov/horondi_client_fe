@@ -280,3 +280,4 @@ export const FAKE_PRODUCT_FOR_TEST = {
   quantity: 1,
   productUrl: '/backpacks/foweoo423'
 };
+export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
