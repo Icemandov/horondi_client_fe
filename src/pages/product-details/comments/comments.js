@@ -17,7 +17,8 @@ import {
   COMMENT_DATA,
   TEXT,
   formRegExp,
-  errorMessages
+  errorMessages,
+  userData
 } from '../../../configs';
 import { COMMENTS } from '../../../translations/product-details.translations';
 
@@ -30,15 +31,13 @@ const Comments = () => {
     language,
     productId,
     userRates,
-    comments,
-    userData
+    comments
   } = useSelector(({ Products, Language, User }) => ({
     commentsLoading: Products.commentsLoading,
     productId: Products.product._id,
     userRates: Products.product.userRates,
     comments: Products.product.comments,
-    language: Language.language,
-    userData: User.userData
+    language: Language.language
   }));
 
   const {
@@ -61,7 +60,7 @@ const Comments = () => {
 
   const [rate, setRate] = useState(0);
 
-  const { purchasedProduct, _id, email: userEmail, firstName: userName } =
+  const { _id, email: userEmail, firstName: userName, purchasedProduct } =
     userData || {};
 
   const hasRate = useMemo(

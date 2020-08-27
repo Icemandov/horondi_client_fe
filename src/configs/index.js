@@ -281,3 +281,10 @@ export const FAKE_PRODUCT_FOR_TEST = {
   productUrl: '/backpacks/foweoo423'
 };
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
+export const userData = null;
+//     {
+//   _id: '170672d3e88f930f725d03fa',
+//   purchasedProduct: ['5878af9ff5ffeac87d1b6728'],
+//   firstName: 'Dima',
+//   email: 'vas.mytro@gmail.com'
+// }

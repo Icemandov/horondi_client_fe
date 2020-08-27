@@ -8,7 +8,12 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import useValidation from '../../../../../utils/use-validation';
 import useStyles from './editable-field.styles';
 
-import { errorMessages, formRegExp, TEXT } from '../../../../../configs';
+import {
+  errorMessages,
+  formRegExp,
+  TEXT,
+  userData
+} from '../../../../../configs';
 import { updateComment } from '../../../../../redux/products/products.actions';
 
 import {
@@ -26,13 +31,12 @@ const EditableField = ({
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const { language, productId, userEmail } = useSelector(
-    ({ Products, Language, User }) => ({
-      productId: Products.product._id,
-      language: Language.language,
-      userEmail: User.email
-    })
-  );
+  const { language, productId } = useSelector(({ Products, Language }) => ({
+    productId: Products.product._id,
+    language: Language.language
+  }));
+
+  const { email: userEmail } = userData || {};
 
   const {
     editableText,

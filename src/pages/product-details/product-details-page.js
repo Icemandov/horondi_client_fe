@@ -67,6 +67,7 @@ const ProductDetails = ({ match }) => {
       setPrice(0);
       setSize('');
       setSidePocket(false);
+      setError(false);
     };
   }, [basePrice, volumeInLiters, weightInKg, product, category, dispatch]);
 

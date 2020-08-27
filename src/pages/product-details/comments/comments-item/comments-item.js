@@ -14,21 +14,21 @@ import CommentDialog from './comment-dialog';
 import * as avatar from '../../../../images/avatar.jpg';
 import {
   COMMENTS_TIME_OPTIONS,
-  DATE_LANGUAGE_OPTIONS
+  DATE_LANGUAGE_OPTIONS,
+  userData
 } from '../../../../configs';
 import { TOOLTIPS } from '../../../../translations/product-details.translations';
 
 const CommentsItem = ({ user, text, date, commentId }) => {
   const styles = useStyles();
 
-  const { updatingComment, language, userEmail } = useSelector(
-    ({ Products, Language, User }) => ({
+  const { updatingComment, language } = useSelector(
+    ({ Products, Language }) => ({
       updatingComment: Products.updatingComment,
-      language: Language.language,
-      userEmail: User.email
+      language: Language.language
     })
   );
-
+  const { email: userEmail } = userData || {};
   const { name } = user;
 
   const [isEditable, setEditable] = useState(false);

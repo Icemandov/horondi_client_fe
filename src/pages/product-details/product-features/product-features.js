@@ -52,13 +52,9 @@ const ProductFeatures = ({
 
   const handlePocketChange = (event) => {
     if (!sidePocket) {
-      setPrice(
-        (currentPrice) => (currentPrice + additionalPrice[0].value) / 100
-      );
+      setPrice((currentPrice) => currentPrice + additionalPrice[0].value / 100);
     } else {
-      setPrice(
-        (currentPrice) => (currentPrice - additionalPrice[0].value) / 100
-      );
+      setPrice((currentPrice) => currentPrice - additionalPrice[0].value / 100);
     }
     setSidePocket(event.target.checked);
   };
