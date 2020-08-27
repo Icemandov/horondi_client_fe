@@ -38,12 +38,12 @@ const ProductFeatures = ({
 
     const oldPrice = bagBottom
       ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
-        .additionalPrice[0].value
+        .additionalPrice[0].value / 100
       : 0;
 
     const newPrice = value
       ? bottomMaterials.find(({ name }) => name[1].value === value)
-        .additionalPrice[0].value
+        .additionalPrice[0].value / 100
       : 0;
 
     setPrice((currentPrice) => currentPrice - oldPrice + newPrice);
@@ -52,9 +52,13 @@ const ProductFeatures = ({
 
   const handlePocketChange = (event) => {
     if (!sidePocket) {
-      setPrice((currentPrice) => currentPrice + additionalPrice[0].value);
+      setPrice(
+        (currentPrice) => (currentPrice + additionalPrice[0].value) / 100
+      );
     } else {
-      setPrice((currentPrice) => currentPrice - additionalPrice[0].value);
+      setPrice(
+        (currentPrice) => (currentPrice - additionalPrice[0].value) / 100
+      );
     }
     setSidePocket(event.target.checked);
   };
